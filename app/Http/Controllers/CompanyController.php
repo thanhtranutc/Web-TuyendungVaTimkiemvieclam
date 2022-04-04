@@ -52,5 +52,8 @@ class CompanyController extends Controller
 
         return Redirect()->back();
     }
+    public function frontend_company(){
+        return view('customer.company');
+    }
     
 }
