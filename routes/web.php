@@ -40,12 +40,14 @@ Route::get('/register_customer','HomeController@register_customer');
 Route::post('/user_login','CustomerController@login');
 Route::post('/add_user','CustomerController@add_user');
 Route::get('/logout_customer','HomeController@logout');
+Route::get('/profile','CustomerController@profile');
 
 //register customer
 
 //job browser
 Route::get('/job_browser','JobController@job_browser');
 Route::get('/job_detail','JobController@job_detail');
+Route::get('/detail_job{id}','JobController@detail_job');
 
 //page company
 Route::get('/company','CompanyController@frontend_company');

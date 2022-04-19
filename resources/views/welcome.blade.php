@@ -71,15 +71,15 @@
 
 								$user_id = Session::get('user_id');
 								$user_name = Session::get('user_name');
-								if($user_id){
+								if ($user_id) {
 								?>
-								<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Register</a>
-								<a href="{{URL::to('/logout_customer')}}" class="site-button"><i class="fa fa-lock"></i> Logout</a>
+									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Register</a>
+									<a href="{{URL::to('/logout_customer')}}" class="site-button"><i class="fa fa-lock"></i> Logout</a>
 								<?php
-								}else{
-								 ?>
-								 <a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Register</a>
-								<a href="{{URL::to('/login_customer')}}" class="site-button"><i class="fa fa-lock"></i> Login</a>
+								} else {
+								?>
+									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Register</a>
+									<a href="{{URL::to('/login_customer')}}" class="site-button"><i class="fa fa-lock"></i> Login</a>
 								<?php } ?>
 								<?php
 								if ($user_name) {
@@ -110,22 +110,24 @@
 								</li>
 								<li>
 									<a href="#">Ứng viên</a>
-
 								</li>
+								@php
+								$user_id = Session::get('user_id');
+								if($user_id){
+								@endphp
+								<li>
+									<a href="{{URL::to('/profile')}}">Hồ sơ</a>
+								</li>
+								@php
+								}
+								@endphp
+
 								<li>
 									<a href="#">Pages <i class="fa fa-chevron-down"></i></a>
 									<ul class="sub-menu">
 										<li><a href="about-us.html" class="dez-page">Thông tin</a></li>
 										<li><a href="error-404.html" class="dez-page">Error 404</a></li>
 										<li><a href="contact.html" class="dez-page">Liên hệ</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="#">Blog <i class="fa fa-chevron-down"></i></a>
-									<ul class="sub-menu">
-										<li><a href="blog-classic.html" class="dez-page">Classic</a></li>
-										<li><a href="blog-classic-sidebar.html" class="dez-page">Classic Sidebar</a></li>
-										<li><a href="blog-detailed-grid.html" class="dez-page">Detailed Grid</a></li>
 									</ul>
 								</li>
 							</ul>

@@ -10,12 +10,13 @@ class company extends Model
     use HasFactory;
     public $timestamps = false; //set time to false
     protected $fillable = [
-    	'company_id', 'company_name','company_image','company_desc','company_adress','company_status'
+        'company_id', 'company_name', 'company_image', 'company_desc', 'company_adress', 'company_status'
     ];
     protected $primaryKey = 'company_id';
- 	protected $table = 'company';
+    protected $table = 'company';
 
-    //  public function product(){
-    //     return $this->hasMany('App\Models\product','MaNCC','MaNCC');
-    // }
+    public function detail_job()
+    {
+        return $this->hasMany('App\Models\job_detail', 'company_id');
+    }
 }

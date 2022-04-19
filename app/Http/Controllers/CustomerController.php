@@ -62,4 +62,10 @@ class CustomerController extends Controller
         // Session::put('cutomer_name', $request->cutomer_name);
         return Redirect()->back();
     }
+    // Xây dựng hồ sơ
+    public function profile(){
+        $id_user = Session::get('user_id');
+        $data = customer::where('user_id',$id_user)->first();
+        return view('customer.profile')->with('user',$data);
+    }
 }
