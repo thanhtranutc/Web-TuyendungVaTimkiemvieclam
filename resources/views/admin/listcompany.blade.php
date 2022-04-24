@@ -67,10 +67,10 @@
 
                             <td><?php echo $value->company_desc; ?></td>
                             <td>
-                                <a class="btn btn-app bg-success">
+                                <a class="btn btn-app bg-success" href="{{URL::to('/editcompany'.$value->company_id)}}">
                                     <i class="fas fa-edit "></i> Sửa
                                 </a>
-                                <a class="btn btn-app bg-warning">
+                                <a class="btn btn-app bg-warning" href="{{URL::to('/deletecompany'.$value->company_id)}}">
                                     <i class="fas fa-save"></i> Xóa
                                 </a>
                             <td>

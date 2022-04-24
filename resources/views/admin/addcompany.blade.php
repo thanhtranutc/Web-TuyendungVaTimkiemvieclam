@@ -1,21 +1,29 @@
+<?php
+
+use Illuminate\Support\Facades\Session;
+
+$company_id = Session::get('id_company');
+?>
 @extends('layout_admin')
 @section('content')
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
+
                 <h1 class="m-0">Thêm công ty</h1>
+
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{URL::to('/dashboard')}}">Dashboard</a></li>
+
                     <li class="breadcrumb-item active">Thêm công ty</li>
+
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
         <?php
-
-        use Illuminate\Support\Facades\Session;
 
         $message = Session::get('message');
         if ($message) {
@@ -41,18 +49,26 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Tên công ty</label>
+
                     <input type="text" class="form-control" name="company_name" id="exampleInputEmail1" placeholder="Nhập tên công ty">
+
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Địa chỉ</label>
+
+
                     <input type="text" class="form-control" name="company_adress" id="exampleInputPassword1" placeholder="Nhập địa chỉ">
+
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh</label>
                     <div class="">
                         <div class="">
+
+                            <img class="#" width="100px" height="100px" id="img-preview" src="">
+
                             <!-- <input type="file" class="custom-file-input" id="exampleInputFile"> -->
-                            <input type="file" name="company_image">
+                            <input type="file" accept="image/*" id="file-input" style="color:transparent;" name="company_image">
                             <!-- <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label> -->
                         </div>
                         <!-- <div class="input-group-append">
@@ -65,15 +81,17 @@
                         <!-- textarea -->
                         <div class="form-group">
                             <label>Mô tả</label>
+
                             <textarea id="textarea1" cols="80" rows="20" name="company_desc" placeholder="Nhập"></textarea>
+
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="exampleSelectRounded0">Tình trạng</label>
                     <select class="custom-select rounded-0" name="company_status" id="exampleSelectRounded0">
-                        <option>1</option>
-                        <option>2</option>
+                        <option>Kích hoạt </option>
+                        <option>Không kích hoạt</option>
                     </select>
                 </div>
             </div>
@@ -90,4 +108,15 @@
         </form>
     </div>
 </div>
+<script>
+    const input = document.getElementById("file-input");
+    const image = document.getElementById("img-preview");
+
+    input.addEventListener("change", (e) => {
+        if (e.target.files.length) {
+            const src = URL.createObjectURL(e.target.files[0]);
+            image.src = src;
+        }
+    });
+</script>
 @endsection
