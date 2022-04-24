@@ -30,7 +30,18 @@ Route::get('/listuser','AdminController@list_user');
 //Company backend
 Route::get('/listcompany','CompanyController@list_company');
 Route::get('/addcompany','CompanyController@add_company');
+Route::get('/deletecompany{id}','CompanyController@delete_company'); // delete company
+Route::get('/editcompany{id}','CompanyController@edit_page');         // edit company
 Route::post('/insert_company','CompanyController@insert_company');
+Route::post('//update_company{id}','CompanyController@update_company');
+
+
+
+// job Backend
+Route::get('/list_job','JobController@job_list');               // Danh sách job
+Route::get('/job_new','JobController@job_new');                 // Danh sách job mới
+Route::get('/confirm_job{id}','JobController@confirm_job');    // Xác nhận job
+Route::get('//view_detailjob{id}','JobController@view_job'); // Xem chi tiết job
 // home page
 
 
@@ -51,3 +62,11 @@ Route::get('/detail_job{id}','JobController@detail_job');
 
 //page company
 Route::get('/company','CompanyController@frontend_company');
+
+//contact page
+Route::get('/contact','HomeController@contact_page');
+Route::get('/test_profile','AdminController@profile');
+
+// Nhà tuyển dụng
+
+Route::get('/list_jobpost','RecruiterController@list_jobpost');   // list bài đã đăng 

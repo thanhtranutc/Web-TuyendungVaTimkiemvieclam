@@ -95,7 +95,7 @@ function contactForm()
 function init_map() {
 	var myOptions = {
 		zoom: 10,
-		center: new google.maps.LatLng(51.5073509, -0.12775829999998223),
+		center: new google.maps.LatLng(21.028149344473334, 105.8033926267137),
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		// This is where you would paste any style found on Snazzy Maps.
 		styles: [ 

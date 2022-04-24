@@ -10,8 +10,8 @@ class customer extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-    	'user_id', 'user_name','user_image','user_password','user_adress','user_email','user_phone'
+        'user_id', 'user_name', 'user_image', 'user_password', 'user_adress', 'user_email', 'user_phone'
     ];
     protected $primaryKey = 'user_id';
- 	protected $table = 'user';
+    protected $table = 'user';
 }

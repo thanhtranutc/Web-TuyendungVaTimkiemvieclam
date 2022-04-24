@@ -57,11 +57,11 @@
 						</div>
 						<!-- nav toggle button -->
 						<!-- nav toggle button -->
-						<button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+						<!-- <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 							<span></span>
 							<span></span>
 							<span></span>
-						</button>
+						</button> -->
 						<!-- extra nav -->
 						<div class="extra-nav">
 							<div class="extra-cell">
@@ -127,7 +127,7 @@
 									<ul class="sub-menu">
 										<li><a href="about-us.html" class="dez-page">Thông tin</a></li>
 										<li><a href="error-404.html" class="dez-page">Error 404</a></li>
-										<li><a href="contact.html" class="dez-page">Liên hệ</a></li>
+										<li><a href="{{URL::to('/contact')}}" class="dez-page">Liên hệ</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -154,6 +154,10 @@
 		<button class="scroltop fa fa-arrow-up"></button>
 	</div>
 	<!-- JAVASCRIPT FILES ========================================= -->
+	<script>
+    CKEDITOR.replace('textarea1');
+    CKEDITOR.config.entities = false;
+  </script>
 	<script src="public/frontend/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 	<script src="public/frontend/plugins/wow/wow.js"></script><!-- WOW JS -->
 	<script src="public/frontend/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->

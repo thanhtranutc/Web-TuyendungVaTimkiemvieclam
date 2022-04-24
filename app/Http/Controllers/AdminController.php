@@ -42,17 +42,24 @@ class AdminController extends Controller
         $email_admin = $validate['email'];
         $password_admin = md5($validate['password']);
         $data = admin::where('admin_email', $email_admin)->where('admin_password', $password_admin)->first();
-        //phân quyền admin
-        $roles = detail_roles::where('admin_id', $data->id_admin)->get();
-        foreach ($roles as $value) {
-            if ($value->roles_id == 1) {
-                Session::put('roles_admin', 'Quyền admin');
-            }
-        }
+
+        // $roles = detail_roles::where('admin_id', $data->id_admin)->get();
+        // foreach ($roles as $value) {
+        //     if ($value->roles_id == 1) {
+        //         Session::put('roles_admin', 'Quyền admin');
+        //     }
+        // }
         // login
         if ($data) {
             $login_count = $data->count();
             if ($login_count > 0) {
+                // Kiểm tra quyền admin
+                $roles = detail_roles::where('admin_id', $data->id_admin)->get();
+                foreach ($roles as $value) {
+                    if ($value->roles_id == 1) {
+                        Session::put('roles_admin', 'Quyền admin');
+                    }
+                }
                 Session::put('admin_email', $data->email);
                 Session::put('admin_id', $data->id_admin);
                 Session::put('admin_name', $data->admin_name);
@@ -86,10 +93,12 @@ class AdminController extends Controller
             if ($request->Input['admin_roles'] == false) {
                 // $data = detail_roles::where('admin_id', $id_admin)->first();
                 $data->roles_id = $request->admin_roles;
-                $data->save(); 
+                $data->save();
             }
-           
         }
         return Redirect::to('/listuser');
+    }
+    public function profile(){
+        return view('admin.user.profile');
     }
 }

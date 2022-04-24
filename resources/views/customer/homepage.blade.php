@@ -5,6 +5,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Models\job_detail;
+$count_job = new HomeController(); 
 ?>
 <div class="page-content">
     <div class="dez-bnr-inr dez-bnr-inr-md" style="background-image:url(public/frontend/images/main-slider/slide2.jpg);">
@@ -74,13 +75,13 @@ use App\Models\job_detail;
                     <h6 class="fw3">20+ Catetories work wating for you</h6>
                 </div>
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter">1800</h2>
+                    <h2 class="m-b5 counter"><?php echo $count_job->job_total() ?></h2>
                     <h6 class="fw3">Jobs Posted</h6>
                 </div>
-                <div class="head-counter-bx">
+                <!-- <div class="head-counter-bx">
                     <h2 class="m-b5 counter">4500</h2>
                     <h6 class="fw3">Tasks Posted</h6>
-                </div>
+                </div> -->
                 <div class="head-counter-bx">
                     <h2 class="m-b5 counter">1500</h2>
                     <h6 class="fw3">Freelancers</h6>
@@ -189,9 +190,7 @@ use App\Models\job_detail;
                     <div class="city-bx align-items-end  d-flex" style="background-image:url(images/city/pic1.jpg)">
                         <div class="city-info">
                             <h5>{{$value->distribution_name}}</h5>
-                            <span><?php
-                            $count_job = new HomeController(); 
-                            echo $count_job->count_job_distribution($value); ?> Jobs</span>
+                            <span><?php echo $count_job->count_job_distribution($value->id_distribution); ?> Jobs</span>
                         </div>
                     </div>
                 </div>
@@ -241,7 +240,7 @@ use App\Models\job_detail;
                                         <span>{{$job_list->working_format['working_format_name']}}</span>
                                     </div>
                                     <div class="salary-bx">
-                                        <span>$1200 - $ 2500</span>
+                                        <span><?php echo $count_job->money_format($image1->salary_up)."tr"."-".$count_job->money_format($image1->salary_down)."tr"?></span>
                                     </div>
                                 </div>
                                 <span class="post-like fa fa-heart-o"></span>

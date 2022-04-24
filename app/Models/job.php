@@ -20,6 +20,12 @@ class job extends Model
     public function working_format(){
         return $this->belongsTo('App\Models\working_format','id_working_format');
     }
+    public function admin(){
+        return $this->belongsTo('App\Models\admin','id_user');
+    }
+    public function category(){
+        return $this->belongsTo('App\Models\category','id_category');
+    }
     public function detail_job()
     {
         return $this->hasMany('App\Models\job_detail', 'job_id');

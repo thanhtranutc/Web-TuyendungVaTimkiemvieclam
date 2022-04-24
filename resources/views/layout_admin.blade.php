@@ -44,12 +44,6 @@
         <li class="nav-item">
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
-        </li>
       </ul>
 
       <!-- Right navbar links -->
@@ -185,7 +179,7 @@
       <!-- Brand Logo -->
       <a href="index3.html" class="brand-link">
         <img src="public/backend/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">Tuyển dụng UTC</span>
       </a>
       <?php
 
@@ -244,7 +238,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
-                  Company
+                  Công ty
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -263,6 +257,42 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Quản lý đăng bài
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{URL::to('/list_job')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Danh sách bài đăng</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{URL::to('/job_new')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Xác nhận bài đăng</p>
+                  </a>
+                </li>
+              </ul>
+            <li class="nav-item">
+              <a href="{{URL::to('/test_profile')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>test profile</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/list_jobpost')}}" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Quản lý bài đăng dành cho Nhà tuyển dụng
+                </p>
+              </a>
+            </li>
             <?php
             $roles = session::get('roles_admin');
             if ($roles) {
@@ -271,7 +301,7 @@
                 <a href="{{URL::to('/listuser')}}" class="nav-link">
                   <i class="nav-icon fas fa-edit"></i>
                   <p>
-                    User
+                    Quản lý người dùng
                   </p>
                 </a>
               </li>
