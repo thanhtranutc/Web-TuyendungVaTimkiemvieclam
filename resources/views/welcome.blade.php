@@ -39,6 +39,29 @@
 	<link rel="stylesheet" type="text/css" href="public/frontend/plugins/revolution/revolution/css/settings.css">
 	<link rel="stylesheet" type="text/css" href="public/frontend/plugins/revolution/revolution/css/navigation.css">
 	<!-- Revolution Navigation Style -->
+
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="public/backend/plugins/fontawesome-free/css/all.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Tempusdominus Bootstrap 4 -->
+	<link rel="stylesheet" href="public/backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="public/backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+	<!-- JQVMap -->
+	<link rel="stylesheet" href="public/backend/plugins/jqvmap/jqvmap.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="public/backend/dist/css/adminlte.min.css">
+	<!-- overlayScrollbars -->
+	<link rel="stylesheet" href="public/backend/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="public/backend/plugins/daterangepicker/daterangepicker.css">
+	<!-- summernote -->
+	<link rel="stylesheet" href="public/backend/plugins/summernote/summernote-bs4.min.css">
+	<link rel="stylesheet" href="public/backend/plugins/toastr/toastr.min.css">
+
 </head>
 
 <body id="bg">
@@ -73,13 +96,13 @@
 								$user_name = Session::get('user_name');
 								if ($user_id) {
 								?>
-									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Register</a>
-									<a href="{{URL::to('/logout_customer')}}" class="site-button"><i class="fa fa-lock"></i> Logout</a>
+									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Đăng ký</a>
+									<a href="{{URL::to('/logout_customer')}}" class="site-button"><i class="fa fa-lock"></i> Đăng xuất</a>
 								<?php
 								} else {
 								?>
-									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Register</a>
-									<a href="{{URL::to('/login_customer')}}" class="site-button"><i class="fa fa-lock"></i> Login</a>
+									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Đăng ký</a>
+									<a href="{{URL::to('/login_customer')}}" class="site-button"><i class="fa fa-lock"></i> Đăng nhập</a>
 								<?php } ?>
 								<?php
 								if ($user_name) {
@@ -99,7 +122,7 @@
 						<div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
 							<ul class="nav navbar-nav">
 								<li class="active">
-									<a href="#">Home</a>
+									<a href="{{URL::to('/')}}">Trang chủ</a>
 								</li>
 								<li>
 									<a href="#">Việc làm<i class="fa fa-chevron-down"></i></a>
@@ -109,7 +132,7 @@
 									</ul>
 								</li>
 								<li>
-									<a href="#">Ứng viên</a>
+									<a href="{{URL::to('/candidates')}}">Ứng viên</a>
 								</li>
 								@php
 								$user_id = Session::get('user_id');
@@ -123,7 +146,7 @@
 								@endphp
 
 								<li>
-									<a href="#">Pages <i class="fa fa-chevron-down"></i></a>
+									<a href="#">Trang khác <i class="fa fa-chevron-down"></i></a>
 									<ul class="sub-menu">
 										<li><a href="about-us.html" class="dez-page">Thông tin</a></li>
 										<li><a href="error-404.html" class="dez-page">Error 404</a></li>
@@ -154,10 +177,19 @@
 		<button class="scroltop fa fa-arrow-up"></button>
 	</div>
 	<!-- JAVASCRIPT FILES ========================================= -->
+	<script src="public/ckeditor/ckeditor.js"></script>
 	<script>
-    CKEDITOR.replace('textarea1');
-    CKEDITOR.config.entities = false;
-  </script>
+		CKEDITOR.replace('textarea1');
+		CKEDITOR.config.entities = false;
+	</script>
+	<script>
+		CKEDITOR.replace('textarea2');
+		CKEDITOR.config.entities = false;
+	</script>
+	<script>
+		CKEDITOR.replace('textarea3');
+		CKEDITOR.config.entities = false;
+	</script>
 	<script src="public/frontend/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 	<script src="public/frontend/plugins/wow/wow.js"></script><!-- WOW JS -->
 	<script src="public/frontend/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
@@ -178,6 +210,46 @@
 	<script src="public/frontend/js/dz.ajax.js"></script><!-- CONTACT JS  -->
 	<script src="public/frontend/plugins/paroller/skrollr.min.js"></script><!-- PAROLLER -->
 	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+
+
+	<!-- jQuery -->
+	<script src="public/backend/plugins/jquery/jquery.min.js"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="public/backend/plugins/jquery-ui/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+		$.widget.bridge('uibutton', $.ui.button)
+	</script>
+	<!-- Bootstrap 4 -->
+	<script src="public/backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- ChartJS -->
+	<script src="public/backend/plugins/chart.js/Chart.min.js"></script>
+	<!-- Sparkline -->
+	<script src="public/backend/plugins/sparklines/sparkline.js"></script>
+	<!-- JQVMap -->
+	<script src="public/backend/plugins/jqvmap/jquery.vmap.min.js"></script>
+	<script src="public/backend/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+	<!-- jQuery Knob Chart -->
+	<script src="public/backend/plugins/jquery-knob/jquery.knob.min.js"></script>
+	<!-- daterangepicker -->
+	<script src="public/backend/plugins/moment/moment.min.js"></script>
+	<script src="public/backend/plugins/daterangepicker/daterangepicker.js"></script>
+	<!-- Tempusdominus Bootstrap 4 -->
+	<script src="public/backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<!-- Summernote -->
+	<script src="public/backend/plugins/summernote/summernote-bs4.min.js"></script>
+	<!-- overlayScrollbars -->
+	<script src="public/backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="public/backend/dist/js/adminlte.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="public/backend/dist/js/demo.js"></script>
+	<script src="public/backend/plugins/toastr/toastr.min.js"></script>
+	<script src="public/backend/plugins/sweetalert2/sweetalert2.min.js"></script>
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+	<script src="public/backend/dist/js/pages/dashboard.js"></script>
+	<script src="public/ckeditor/ckeditor.js"></script>
+
 
 </body>
 

@@ -261,6 +261,52 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
+                  Ngành nghề
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{URL::to('/list_category')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Danh sách ngành nghề</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{URL::to('/new_category')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Thêm ngành nghề</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Hình thức làm việc
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Danh sách</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Thêm</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
                   Quản lý đăng bài
                   <i class="fas fa-angle-left right"></i>
                 </p>
@@ -279,19 +325,29 @@
                   </a>
                 </li>
               </ul>
-            <li class="nav-item">
-              <a href="{{URL::to('/test_profile')}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>test profile</p>
-              </a>
             </li>
             <li class="nav-item">
-              <a href="{{URL::to('/list_jobpost')}}" class="nav-link">
+              <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
-                  Quản lý bài đăng dành cho Nhà tuyển dụng
+                  UI Quản lý bài đăng cho Nhà tuyển dụng
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{URL::to('/list_jobpost')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>UI Danh sách bài đăng</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{URL::to('/add_job')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>UI Thêm bài đăng</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <?php
             $roles = session::get('roles_admin');
@@ -372,6 +428,14 @@
   <script src="public/ckeditor/ckeditor.js"></script>
   <script>
     CKEDITOR.replace('textarea1');
+    CKEDITOR.config.entities = false;
+  </script>
+  <script>
+    CKEDITOR.replace('textarea2');
+    CKEDITOR.config.entities = false;
+  </script>
+  <script>
+    CKEDITOR.replace('textarea3');
     CKEDITOR.config.entities = false;
   </script>
   <script>

@@ -4,12 +4,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Danh sách bài tuyển dụng</h1>
+                <h1 class="m-0">Danh sách ngành nghề</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{URL::to('/dashboard')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Danh sách bài tuyển dụng</li>
+                    <li class="breadcrumb-item active">Danh sách ngành nghề</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -35,41 +35,42 @@
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 300px;">
+            <div class="card-body table-responsive p-0" style="">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Tiêu đề</th>
-                            <th>Người Đăng</th>
-                            <th>Ngành nghề</th>
-                            <th>Ngày đăng bài</th>
-                            <th>Khu vực</th>
-                            <th>Hình thức</th>
+                            <th>STT</th>
+                            <th>Tên</th>
+                            <th>Ảnh</th>
                             <th>Trạng thái</th>
+                            <th>Mô tả</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($list_job as $value)
+                        @foreach($list_category as $key =>$value)
                         <tr>
-                            <td>{{$value->job_id}}</td>
-                            <td>{{$value->job_desc}}</td>
-                            <td>{{$value->admin['admin_name']}}</td>
-                            <td>{{$value->category['category_name']}}</td>
-                            <td>{{$value->job_date}}</td>
-                            <td>{{$value->distribution['distribution_name']}}</td>
-                            <td>{{$value->working_format['working_format_name']}}</td>
-                            <?php if ($value->job_status == 2) { ?>
+                            <td>{{$value->id_category}}</td>
+                            <td>{{$value->category_name}}</td>
+                            <td></td>
+                            <?php
+                            if ($value->category_status == 1) {
+                            ?>
+                                <td>Đang hoạt động</td>
+                            <?php
+                            } else {
+                            ?>
                                 <td>Ngừng hoạt động</td>
-                            <?php } else { ?>
-                                <td>Đăng bài</td>
-                            <?php } ?>
+                            <?php
+                            }
+                            ?>
+
+                            <td><?php echo $value->category_desc; ?></td>
                             <td>
-                                <a class="btn btn-app bg-success" href="{{URL::to('/view_detailjob'.$value->job_id)}}">
-                                    <i class="fas fa-edit "></i> Xem Chi tiết
+                                <a class="btn btn-app bg-success" href="{{URL::to('/editcategory'.$value->id_category)}}">
+                                    <i class="fas fa-edit "></i> Sửa
                                 </a>
-                                <a class="btn btn-app bg-warning" href="{{URL::to('/deletecompany')}}">
+                                <a class="btn btn-app bg-warning" href="{{URL::to('/deletecategory'.$value->id_category)}}">
                                     <i class="fas fa-save"></i> Xóa
                                 </a>
                             <td>

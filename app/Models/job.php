@@ -30,4 +30,8 @@ class job extends Model
     {
         return $this->hasMany('App\Models\job_detail', 'job_id');
     }
+    public function apply_job()
+    {
+        return $this->hasMany('App\Models\apply_job', 'job_id');
+    }
 }

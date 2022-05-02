@@ -46,7 +46,6 @@
                             <th>Khu vực</th>
                             <th>Hình thức</th>
                             <th>Trạng thái</th>
-                            <th>Số người ứng tuyển</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -59,14 +58,15 @@
                             <td>{{$value->job_date}}</td>
                             <td>{{$value->distribution['distribution_name']}}</td>
                             <td>{{$value->working_format['working_format_name']}}</td>
-                            <?php if ($value->job_status == 0) { ?>
+                            <?php if ($value->job_status == 3) { ?>
                                 <td>Đăng bài</td>
-                            <?php } else { ?>
+                            <?php }elseif($value->job_status == 2) { ?>
                                 <td>Ngừng hoạt động</td>
-                            <?php } ?>
-                            <td></td>
+                            <?php }else{ ?>
+                                <td>Chờ xác nhận</td>
+                                <?php } ?>
                             <td>
-                                <a class="btn btn-app bg-success" href="{{URL::to('/view_detailjob'.$value->job_id)}}">
+                                <a class="btn btn-app bg-success" href="{{URL::to('/list_candidate'.$value->job_id)}}">
                                     <i class="fas fa-edit "></i> Xem ứng viên
                                 </a>
                                 <a class="btn btn-app bg-success" href="{{URL::to('/view_detailjob'.$value->job_id)}}">

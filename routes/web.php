@@ -36,6 +36,18 @@ Route::post('/insert_company','CompanyController@insert_company');
 Route::post('//update_company{id}','CompanyController@update_company');
 
 
+//Quản lý ngành nghề backend
+Route::get('/list_category','CategoryController@list_category'); 
+Route::get('//deletecategory{id}','CategoryController@delete_category'); 
+Route::get('/editcategory{id}','CategoryController@edit_category'); 
+Route::post('/update_category{id}','CategoryController@update_category');
+Route::get('/new_category','CategoryController@new_category_page');
+Route::post('/add_category','CategoryController@add_category');
+
+//Quản lý hình thức làm việc backend
+
+
+
 
 // job Backend
 Route::get('/list_job','JobController@job_list');               // Danh sách job
@@ -55,6 +67,10 @@ Route::get('/profile','CustomerController@profile');
 
 //register customer
 
+//
+Route::get('/candidates','HomeController@candidate_page');
+Route::get('/ui_list_candidate','AdminController@ui_list_candidate');
+
 //job browser
 Route::get('/job_browser','JobController@job_browser');
 Route::get('/job_detail','JobController@job_detail');
@@ -69,4 +85,22 @@ Route::get('/test_profile','AdminController@profile');
 
 // Nhà tuyển dụng
 
-Route::get('/list_jobpost','RecruiterController@list_jobpost');   // list bài đã đăng 
+Route::get('/list_jobpost','RecruiterController@list_jobpost');   // list bài đã đăng
+Route::get('/list_candidate{id}','RecruiterController@list_candidate');   // Xem danh sách ứng viên
+Route::get('/viewprofile{id}','RecruiterController@view_profile');   // Xem profile ứng viên
+Route::get('/add_job','RecruiterController@page_addjob');   // Trang thêm bài tuyển dụng
+Route::post('/insert_job','RecruiterController@add_job');   // thêm bài tuyển dụng 
+
+
+
+Route::post('/save_profile','CustomerController@save_profile');   // list bài đã đăng 
+
+
+// Ứng tuyển
+Route::get('/login_user','CustomerController@login_after_apply');
+Route::get('/apply_job{id}{id_job}','CustomerController@apply_job');
+
+
+
+Route::post('/save_profile{id}','CustomerController@save_profile');
+

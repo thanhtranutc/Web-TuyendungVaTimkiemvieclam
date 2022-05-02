@@ -14,4 +14,13 @@ class customer extends Model
     ];
     protected $primaryKey = 'user_id';
     protected $table = 'user';
+
+    public function experience()
+    {
+        return $this->hasMany('App\Models\experience', 'user_id');
+    }
+    public function profile()
+    {
+        return $this->hasMany('App\Models\profile', 'user_id');
+    }
 }

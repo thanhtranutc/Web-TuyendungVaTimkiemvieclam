@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h3 class="font-weight-700 m-t0 m-b20">Login Your Account</h3>
+                    <h3 class="font-weight-700 m-t0 m-b20">Đăng nhập tài khoản của bạn</h3>
                 </div>
             </div>
             <div>
@@ -33,11 +33,22 @@
                         <div class="tab-content nav">
                             <form id="login" class="tab-pane active col-12 p-a0" action="{{URL::to('/user_login')}}" method="POST">
                                 @csrf
-                                <h4 class="font-weight-700">LOGIN</h4>
-                                <p class="font-weight-600">If you have an account with us, please log in.</p>
                                 <?php
 
                                 use Illuminate\Support\Facades\Session;
+
+                                $message = Session::get('notifi');
+                                if ($message) {
+                                    echo '<span style="color:red;" class="text-alert">' . $message . '</span>';
+                                    Session::put('notifi', null);
+                                    echo '<br></br>';
+                                    echo '  ';
+                                }
+                                ?>
+                                <h4 class="font-weight-700">ĐĂNG NHẬP</h4>
+                                <p class="font-weight-600">Nếu bạn đã có tài khoản của chúng tối, hay đăng nhập.</p>
+                                <?php
+
 
                                 $message = Session::get('message');
                                 if ($message) {
@@ -57,7 +68,7 @@
                                 </ul>
                                 @enderror
                                 <div class="form-group">
-                                    <label class="font-weight-700">PASSWORD *</label>
+                                    <label class="font-weight-700">MẬT KHẨU *</label>
                                     <input name="user_password" required="" class="form-control " placeholder="Type Password" type="password">
                                 </div>
                                 @error('user_password')
@@ -66,20 +77,20 @@
                                 </ul>
                                 @enderror
                                 <div class="text-left">
-                                    <button type="submit" class="site-button m-r5 button-lg">login</button>
-                                    <a data-toggle="tab" href="#forgot-password" class="m-l5"><i class="fa fa-unlock-alt"></i> Forgot Password</a>
+                                    <button type="submit" class="site-button m-r5 button-lg">Đăng nhập</button>
+                                    <a data-toggle="tab" href="#forgot-password" class="m-l5"><i class="fa fa-unlock-alt"></i> Quên mật khẩu</a>
                                 </div>
                             </form>
                             <form id="forgot-password" class="tab-pane fade  col-12 p-a0">
-                                <h4 class="font-weight-700">FORGET PASSWORD ?</h4>
-                                <p class="font-weight-600">We will send you an email to reset your password. </p>
+                                <h4 class="font-weight-700">QUÊN MẬT KHẨU ?</h4>
+                                <p class="font-weight-600">Chúng tôi sẽ gửi email cho bạn để đặt lại mật khẩu. </p>
                                 <div class="form-group">
                                     <label class="font-weight-700">E-MAIL *</label>
                                     <input name="dzName" required="" class="form-control" placeholder="Your Email Id" type="email">
                                 </div>
                                 <div class="text-left">
-                                    <a class="site-button outline gray button-lg" data-toggle="tab" href="#login">Back</a>
-                                    <button class="site-button pull-right button-lg">Submit</button>
+                                    <a class="site-button outline gray button-lg" data-toggle="tab" href="#login">Quay lại</a>
+                                    <button class="site-button pull-right button-lg">Gửi</button>
                                 </div>
                             </form>
                         </div>

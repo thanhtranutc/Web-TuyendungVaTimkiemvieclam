@@ -1,14 +1,21 @@
+<?php
+
+use Illuminate\Support\Facades\Session;
+
+$user_id = Session::get('user_id');
+
+?>
 @extends('welcome')
 @section('content')
 <div class="dez-bnr-inr overlay-black-middle" style="background-image:url(public/frontend/images/banner/bnr1.jpg);">
     <div class="container">
         <div class="dez-bnr-inr-entry">
-            <h1 class="text-white">Job Detail</h1>
+            <h1 class="text-white">Chi tiết công việc</h1>
             <!-- Breadcrumb row -->
             <div class="breadcrumb-row">
                 <ul class="list-inline">
-                    <li><a href="{{URL::to('/')}}">Home</a></li>
-                    <li>Job Detail</li>
+                    <li><a href="{{URL::to('/')}}">Trang chủ</a></li>
+                    <li>Chi tiết công việc</li>
                 </ul>
             </div>
             <!-- Breadcrumb row END -->
@@ -19,6 +26,15 @@
 <!-- contact area -->
 <div class="content-block">
     <!-- Job Detail -->
+    <?php
+    $notifi = Session::get('notifi');
+    if ($notifi) {
+        echo '<span style="color:red;" class="text-alert">' . $notifi . '</span>';
+        Session::put('notifi', null);
+        echo '<br></br>';
+        echo ' ';
+    }
+    ?>
     <div class="section-full content-inner-1">
         <div class="container">
             <div class="row">
@@ -32,11 +48,11 @@
                             </div>
                             <div class="col-lg-12 col-md-6">
                                 <div class="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
-                                    <h4 class="text-black font-weight-700 p-t10 m-b15">Job Details</h4>
+                                    <h4 class="text-black font-weight-700 p-t10 m-b15">Chi tiết công việc</h4>
                                     <ul>
-                                        <li><i class="ti-location-pin"></i><strong class="font-weight-700 text-black">Address</strong><span class="text-black-light"> {{$data->company['company_adress']}} </span></li>
-                                        <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Salary</strong>{{number_format($data->detail_job_salary,0,',','.')}} VND</li>
-                                        <li><i class="ti-shield"></i><strong class="font-weight-700 text-black">Experience</strong>6 Year Experience</li>
+                                        <li><i class="ti-location-pin"></i><strong class="font-weight-700 text-black">Địa chỉ</strong><span class="text-black-light"> {{$data->company['company_adress']}} </span></li>
+                                        <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Lương</strong>{{number_format($data->detail_job_salary,0,',','.')}} VND</li>
+                                        <li><i class="ti-shield"></i><strong class="font-weight-700 text-black">Kinh nghiệm</strong>6 Year Experience</li>
                                     </ul>
                                 </div>
                             </div>
@@ -53,25 +69,26 @@
                             use Carbon\Carbon;
                             @endphp
                             <li><strong>Education</strong> Web Designer</li>
-                            <li><strong>Deadline:</strong> {{Carbon::parse($data->detail_job_duration)->format('m/d/Y');}}</li>
+                            <li><strong>Thời hạn:</strong> {{Carbon::parse($data->detail_job_duration)->format('m/d/Y');}}</li>
                             <li><i class="ti-location-pin text-black m-r5"></i> {{$distribution->distribution['distribution_name']}} </li>
                         </ul>
-                        <p class="p-t20">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                        <h5 class="font-weight-600">Job Description</h5>
+                        <p class="p-t20"><?php echo $data->company['company_desc'] ?></p>
+                        <h5 class="font-weight-600">Mô tả công việc</h5>
                         <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-                        <p>{{$data->detail_job_desc}}</p>
-                        <h5 class="font-weight-600">How to Apply</h5>
-                        <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>
-                        <h5 class="font-weight-600">Job Requirements</h5>
+                        <p><?php echo $data->detail_job_desc ?></p>
+                        <h5 class="font-weight-600">Yêu cầu ứng viên</h5>
                         <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
                         <ul class="list-num-count no-round">
                             <!-- <li>The DexignLab Privacy Policy was updated on 25 June 2018.</li>
                             <li>Who We Are and What This Policy Covers</li> -->
-                            <p>1. {{$data->detail_job_request}}</p>
+                            <p><?php echo $data->detail_job_request ?></p>
 
                         </ul>
-                        <a href="#" class="site-button">Apply This Job</a>
+                        <?php if ($user_id) { ?>
+                            <a href="{{URL::to('/apply_job'.$user_id.$data->id_job)}}" class="site-button">Ứng tuyển</a>
+                        <?php } else { ?>
+                            <a href="{{URL::to('/login_user')}}" class="site-button">Ứng tuyển</a>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

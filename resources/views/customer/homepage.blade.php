@@ -1,12 +1,12 @@
-@extends('welcome')
-@section('content')
-
 <?php
-
 use App\Http\Controllers\HomeController;
+use App\Models\company;
 use App\Models\job_detail;
 $count_job = new HomeController(); 
+$category = $count_job->getCategory();
 ?>
+@extends('welcome')
+@section('content')
 <div class="page-content">
     <div class="dez-bnr-inr dez-bnr-inr-md" style="background-image:url(public/frontend/images/main-slider/slide2.jpg);">
         <div class="container">
@@ -71,103 +71,34 @@ $count_job = new HomeController();
         <div class="container">
             <div class="section-head d-flex head-counter clearfix">
                 <div class="mr-auto">
-                    <h2 class="m-b5">Popular Categories</h2>
-                    <h6 class="fw3">20+ Catetories work wating for you</h6>
+                    <h2 class="m-b5">Ngành nghề phổ biến</h2>
                 </div>
                 <div class="head-counter-bx">
                     <h2 class="m-b5 counter"><?php echo $count_job->job_total() ?></h2>
-                    <h6 class="fw3">Jobs Posted</h6>
+                    <h6 class="fw3">Công việc</h6>
                 </div>
                 <!-- <div class="head-counter-bx">
                     <h2 class="m-b5 counter">4500</h2>
                     <h6 class="fw3">Tasks Posted</h6>
                 </div> -->
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter">1500</h2>
-                    <h6 class="fw3">Freelancers</h6>
+                    <h2 class="m-b5 counter"><?= $count_job->count_cv_candidate() ?></h2>
+                    <h6 class="fw3">Ứng viên</h6>
                 </div>
             </div>
             <div class="row sp20">
+                @foreach($category as $item)
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="icon-bx-wraper">
                         <div class="icon-content">
                             <div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div>
-                            <a href="#" class="dez-tilte">Design, Art & Multimedia</a>
-                            <p class="m-a0">198 Open Positions</p>
+                            <a href="#" class="dez-tilte">{{$item->category_name}}</a>
+                            <p class="m-a0">198 công việc</p>
                             <div class="rotate-icon"><i class="ti-location-pin"></i></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-wand"></i></div>
-                            <a href="#" class="dez-tilte">Education Training</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-wand"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-wallet"></i></div>
-                            <a href="#" class="dez-tilte">Accounting / Finance</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-wallet"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-cloud-up"></i></div>
-                            <a href="#" class="dez-tilte">Human Resource</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-cloud-up"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-bar-chart"></i></div>
-                            <a href="#" class="dez-tilte">Telecommunications</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-bar-chart"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-tablet"></i></div>
-                            <a href="#" class="dez-tilte">Restaurant / Food Service</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-tablet"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-camera"></i></div>
-                            <a href="#" class="dez-tilte">Construction / Facilities</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-camera"></i></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="icon-bx-wraper">
-                        <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-panel"></i></div>
-                            <a href="#" class="dez-tilte">Health</a>
-                            <p class="m-a0">198 Open Positions</p>
-                            <div class="rotate-icon"><i class="ti-panel"></i></div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
                 <div class="col-lg-12 text-center m-t30">
                     <button class="site-button radius-xl">All Categories</button>
                 </div>
@@ -190,7 +121,7 @@ $count_job = new HomeController();
                     <div class="city-bx align-items-end  d-flex" style="background-image:url(images/city/pic1.jpg)">
                         <div class="city-info">
                             <h5>{{$value->distribution_name}}</h5>
-                            <span><?php echo $count_job->count_job_distribution($value->id_distribution); ?> Jobs</span>
+                            <span><?php echo $count_job->count_job_distribution($value->id_distribution); ?> Công việc</span>
                         </div>
                     </div>
                 </div>
@@ -222,6 +153,8 @@ $count_job = new HomeController();
 
                                         <?php
                                         $image1 = job_detail::where('id_job', $job_list->job_id)->with('company')->first();
+                                        // print_r(json_encode($image1));die;
+                                        // $image_company = company::where('company_id', $image1['id_company'])->first();
                                         ?>
                                         <span><img style="height:60px; width:60px;" src="{{URL('public/images/company/'.$image1->company['company_image'])}}"/></span>
                                     </div>
@@ -243,7 +176,9 @@ $count_job = new HomeController();
                                         <span><?php echo $count_job->money_format($image1->salary_up)."tr"."-".$count_job->money_format($image1->salary_down)."tr"?></span>
                                     </div>
                                 </div>
-                                <span class="post-like fa fa-heart-o"></span>
+                                <span class="post-like fa fa-heart-o">
+                                    <img src="pullic/frontend/images/icon/hearts.png" alt="">
+                                </span>
                             </a>
                         </li>
                         @endforeach

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\admin;
 use App\Models\roles;
+use App\Models\category;
 use App\Models\detail_roles;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -101,4 +102,7 @@ class AdminController extends Controller
     public function profile(){
         return view('admin.user.profile');
     }
+
+
+
 }

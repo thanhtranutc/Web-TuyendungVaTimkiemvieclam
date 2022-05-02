@@ -30,7 +30,7 @@ $count_job = new HomeController();
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-9 col-lg-8">
-						<h5 class="widget-title font-weight-700 text-uppercase">Recent Jobs</h5>
+						<h5 class="widget-title font-weight-700 text-uppercase">Công việc được thêm gần đây</h5>
 						<ul class="post-job-bx">
 							@foreach($job_list as $value)
 							@php
@@ -66,24 +66,24 @@ $count_job = new HomeController();
 						</ul>
 						<div class="pagination-bx m-t30">
 							<ul class="pagination">
-								<li class="previous"><a href="#"><i class="ti-arrow-left"></i> Prev</a></li>
+								<li class="previous"><a href="#"><i class="ti-arrow-left"></i> Trước</a></li>
 								<li class="active"><a href="#">1</a></li>
 								<li><a href="#">2</a></li>
 								<li><a href="#">3</a></li>
-								<li class="next"><a href="#">Next <i class="ti-arrow-right"></i></a></li>
+								<li class="next"><a href="#">Tiếp <i class="ti-arrow-right"></i></a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4">
 						<div class="sticky-top">
 							<div class="clearfix m-b30">
-								<h5 class="widget-title font-weight-700 text-uppercase">Keywords</h5>
+								<h5 class="widget-title font-weight-700 text-uppercase">Từ khóa </h5>
 								<div class="">
 									<input type="text" class="form-control" placeholder="Search">
 								</div>
 							</div>
 							<div class="clearfix m-b10">
-								<h5 class="widget-title font-weight-700 m-t0 text-uppercase">Location</h5>
+								<h5 class="widget-title font-weight-700 m-t0 text-uppercase">Khu vực</h5>
 								<input type="text" class="form-control m-b30" placeholder="Location">
 								<!-- <div class="input-group m-b20">
 									<input type="text" class="form-control" placeholder="120">
@@ -94,7 +94,7 @@ $count_job = new HomeController();
 								</div> -->
 							</div>
 							<div class="clearfix m-b30">
-								<h5 class="widget-title font-weight-700 text-uppercase">Job type</h5>
+								<h5 class="widget-title font-weight-700 text-uppercase">Thời gian làm việc</h5>
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
 										@foreach($work_type as $item)
@@ -109,7 +109,7 @@ $count_job = new HomeController();
 								</div>
 							</div>
 							<div class="clearfix">
-								<h5 class="widget-title font-weight-700 text-uppercase">Category</h5>
+								<h5 class="widget-title font-weight-700 text-uppercase">Ngành nghề</h5>
 								<select>
 									@foreach($category as $cate)
 									<option>{{$cate->category_name}}</option>

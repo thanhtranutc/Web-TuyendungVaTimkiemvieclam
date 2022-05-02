@@ -44,14 +44,14 @@ class JobController extends Controller
     // job backend
 
     public function job_list(){
-        $list_job = job::where('job_status','>=','1')->orderby('job_id','asc')
+        $list_job = job::where('job_status','>=','2')->orderby('job_id','asc')
         ->with('admin','category','distribution','working_format')
         ->get();
         return view('admin.job.list_job')->with('list_job',$list_job);
     }
     public function job_new(){
-        $list_job = job::where('job_status','0')
-        ->with('customer','category','distribution','working_format')
+        $list_job = job::where('job_status','1')
+        ->with('category','distribution','working_format')
         ->orderby('job_id','asc')
         ->get();
         return view('admin.job.job_new')->with('list_job',$list_job);
@@ -59,7 +59,7 @@ class JobController extends Controller
     public function confirm_job($job_id){
         $job_new = job::where('job_id',$job_id)->first();
         if($job_new){
-            $job_new->job_status = 1;
+            $job_new->job_status = 3;
             $job_new->save();
             Session::put('message','Bài viết đã được xác nhận');
             return Redirect()->back();

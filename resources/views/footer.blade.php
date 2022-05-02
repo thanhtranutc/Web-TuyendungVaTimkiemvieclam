@@ -28,26 +28,18 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-8 col-sm-8 col-12">
                     <div class="widget border-0">
-                        <h5 class="m-b30 text-white">Frequently Asked Questions</h5>
-                        <ul class="list-2 list-line">
-                            <li><a href="#">Privacy & Seurty</a></li>
-                            <li><a href="#">Terms of Serice</a></li>
-                            <li><a href="#">Communications</a></li>
-                            <li><a href="#">Referral Terms</a></li>
-                            <li><a href="#">Lending Licnses</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">How It Works</a></li>
-                            <li><a href="#">For Employers</a></li>
-                            <li><a href="#">Underwriting</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Lending Licnses</a></li>
+                        <h5 class="m-b30 text-white">Câu hỏi thường gặp ?</h5>
+                        <ul class="list-2 w10 list-line">
+                            <li><a href="#">Chính sách và bảo mật</a></li>
+                            <li><a href="#">Hỗ trợ</a></li>
+                            <li><a href="#">Liên hệ</a></li>   
                             <li><a href="#">Support</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-12">
                     <div class="widget border-0">
-                        <h5 class="m-b30 text-white">Find Jobs</h5>
+                        <h5 class="m-b30 text-white">Tìm việc</h5>
                         <ul class="list-2 w10 list-line">
                             <li><a href="#">US Jobs</a></li>
                             <li><a href="#">Canada Jobs</a></li>

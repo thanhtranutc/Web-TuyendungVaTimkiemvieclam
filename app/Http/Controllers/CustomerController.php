@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\customer;
+use App\Models\profile;
+use App\Models\apply_job;
 use App\Models\customer as ModelsCustomer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -67,5 +69,42 @@ class CustomerController extends Controller
         $id_user = Session::get('user_id');
         $data = customer::where('user_id',$id_user)->first();
         return view('customer.profile')->with('user',$data);
+    }
+    public function login_after_apply(){
+        Session::put('notifi', 'Bạn cần đăng nhập để có thể ứng tuyển công việc!');
+        return Redirect::to('/login_customer');
+    }
+    public function apply_job($id_user,$id_job){
+        $profile_user = profile::where('id_user',$id_user)->first();
+        if($profile_user){
+            $is_applyjob = apply_job::where('id_job',$id_job)->where('id_profile',$profile_user['id_profile'])->first();
+            if($is_applyjob){
+                Session::put('notifi', 'Bạn đã ứng tuyển công việc này trước đó');
+            }else{
+            $apply_job = new apply_job();
+            $apply_job->id_profile = $profile_user['id_profile'];
+            $apply_job->id_job = $id_job;
+            $apply_job->save();
+            Session::put('notifi', 'Bạn đã ứng tuyển công việc');
+            }
+        }
+        else{
+            Session::put('notifi', 'Bạn cần tạo hồ sơ để có thể ứng tuyển!');
+        }
+        return Redirect()->back();
+
+    }
+    public function save_profile($id_user,Request $request){
+        $data = $request->all();
+        //update date user table
+
+        $userCurrent = customer::where('user_id',$id_user)->first();
+        if($userCurrent){
+            $userCurrent->user_name = $data['user_name'];
+            $userCurrent->user_phone = $data['user_sdt'];
+            $userCurrent->user_adress = $data['user_adress'];
+            $userCurrent->update();
+        }
+
     }
 }

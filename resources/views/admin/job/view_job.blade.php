@@ -72,7 +72,7 @@
                         <div class="col-6">
                             <p class="lead">Mô tả công việc:</p>
                             <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                               {{$jobview->detail_job_desc}}
+                               <?= $jobview->detail_job_desc ?>
                             </p>
                         </div>
                         <!-- /.col -->
@@ -80,7 +80,7 @@
                             <p class="lead">Yêu cầu:</p>
 
                             <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                               {{$jobview->detail_job_request}}
+                               <?= $jobview->detail_job_request ?>
                             </p>
                         </div>
                         <!-- /.col -->

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\category;
 use App\Models\distribution;
 use App\Models\job;
 use App\Models\company;
 use App\Models\job_detail;
+use App\Models\experience;
+use App\Models\profile;
 use App\Models\working_format;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +19,7 @@ class HomeController extends Controller
 {
 
     // protected $list_job;
+    protected $job_status = 3;
 
     public function index(){
         $city= distribution::orderby('id_distribution','asc')->take(3)->get();
@@ -44,7 +48,7 @@ class HomeController extends Controller
 
     //get job list
     public function getJob(){
-        $list_job = job::orderby('job_id','asc')->with('distribution','working_format')->get();
+        $list_job = job::orderby('job_id','asc')->with('distribution','working_format')->where('job_status',$this->job_status)->get();
         return $list_job;
     }
 
@@ -59,4 +63,17 @@ class HomeController extends Controller
         return view('customer.contact');
     }
 
+    public function candidate_page(){
+        return view('customer.candidate');
+    }
+
+    public function count_cv_candidate(){
+        $count_cv =  count(profile::orderby('id_profile','asc')->get());
+        return $count_cv;
+    }
+    public function getCategory(){
+        $list_category = category::orderby('id_category','asc')->get();
+        return $list_category;
+    }
+    
 }

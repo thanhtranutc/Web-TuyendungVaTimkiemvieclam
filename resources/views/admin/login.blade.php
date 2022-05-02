@@ -25,6 +25,18 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
+                <?php
+
+                use Illuminate\Support\Facades\Session;
+
+                $message = Session::get('message');
+                if ($message) {
+                    echo '<span style="color:#79EE56;" class="text-alert">' . $message . '</span>';
+                    Session::put('message', null);
+                    echo '<br></br>';
+                    echo '  ';
+                }
+                ?>
 
                 <form action="{{URL::to('/loginadmin')}}" method="post">
                     @csrf
