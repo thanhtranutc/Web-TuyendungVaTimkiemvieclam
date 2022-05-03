@@ -48,7 +48,7 @@ class HomeController extends Controller
 
     //get job list
     public function getJob(){
-        $list_job = job::orderby('job_id','asc')->with('distribution','working_format')->where('job_status',$this->job_status)->get();
+        $list_job = job::orderby('job_id','asc')->with('distribution','working_format')->where('job_status',$this->job_status)->paginate(3);
         return $list_job;
     }
 
@@ -74,6 +74,11 @@ class HomeController extends Controller
     public function getCategory(){
         $list_category = category::orderby('id_category','asc')->get();
         return $list_category;
+    }
+
+    public function getCountJobByCategory($id){
+        $count_job = count(job::where('id_category',$id)->get());
+        return $count_job;
     }
     
 }

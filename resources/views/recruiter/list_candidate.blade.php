@@ -37,7 +37,7 @@
                                         <i class="fas fa-comments"></i>
                                     </a>
                                     <a href="{{URL::to('/viewprofile'.$item->user_id)}}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user"></i> View Profile
+                                        <i class="fas fa-user"></i> Xem
                                     </a>
                                 </div>
                             </div>
@@ -56,8 +56,6 @@
                         <li class="page-item"><a class="page-link" href="#">4</a></li>
                         <li class="page-item"><a class="page-link" href="#">5</a></li>
                         <li class="page-item"><a class="page-link" href="#">6</a></li>
-                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                        <li class="page-item"><a class="page-link" href="#">8</a></li>
                     </ul>
                 </nav>
             </div>

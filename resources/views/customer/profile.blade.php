@@ -1,5 +1,10 @@
-<?php use Illuminate\Support\Facades\Session; ?>
+<?php
+
+use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CustomerController; ?>
 <?php $user_id = Session::get('user_id') ?>
+<?php $customer = new CustomerController() ?>
+<?php $profile = $customer->getProfileByIdUser($user_id) ?>
 @extends('welcome')
 @section('content')
 <style>
@@ -35,17 +40,31 @@
         </div>
     </div>
     <div>
+        <?php
+        $message = Session::get('notifi');
+        if ($message) {
+            echo '<span style="color:red;" class="text-alert">' . $message . '</span>';
+            Session::put('notifi', null);
+            echo '<br></br>';
+            echo '  ';
+        }
+        ?>
+    </div>
+    <div>
         <form method="post" action="{{URL::to('/save_profile'.$user_id)}}" enctype="multipart/form-data">
-        {{csrf_field()}}
+            {{csrf_field()}}
             <div class="row">
                 <div class="col-md-4 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img class="rounded-circle mt-5" width="150px" id="img-preview" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                        <?php if (empty($user->user_image)) { ?>
+                            <img class="rounded-circle mt-5" width="150px" id="img-preview" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                        <?php } else { ?>
+                            <img class="rounded-circle mt-5" width="150px" id="img-preview" src="{{URL('public/images/user/'.$user->user_image)}}">
+                        <?php } ?>
                         <div class="form-img">
-                            <form action="#" method="POST" enctype="multipart/form-data">
-                                <input type="file" title=" " style="color:transparent; width:100px;" accept="image/*" id="file-input">
-                                <input type="submit" value="submit">
-                            </form>
+                            <!-- <form action="#" method="POST" enctype="multipart/form-data"> -->
+                            <input type="file" style="color:transparent; width:100px;" name="user_image" accept="image/*" id="file-input">
+                            <!-- </form> -->
                         </div>
                     </div>
                     <div class="p-3 py-5 profile-custom">
@@ -56,7 +75,7 @@
 
                             <div class="col-md-12"><label class="labels">Địa chỉ</label><input type="text" class="form-control" placeholder="enter address" name="user_adress" value="{{$user->user_adress}}"></div>
                             <div class="col-md-12"><label class="labels">Email</label><input type="text" disabled class="form-control" placeholder="enter email" name="user_email" value="{{$user->user_email}}"></div>
-                            <div class="col-md-12"><label class="labels">Kĩ năng</label> <textarea id="textarea3" name="user_skill" cols="50" rows="5"></textarea></div>
+                            <div class="col-md-12"><label class="labels">Kĩ năng</label> <textarea id="textarea3" name="user_skill" cols="50" rows="5"><?= $profile->profile_skill ?></textarea></div>
                         </div>
 
                     </div>
@@ -70,9 +89,9 @@
                         <label class="labels">Experience</label>
                         <textarea id="textarea1" class="form-control" cols="" rows="20" placeholder="Enter"></textarea>
                     </div><br> -->
-                        <div class="col-md-12"><label class="labels">Mục tiêu nghề nghiệp</label><br> <textarea name="career_goals" id="textarea2" cols="80" rows="5"></textarea>
+                        <div class="col-md-12"><label class="labels">Mục tiêu nghề nghiệp</label><br> <textarea name="career_goals" id="textarea2" cols="80" rows="5"><?= $profile->profile_career_goals ?></textarea>
                         </div>
-                        <div class="col-md-12"><label class="labels">Học vấn</label><br> <textarea name="univerity" id="" cols="80" rows="5"></textarea></div><br>
+                        <div class="col-md-12"><label class="labels">Học vấn</label><br> <textarea name="univerity" id="" cols="80" rows="5"><?= $profile->profile_education ?></textarea></div><br>
                         <div class="col-md-12" id="test">
                             <div class="d-flex justify-content-between align-items-center experience"> <label class="labels">Kinh nghiệm làm việc</label><a class="border px-3 p-1 add-experience" onclick="myFunction()"><i class="fa fa-plus"></i>&nbsp;Thêm</a></div><br>
                             <div class="timeline timeline-inverse">

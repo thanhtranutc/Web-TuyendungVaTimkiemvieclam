@@ -73,7 +73,7 @@
                         <strong><i class="fas fa-pencil-alt mr-1"></i>Kĩ năng</strong>
 
                         <p class="text-muted">
-                            <span class="tag tag-danger">{{$user_profile['profile_skill']}}</span>
+                            <span class="tag tag-danger"><?= $user_profile['profile_skill'] ?></span>
                         </p>
 
                         <hr>
@@ -103,7 +103,7 @@
                                 <div class="post">
                                     <!-- /.user-block -->
                                     <p>
-                                    {{$user_profile->profile_career_goals}}
+                                    <?= $user_profile->profile_career_goals ?>
                                     </p>
                                 </div>
                                 <!-- /.post -->

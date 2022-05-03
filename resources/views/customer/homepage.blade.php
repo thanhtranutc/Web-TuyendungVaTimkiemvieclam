@@ -93,7 +93,7 @@ $category = $count_job->getCategory();
                         <div class="icon-content">
                             <div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div>
                             <a href="#" class="dez-tilte">{{$item->category_name}}</a>
-                            <p class="m-a0">198 công việc</p>
+                            <p class="m-a0"><?= $count_job->getCountJobByCategory($item->id_category) ?> công việc</p>
                             <div class="rotate-icon"><i class="ti-location-pin"></i></div>
                         </div>
                     </div>

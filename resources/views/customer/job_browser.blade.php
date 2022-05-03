@@ -3,7 +3,7 @@
 @php
 use App\Models\job_detail;
 use App\Http\Controllers\HomeController;
-$count_job = new HomeController(); 
+$count_job = new HomeController();
 @endphp
 <div class="page-content bg-white">
 	<!-- inner page banner -->
@@ -56,7 +56,7 @@ $count_job = new HomeController();
 											<span>{{$value->working_format['working_format_name']}}</span>
 										</div>
 										<div class="salary-bx">
-											<span><?php echo $count_job->money_format($image1->salary_up)."tr"."-".$count_job->money_format($image1->salary_down)."tr"?></span>
+											<span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
 										</div>
 									</div>
 									<span class="post-like fa fa-heart-o"></span>
@@ -64,14 +64,13 @@ $count_job = new HomeController();
 							</li>
 							@endforeach
 						</ul>
-						<div class="pagination-bx m-t30">
-							<ul class="pagination">
+						<div class="pagination-bx m-t30" >
+							<!-- <ul class="pagination">
 								<li class="previous"><a href="#"><i class="ti-arrow-left"></i> Trước</a></li>
 								<li class="active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
 								<li class="next"><a href="#">Tiếp <i class="ti-arrow-right"></i></a></li>
-							</ul>
+							</ul> -->
+							<span><?php echo $job_list->render(); ?></span>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4">
