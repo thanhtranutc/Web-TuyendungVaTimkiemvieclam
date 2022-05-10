@@ -77,12 +77,12 @@ class CustomerController extends Controller
     public function apply_job($id_user,$id_job){
         $profile_user = profile::where('id_user',$id_user)->first();
         if($profile_user){
-            $is_applyjob = apply_job::where('id_job',$id_job)->where('id_profile',$profile_user['id_profile'])->first();
+            $is_applyjob = apply_job::where('id_job',$id_job)->where('id_user',$profile_user['id_user'])->first();
             if($is_applyjob){
                 Session::put('notifi', 'Bạn đã ứng tuyển công việc này trước đó');
             }else{
             $apply_job = new apply_job();
-            $apply_job->id_profile = $profile_user['id_profile'];
+            $apply_job->id_user = $id_user;
             $apply_job->id_job = $id_job;
             $apply_job->save();
             Session::put('notifi', 'Bạn đã ứng tuyển công việc');
@@ -144,5 +144,8 @@ class CustomerController extends Controller
     public function getProfileByIdUser($id){
         $profile = profile::where('id_user',$id)->first();
         return $profile;
+    }
+    public function getUserById($id){
+        return customer::find($id);
     }
 }

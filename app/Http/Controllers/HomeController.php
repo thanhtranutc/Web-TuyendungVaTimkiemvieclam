@@ -11,15 +11,25 @@ use App\Models\company;
 use App\Models\job_detail;
 use App\Models\experience;
 use App\Models\profile;
+use App\Models\apply_job;
 use App\Models\working_format;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CustomerController;
+
 
 class HomeController extends Controller
 {
-
+ 
     // protected $list_job;
     protected $job_status = 3;
+    protected $_customer;
+    protected $_job;
+
+    public function __construct(CustomerController $customer)
+    {
+        $this->_customer = $customer;
+    }
 
     public function index(){
         $city= distribution::orderby('id_distribution','asc')->take(3)->get();
@@ -42,8 +52,7 @@ class HomeController extends Controller
     } 
     public function logout(){
         Session::flush();
-        $city= distribution::orderby('id_distribution','asc')->take(3)->get();
-        return view('customer.homepage')->with('city',$city);
+        return $this->index();
     }
 
     //get job list
@@ -64,13 +73,19 @@ class HomeController extends Controller
     }
 
     public function candidate_page(){
-        return view('customer.candidate');
+        $id_user = Session::get('user_id');
+        // $job_id = apply_job::find($id_user);
+        // print_r(json_encode($job_id));die;
+        $userCurent = $this->_customer->getUserById($id_user);
+
+        return view('customer.candidate')->with('userInfor',$userCurent);
     }
 
     public function count_cv_candidate(){
         $count_cv =  count(profile::orderby('id_profile','asc')->get());
         return $count_cv;
     }
+
     public function getCategory(){
         $list_category = category::orderby('id_category','asc')->get();
         return $list_category;

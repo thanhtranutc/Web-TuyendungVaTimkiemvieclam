@@ -8,11 +8,11 @@ use App\Models\company;
 use App\Models\working_format;
 use App\Models\distribution;
 use App\Models\category;
+use App\Models\apply_job;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 // use App\Classes\HomeController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\HomeController as ControllersHomeController;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -20,11 +20,16 @@ use Illuminate\Support\Facades\Session as FacadesSession;
 class JobController extends Controller
 {
 
-    protected $homecontroller;
+    protected $_homecontroller;
+
+    public function __construct(HomeController $homeController)
+    {
+        $this->_homecontroller = $homeController;
+    }
 
     public function job_browser(){
-        $homecontroller = new HomeController();
-        $job_list = $homecontroller->getJob();
+        // $homecontroller = new HomeController();
+        $job_list = $this->_homecontroller->getJob();
         $working_format = working_format::orderby('id_working_format', 'desc')->get();
         $category = category::where('category_status','1')->orderby('id_category', 'desc')->get();
         return view('customer.job_browser')
@@ -80,4 +85,8 @@ class JobController extends Controller
             return Redirect()->back();
         }
     }
+    public function getJobById($id){
+        return job::find($id);
+    }
+
 }

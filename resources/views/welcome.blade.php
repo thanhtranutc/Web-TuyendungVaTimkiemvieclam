@@ -134,7 +134,7 @@
 								<li>
 									<a href="{{URL::to('/candidates')}}">Ứng viên</a>
 								</li>
-								@php
+								<!-- @php
 								$user_id = Session::get('user_id');
 								if($user_id){
 								@endphp
@@ -143,7 +143,7 @@
 								</li>
 								@php
 								}
-								@endphp
+								@endphp -->
 
 								<li>
 									<a href="#">Trang khác <i class="fa fa-chevron-down"></i></a>

@@ -23,4 +23,8 @@ class customer extends Model
     {
         return $this->hasMany('App\Models\profile', 'user_id');
     }
+    public function apply_job()
+    {
+        return $this->hasMany('App\Models\apply_job', 'user_id');
+    }
 }

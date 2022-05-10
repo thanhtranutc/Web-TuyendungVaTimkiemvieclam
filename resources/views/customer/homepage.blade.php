@@ -1,8 +1,12 @@
 <?php
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerController as customer;
 use App\Models\company;
 use App\Models\job_detail;
-$count_job = new HomeController(); 
+use Illuminate\Support\Facades\App;
+
+// $count_job = new HomeController();
+$count_job = App::make("App\Http\Controllers\HomeController");
 $category = $count_job->getCategory();
 ?>
 @extends('welcome')

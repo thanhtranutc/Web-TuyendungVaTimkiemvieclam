@@ -17,8 +17,4 @@ class profile extends Model
     public function customer(){
         return $this->belongsTo('App\Models\customer','id_user');
     }
-    public function apply_job()
-    {
-        return $this->hasMany('App\Models\apply_job', 'id_profile');
-    }
 }

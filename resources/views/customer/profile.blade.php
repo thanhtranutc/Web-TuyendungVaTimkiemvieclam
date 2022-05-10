@@ -75,7 +75,7 @@ use App\Http\Controllers\CustomerController; ?>
 
                             <div class="col-md-12"><label class="labels">Địa chỉ</label><input type="text" class="form-control" placeholder="enter address" name="user_adress" value="{{$user->user_adress}}"></div>
                             <div class="col-md-12"><label class="labels">Email</label><input type="text" disabled class="form-control" placeholder="enter email" name="user_email" value="{{$user->user_email}}"></div>
-                            <div class="col-md-12"><label class="labels">Kĩ năng</label> <textarea id="textarea3" name="user_skill" cols="50" rows="5"><?= $profile->profile_skill ?></textarea></div>
+                            <div class="col-md-12"><label class="labels">Kĩ năng</label> <textarea id="textarea3" name="user_skill" cols="50" rows="5"><?php if(isset($profile)){ echo $profile->profile_skill;} ?></textarea></div>
                         </div>
 
                     </div>
@@ -89,9 +89,9 @@ use App\Http\Controllers\CustomerController; ?>
                         <label class="labels">Experience</label>
                         <textarea id="textarea1" class="form-control" cols="" rows="20" placeholder="Enter"></textarea>
                     </div><br> -->
-                        <div class="col-md-12"><label class="labels">Mục tiêu nghề nghiệp</label><br> <textarea name="career_goals" id="textarea2" cols="80" rows="5"><?= $profile->profile_career_goals ?></textarea>
+                        <div class="col-md-12"><label class="labels">Mục tiêu nghề nghiệp</label><br> <textarea name="career_goals" id="textarea2" cols="80" rows="5"><?php if(isset($profile)){echo $profile->profile_career_goals;} ?></textarea>
                         </div>
-                        <div class="col-md-12"><label class="labels">Học vấn</label><br> <textarea name="univerity" id="" cols="80" rows="5"><?= $profile->profile_education ?></textarea></div><br>
+                        <div class="col-md-12"><label class="labels">Học vấn</label><br> <textarea name="univerity" id="" cols="80" rows="5"><?php if(isset($profile)){echo $profile->profile_education;} ?></textarea></div><br>
                         <div class="col-md-12" id="test">
                             <div class="d-flex justify-content-between align-items-center experience"> <label class="labels">Kinh nghiệm làm việc</label><a class="border px-3 p-1 add-experience" onclick="myFunction()"><i class="fa fa-plus"></i>&nbsp;Thêm</a></div><br>
                             <div class="timeline timeline-inverse">

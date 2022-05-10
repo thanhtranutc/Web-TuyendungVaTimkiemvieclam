@@ -40,8 +40,8 @@ class RecruiterController extends Controller
         try {
             if ($list_profile)
                 foreach ($list_profile as $item) {
-                    $id_user = profile::where('id_profile', $item->id_profile)->first();
-                    $info_user = customer::where('user_id', $id_user->id_user)->first();
+                    // $id_user = profile::where('id_profile', $item->id_profile)->first();
+                    $info_user = customer::where('user_id', $item->id_user)->first();
                     $list_user[] = $info_user;
                 }
             return view('recruiter.list_candidate')->with('list_candidate', $list_user);
