@@ -22,4 +22,8 @@ class job_detail extends Model
     public function job(){
         return $this->belongsTo('App\Models\job','id_job');
     }
+
+    public function getDetailJobByIdJob($id){
+        return job_detail::where('id_job',$id)->first();
+    }
 }

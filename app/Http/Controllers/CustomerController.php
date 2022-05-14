@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\customer;
 use App\Models\profile;
 use App\Models\apply_job;
+use App\Models\favourite_job;
 use App\Models\customer as ModelsCustomer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -147,5 +148,14 @@ class CustomerController extends Controller
     }
     public function getUserById($id){
         return customer::find($id);
+    }
+
+    public function addJobToFavourite(Request $request){
+        $data_post = $request->all();
+        $user = Session::get('user_id');
+        $favourite_job = new favourite_job();
+        $favourite_job->id_user = $user;
+        $favourite_job->id_job = $data_post['id_job'];
+        $favourite_job->save();
     }
 }

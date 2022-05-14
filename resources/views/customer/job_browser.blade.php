@@ -2,8 +2,9 @@
 @section('content')
 @php
 use App\Models\job_detail;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\HomeController;
-$count_job = new HomeController();
+$count_job = App::make("App\Http\Controllers\HomeController");
 @endphp
 <div class="page-content bg-white">
 	<!-- inner page banner -->
@@ -30,7 +31,7 @@ $count_job = new HomeController();
 			<div class="container">
 				<div class="row">
 					<div class="col-xl-9 col-lg-8">
-						<h5 class="widget-title font-weight-700 text-uppercase">Công việc được thêm gần đây</h5>
+						<h5 class="widget-title font-weight-700 text-uppercase ">Công việc được thêm gần đây</h5>
 						<ul class="post-job-bx">
 							@foreach($job_list as $value)
 							@php
@@ -43,7 +44,7 @@ $count_job = new HomeController();
 											<span><img src="{{URL('public/images/company/'.$image1->company['company_image'])}}" /></span>
 										</div>
 										<div class="job-post-info">
-											<h4>{{$value->job_desc}}</h4>
+											<h4 class="custom-title-text">{{$value->job_desc}}</h4>
 											<ul>
 												<li><i class="fa fa-map-marker"></i>{{$value->distribution['distribution_name']}}</li>
 												<li><i class="fa fa-bookmark-o"></i> {{$value->working_format['working_format_name']}}</li>
@@ -64,13 +65,13 @@ $count_job = new HomeController();
 							</li>
 							@endforeach
 						</ul>
+						{{ $job_list->links() }}
 						<div class="pagination-bx m-t30" >
 							<!-- <ul class="pagination">
 								<li class="previous"><a href="#"><i class="ti-arrow-left"></i> Trước</a></li>
 								<li class="active"><a href="#">1</a></li>
 								<li class="next"><a href="#">Tiếp <i class="ti-arrow-right"></i></a></li>
 							</ul> -->
-							<span><?php echo $job_list->render(); ?></span>
 						</div>
 					</div>
 					<div class="col-xl-3 col-lg-4">
@@ -96,11 +97,15 @@ $count_job = new HomeController();
 								<h5 class="widget-title font-weight-700 text-uppercase">Thời gian làm việc</h5>
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-12">
+										<?php $i = 0 ?>										
 										@foreach($work_type as $item)
+										@php
+										$i++;
+										@endphp
 										<div class="product-brand">
 											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input" id="check1" name="example1">
-												<label class="custom-control-label" for="check1">{{$item->working_format_name}}</label>
+												<input type="checkbox" class="custom-control-input" id="check{{$i}}" name="example1">
+												<label class="custom-control-label" for="check{{$i}}">{{$item->working_format_name}}</label>
 											</div>
 										</div>
 										@endforeach

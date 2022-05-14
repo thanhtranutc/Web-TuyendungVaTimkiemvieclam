@@ -87,7 +87,7 @@ Route::get('/test_profile','AdminController@profile');
 
 Route::get('/list_jobpost','RecruiterController@list_jobpost');   // list bài đã đăng
 Route::get('/list_candidate{id}','RecruiterController@list_candidate');   // Xem danh sách ứng viên
-Route::get('/viewprofile{id}','RecruiterController@view_profile');   // Xem profile ứng viên
+Route::post('/viewprofile{id}','RecruiterController@view_profile');   // Xem profile ứng viên
 Route::get('/add_job','RecruiterController@page_addjob');   // Trang thêm bài tuyển dụng
 Route::post('/insert_job','RecruiterController@add_job');   // thêm bài tuyển dụng 
 
@@ -103,4 +103,12 @@ Route::get('/apply_job{id}{id_job}','CustomerController@apply_job');
 
 
 Route::post('/save_profile{id}','CustomerController@save_profile');
+
+
+// page Chi tiết công viêc
+Route::get('/addtofavourite','CustomerController@addJobToFavourite');
+
+
+// công việc yêu thích
+Route::get('/favourite','HomeController@showFavouritePage');
 

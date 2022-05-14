@@ -27,4 +27,13 @@ class customer extends Model
     {
         return $this->hasMany('App\Models\apply_job', 'user_id');
     }
+    public function notification()
+    {
+        return $this->hasMany('App\Models\notification', 'user_id');
+    }
+    public function favourite_job()
+    {
+        return $this->hasMany('App\Models\favourite_job', 'user_id');
+    }
+    
 }

@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController as customer;
 use App\Models\company;
@@ -75,10 +76,10 @@ $category = $count_job->getCategory();
         <div class="container">
             <div class="section-head d-flex head-counter clearfix">
                 <div class="mr-auto">
-                    <h2 class="m-b5">Ngành nghề phổ biến</h2>
+                    <h2 class="m-b5 custom-title-text">Ngành nghề phổ biến</h2>
                 </div>
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter"><?php echo $count_job->job_total() ?></h2>
+                    <h2 class="m-b5 counter custom-title-text"><?php echo $count_job->job_total() ?></h2>
                     <h6 class="fw3">Công việc</h6>
                 </div>
                 <!-- <div class="head-counter-bx">
@@ -86,7 +87,7 @@ $category = $count_job->getCategory();
                     <h6 class="fw3">Tasks Posted</h6>
                 </div> -->
                 <div class="head-counter-bx">
-                    <h2 class="m-b5 counter"><?= $count_job->count_cv_candidate() ?></h2>
+                    <h2 class="m-b5 counter custom-title-text"><?= $count_job->count_cv_candidate() ?></h2>
                     <h6 class="fw3">Ứng viên</h6>
                 </div>
             </div>
@@ -115,7 +116,7 @@ $category = $count_job->getCategory();
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 section-head text-center">
-                    <h1 class="m-b5">Thành phố nổi bật</h1>
+                    <h1 class="m-b5 custom-title-text">Thành phố nổi bật</h1>
                     <h6 class="fw4 m-b0">20+ Thành phố đã được thêm</h5>
                 </div>
             </div>
@@ -139,7 +140,7 @@ $category = $count_job->getCategory();
         <div class="container">
             <div class="d-flex job-title-bx section-head">
                 <div class="mr-auto">
-                    <h2 class="m-b5">Việc làm mới</h2>
+                    <h2 class="m-b5 custom-title-text">Việc làm mới</h2>
                     <h6 class="fw4 m-b0">+20 việc làm mới được thêm gần đây</h5>
                 </div>
                 <div class="align-self-end">
@@ -152,47 +153,42 @@ $category = $count_job->getCategory();
                         @foreach($list_job as $key=>$job_list)
                         <li>
                             <a href="{{URL::to('/detail_job'.$job_list->job_id)}}">
-                                <div class="d-flex m-b30">
-                                    <div class="job-post-company">
+                                    <div class="d-flex m-b30">
+                                        <div class="job-post-company">
 
-                                        <?php
-                                        $image1 = job_detail::where('id_job', $job_list->job_id)->with('company')->first();
-                                        // print_r(json_encode($image1));die;
-                                        // $image_company = company::where('company_id', $image1['id_company'])->first();
-                                        ?>
-                                        <span><img style="height:60px; width:60px;" src="{{URL('public/images/company/'.$image1->company['company_image'])}}"/></span>
+                                            <?php
+                                            $image1 = job_detail::where('id_job', $job_list->job_id)->with('company')->first();
+                                            // print_r(json_encode($image1));die;
+                                            // $image_company = company::where('company_id', $image1['id_company'])->first();
+                                            ?>
+                                            <span><img style="height:60px; width:60px;" src="{{URL('public/images/company/'.$image1->company['company_image'])}}" /></span>
+                                        </div>
+                                        <div class="job-post-info">
+                                            <!-- <h4>Digital Marketing Executive</h4> -->
+                                            <h4 class="custom-title-text">{{$job_list->job_desc}}</h4>
+                                            <ul>
+                                                <li><i class="fa fa-map-marker"></i> {{$job_list->distribution['distribution_name']}}</li>
+                                                <li><i class="fa fa-bookmark-o"></i> {{$job_list->working_format['working_format_name']}}</li>
+                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="job-post-info">
-                                        <!-- <h4>Digital Marketing Executive</h4> -->
-                                        <h4>{{$job_list->job_desc}}</h4>
-                                        <ul>
-                                            <li><i class="fa fa-map-marker"></i> {{$job_list->distribution['distribution_name']}}</li>
-                                            <li><i class="fa fa-bookmark-o"></i> {{$job_list->working_format['working_format_name']}}</li>
-                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-                                        </ul>
+                                    <div class="d-flex">
+                                        <div class="job-time mr-auto">
+                                            <span>{{$job_list->working_format['working_format_name']}}</span>
+                                        </div>
+                                        <div class="salary-bx">
+                                            <span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">
-                                        <span>{{$job_list->working_format['working_format_name']}}</span>
-                                    </div>
-                                    <div class="salary-bx">
-                                        <span><?php echo $count_job->money_format($image1->salary_up)."tr"."-".$count_job->money_format($image1->salary_down)."tr"?></span>
-                                    </div>
-                                </div>
-                                <span class="post-like fa fa-heart-o">
+                                <span onclick="myFunction55()" class="post-like fa fa-heart-o">
                                     <img src="pullic/frontend/images/icon/hearts.png" alt="">
                                 </span>
                             </a>
                         </li>
                         @endforeach
                     </ul>
-                    <div class="m-t30">
-                        <div class="d-flex">
-                            <a class="site-button button-sm mr-auto" href="#"><i class="ti-arrow-left"></i> Prev</a>
-                            <a class="site-button button-sm" href="#">Next <i class="ti-arrow-right"></i></a>
-                        </div>
-                    </div>
+                    {{ $list_job->links() }}
                 </div>
                 <div class="col-lg-3">
                     <div class="sticky-top">
@@ -218,4 +214,10 @@ $category = $count_job->getCategory();
         </div>
     </div>
 </div>
+<script>
+    function myFunction55() {
+        alert("Hello! I am an alert box!");
+    }
+</script>
+
 @endsection

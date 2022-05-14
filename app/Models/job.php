@@ -34,5 +34,17 @@ class job extends Model
     {
         return $this->hasMany('App\Models\apply_job', 'job_id');
     }
+    public function notification()
+    {
+        return $this->hasMany('App\Models\notification', 'job_id');
+    }
+    public function favourite_job()
+    {
+        return $this->hasMany('App\Models\favourite_job', 'job_id');
+    }
+
+    public function getJobById($id){
+          return job::find($id);
+    }
 
 }

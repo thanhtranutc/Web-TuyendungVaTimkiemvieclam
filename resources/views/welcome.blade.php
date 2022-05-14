@@ -44,6 +44,7 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="public/backend/plugins/fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="public/frontend/plugins/fontawesome/css/font-awesome.min.css">
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- Tempusdominus Bootstrap 4 -->
@@ -61,7 +62,10 @@
 	<!-- summernote -->
 	<link rel="stylesheet" href="public/backend/plugins/summernote/summernote-bs4.min.css">
 	<link rel="stylesheet" href="public/backend/plugins/toastr/toastr.min.css">
-
+	<link rel="stylesheet" href="public/frontend/css/custom.css">
+	<link rel="stylesheet" href="public/frontend/css/custom.less">
+	<!-- <link rel="stylesheet" href="public/frontend/css/sweetalert.css"> -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 </head>
 
 <body id="bg">
@@ -77,46 +81,6 @@
 						<!-- website logo -->
 						<div class="logo-header mostion">
 							<a href="{{URL::to('/')}}"><img src="public/frontend/images/logo.png" class="logo" alt=""></a>
-						</div>
-						<!-- nav toggle button -->
-						<!-- nav toggle button -->
-						<!-- <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-							<span></span>
-							<span></span>
-							<span></span>
-						</button> -->
-						<!-- extra nav -->
-						<div class="extra-nav">
-							<div class="extra-cell">
-								<?php
-
-								use Illuminate\Support\Facades\Session;
-
-								$user_id = Session::get('user_id');
-								$user_name = Session::get('user_name');
-								if ($user_id) {
-								?>
-									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Đăng ký</a>
-									<a href="{{URL::to('/logout_customer')}}" class="site-button"><i class="fa fa-lock"></i> Đăng xuất</a>
-								<?php
-								} else {
-								?>
-									<a href="{{URL::to('/register_customer')}}" class="site-button"><i class="fa fa-user"></i>Đăng ký</a>
-									<a href="{{URL::to('/login_customer')}}" class="site-button"><i class="fa fa-lock"></i> Đăng nhập</a>
-								<?php } ?>
-								<?php
-								if ($user_name) {
-								?>
-									&ensp;Id:<span>{{$user_name}}</span>
-								<?php } ?>
-							</div>
-						</div>
-						<!-- Quik search -->
-						<div class="dez-quik-search bg-primary">
-							<form action="#">
-								<input name="search" value="" type="text" class="form-control" placeholder="Type to search">
-								<span id="quik-search-remove"><i class="flaticon-close"></i></span>
-							</form>
 						</div>
 						<!-- main nav -->
 						<div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
@@ -154,6 +118,59 @@
 									</ul>
 								</li>
 							</ul>
+							<?php
+
+							use Illuminate\Support\Facades\Session;
+
+							$user_id = Session::get('user_id');
+							$user_name = Session::get('user_name');
+							if ($user_id) {
+							?>
+								<a href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
+								<a href="{{URL::to('/logout_customer')}}"><i class="fa fa-lock"></i> Đăng xuất</a>
+							<?php
+							} else {
+							?>
+								<a href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
+								<a href="{{URL::to('/login_customer')}}"><i class="fa fa-lock"></i> Đăng nhập</a>
+							<?php } ?>
+							<ul class="navbar-nav ml-auto">
+								<li class="nav-item dropdown">
+									<a class="nav-link" href="{{URL::to('/favourite')}}">
+										<i class="far fa-bell"></i>
+										<span class="badge badge-warning navbar-badge">1</span>
+									</a>
+									<a class="nav-link" data-toggle="dropdown" href="#">
+										<i class="far fa-bell"></i>
+										<span class="badge badge-warning navbar-badge">15</span>
+									</a>
+									<!-- <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+										<span class="dropdown-item dropdown-header">15 Notifications</span>
+										<div class="dropdown-divider"></div>
+										<a href="#" class="dropdown-item">
+											<i class="fas fa-envelope mr-2"></i> 4 new messages
+											<span class="float-right text-muted text-sm">3 mins</span>
+										</a>
+										<div class="dropdown-divider"></div>
+										<a href="#" class="dropdown-item">
+											<i class="fas fa-users mr-2"></i> 8 friend requests
+											<span class="float-right text-muted text-sm">12 hours</span>
+										</a>
+										<div class="dropdown-divider"></div>
+										<a href="#" class="dropdown-item">
+											<i class="fas fa-file mr-2"></i> 3 new reports
+											<span class="float-right text-muted text-sm">2 days</span>
+										</a>
+										<div class="dropdown-divider"></div>
+										<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+									</div> -->
+								</li>
+							</ul>
+							<?php
+							if ($user_name) {
+							?>
+								&ensp;Id:<span data-user_id="{{$user_id}}" name="user">{{$user_name}}</span>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -190,25 +207,47 @@
 		CKEDITOR.replace('textarea3');
 		CKEDITOR.config.entities = false;
 	</script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $('.add-to-favourite').click(function() {
+                var job_id = $(this).data('job_id');
+             
+                $.ajax({
+                    url: "{{url('/addtofavourite')}}",
+                    method: 'GET',
+                    data: {
+                        id_job: job_id,
+                    },
+                    success: function(data) {
+                        swal("Đã thêm công việc vào yêu thích của bạn!", "", "success");
+                    },
+                    error: function(data) {
+                        swal("Công việc này đã có trong yêu thích của bạn!", "", "error");
+                    }
+                });
+            });
+        });
+    </script>
 	<script src="public/frontend/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 	<script src="public/frontend/plugins/wow/wow.js"></script><!-- WOW JS -->
 	<script src="public/frontend/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
 	<script src="public/frontend/plugins/bootstrap/js/bootstrap.min.js"></script><!-- BOOTSTRAP.MIN JS -->
 	<script src="public/frontend/plugins/bootstrap-select/bootstrap-select.min.js"></script><!-- FORM JS -->
 	<script src="public/frontend/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script><!-- FORM JS -->
-	<script src="plugins/magnific-popup/magnific-popup.js"></script><!-- MAGNIFIC POPUP JS -->
-	<script src="plugins/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
-	<script src="plugins/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
-	<script src="plugins/imagesloaded/imagesloaded.js"></script><!-- IMAGESLOADED -->
-	<script src="plugins/masonry/masonry-3.1.4.js"></script><!-- MASONRY -->
-	<script src="plugins/masonry/masonry.filter.js"></script><!-- MASONRY -->
-	<script src="plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
-	<script src="plugins/rangeslider/rangeslider.js"></script><!-- Rangeslider -->
+	<script src="public/frontend/plugins/magnific-popup/magnific-popup.js"></script><!-- MAGNIFIC POPUP JS -->
+	<script src="public/frontend/plugins/counter/waypoints-min.js"></script><!-- WAYPOINTS JS -->
+	<script src="public/frontend/plugins/counter/counterup.min.js"></script><!-- COUNTERUP JS -->
+	<script src="public/frontend/plugins/imagesloaded/imagesloaded.js"></script><!-- IMAGESLOADED -->
+	<script src="public/frontend/plugins/masonry/masonry-3.1.4.js"></script><!-- MASONRY -->
+	<script src="public/frontend/plugins/masonry/masonry.filter.js"></script><!-- MASONRY -->
+	<script src="public/frontend/plugins/owl-carousel/owl.carousel.js"></script><!-- OWL SLIDER -->
+	<script src="public/frontend/plugins/rangeslider/rangeslider.js"></script><!-- Rangeslider -->
 	<script src="public/frontend/js/custom.js"></script><!-- CUSTOM FUCTIONS  -->
 	<script src="public/frontend/js/dz.carousel.js"></script><!-- SORTCODE FUCTIONS  -->
 	<script src='public/frontend/js/recaptcha/api.js'></script> <!-- Google API For Recaptcha  -->
 	<script src="public/frontend/js/dz.ajax.js"></script><!-- CONTACT JS  -->
 	<script src="public/frontend/plugins/paroller/skrollr.min.js"></script><!-- PAROLLER -->
+	<script src="public/frontend/js/sweetalert.min.js"></script>
 	<!-- Go to www.addthis.com/dashboard to customize your tools -->
 
 
@@ -245,7 +284,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="public/backend/dist/js/demo.js"></script>
 	<script src="public/backend/plugins/toastr/toastr.min.js"></script>
-	<script src="public/backend/plugins/sweetalert2/sweetalert2.min.js"></script>
+	<!-- <script src="public/backend/plugins/sweetalert2/sweetalert2.min.js"></script> -->
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="public/backend/dist/js/pages/dashboard.js"></script>
 	<script src="public/ckeditor/ckeditor.js"></script>

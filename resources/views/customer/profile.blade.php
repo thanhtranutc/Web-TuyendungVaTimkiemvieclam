@@ -7,22 +7,6 @@ use App\Http\Controllers\CustomerController; ?>
 <?php $profile = $customer->getProfileByIdUser($user_id) ?>
 @extends('welcome')
 @section('content')
-<style>
-    .form-img {
-        padding-top: 25px;
-        padding-bottom: 15px;
-    }
-
-    .add-experience {
-        background-color: #007BFF;
-        color: white !important;
-    }
-
-    .profile-custom {
-        margin-top: 0;
-        padding-top: 0 !important;
-    }
-</style>
 <div class="page-content bg-white">
     <div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url(public/frontend/images/banner/bnr2.jpg);">
         <div class="container">

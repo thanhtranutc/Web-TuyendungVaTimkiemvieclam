@@ -1,3 +1,7 @@
+<?php
+
+use Illuminate\Support\Facades\Session; ?>
+<?php $job_id = Session::get('id_job') ?>
 @extends('layout_admin')
 @section('content')
 </section>
@@ -36,9 +40,16 @@
                                     <a href="#" class="btn btn-sm bg-teal">
                                         <i class="fas fa-comments"></i>
                                     </a>
-                                    <a href="{{URL::to('/viewprofile'.$item->user_id)}}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-user"></i> Xem
-                                    </a>
+                                    <form method="post" action="{{URL::to('/viewprofile'.$item->user_id)}}">
+                                        @csrf
+                                        <input hidden name="job" value="{{$job_id}}" />
+                                        <div class="btn btn-sm btn-primary">
+                                            <i class="fas fa-user"></i>
+                                            <input type="submit" value="Xem" class="btn btn-sm btn-primary"/>
+                                        </div>
+
+                                    </form>
+
                                 </div>
                             </div>
                         </div>

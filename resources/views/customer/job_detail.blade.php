@@ -1,10 +1,7 @@
-<?php
-
-use Illuminate\Support\Facades\Session;
-
-$user_id = Session::get('user_id');
-
-?>
+<?php use Illuminate\Support\Facades\Session;?>
+<?php use Illuminate\Support\Facades\App; ?>
+<?php $user_id = Session::get('user_id');?>
+<?php $job_info = App::make("App\Models\job_detail"); ?>
 @extends('welcome')
 @section('content')
 <div class="dez-bnr-inr overlay-black-middle" style="background-image:url(public/frontend/images/banner/bnr1.jpg);">
@@ -26,15 +23,16 @@ $user_id = Session::get('user_id');
 <!-- contact area -->
 <div class="content-block">
     <!-- Job Detail -->
-    <?php
-    $notifi = Session::get('notifi');
-    if ($notifi) {
-        echo '<span style="color:red;" class="text-alert">' . $notifi . '</span>';
-        Session::put('notifi', null);
-        echo '<br></br>';
-        echo ' ';
-    }
-    ?>
+    
+        <?php
+        $notifi = Session::get('notifi');
+        if ($notifi) {
+            echo ' <div style="background-color: #a3eb7a;max-width: 500px;height: 30px;margin: 10px;max-width: 350px;"><span style="color: white;width: 100%;margin-left: 15px;" class="text-alert">' . $notifi . '</span>  </div>';
+            Session::put('notifi', null);
+            echo '<br></br>';
+            echo ' ';
+        }
+        ?>
     <div class="section-full content-inner-1">
         <div class="container">
             <div class="row">
@@ -68,7 +66,7 @@ $user_id = Session::get('user_id');
                             @php
                             use Carbon\Carbon;
                             @endphp
-                            <li><strong>Education</strong> Web Designer</li>
+                            <li><strong>Công việc:</strong> {{$distribution->category['category_name']}}</li>
                             <li><strong>Thời hạn:</strong> {{Carbon::parse($data->detail_job_duration)->format('m/d/Y');}}</li>
                             <li><i class="ti-location-pin text-black m-r5"></i> {{$distribution->distribution['distribution_name']}} </li>
                         </ul>
@@ -84,11 +82,19 @@ $user_id = Session::get('user_id');
                             <p><?php echo $data->detail_job_request ?></p>
 
                         </ul>
-                        <?php if ($user_id) { ?>
-                            <a href="{{URL::to('/apply_job'.$user_id.$data->id_job)}}" class="site-button">Ứng tuyển</a>
-                        <?php } else { ?>
-                            <a href="{{URL::to('/login_user')}}" class="site-button">Ứng tuyển</a>
-                        <?php } ?>
+                        <div>
+                            <?php if ($user_id) { ?>
+                                <a href="{{URL::to('/apply_job'.$user_id.$data->id_job)}}" class="site-button">Ứng tuyển</a>
+                            <?php } else { ?>
+                                <a href="{{URL::to('/login_user')}}" class="site-button">Ứng tuyển</a>
+                            <?php } ?>
+                            <?php if (isset($isFavouriteJob)) { ?>
+                                <a href="#" class="site-button add-to-favourite">Yêu thích</a>
+                            <?php } else { ?>
+                                <a href="#" data-job_id="{{$data->id_job}}" class="site-button add-to-favourite">Yêu thích</a>
+                            <?php } ?>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,50 +105,31 @@ $user_id = Session::get('user_id');
     <div class="section-full content-inner">
         <div class="container">
             <div class="row">
+                @foreach($relate_job as $value)
+                <?php $job = $job_info->getDetailJobByIdJob($value->job_id); ?>
                 <div class="col-xl-3 col-lg-6 col-md-6">
                     <div class="m-b30 blog-grid">
                         <div class="dez-post-media dez-img-effect "> <a href="#"><img src="images/blog/grid/pic1.jpg" alt=""></a> </div>
                         <div class="dez-info p-a20 border-1">
                             <div class="dez-post-title ">
-                                <h5 class="post-title"><a href="#">Title of blog post</a></h5>
+                                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="post-title"><a  href="#">{{$value->job_desc}}</a></h5>
                             </div>
                             <div class="dez-post-meta ">
                                 <ul>
-                                    <li class="post-date"> <i class="ti-location-pin"></i> London </li>
+                                    <li class="post-date"> <i class="ti-location-pin"></i> {{$value->distribution['distribution_name']}} </li>
                                     <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a> </li>
                                 </ul>
                             </div>
                             <div class="dez-post-text">
-                                <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.</p>
+                                <?= $job['detail_job_desc']?>
                             </div>
                             <div class="dez-post-readmore">
-                                <a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
+                                <a href="#" class="site-button outline"><?= __('Xem') ?><i class="ti-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6 col-md-6">
-                    <div class="m-b30 blog-grid">
-                        <div class="dez-post-media dez-img-effect "> <a href="#"><img src="images/blog/grid/pic2.jpg" alt=""></a> </div>
-                        <div class="dez-info p-a20 border-1">
-                            <div class="dez-post-title ">
-                                <h5 class="post-title"><a href="#">Title of blog post</a></h5>
-                            </div>
-                            <div class="dez-post-meta ">
-                                <ul>
-                                    <li class="post-date"> <i class="ti-location-pin"></i> London </li>
-                                    <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a> </li>
-                                </ul>
-                            </div>
-                            <div class="dez-post-text">
-                                <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.</p>
-                            </div>
-                            <div class="dez-post-readmore">
-                                <a href="#" class="site-button outline">Apply Now <i class="ti-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

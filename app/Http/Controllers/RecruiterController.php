@@ -13,13 +13,22 @@ use App\Models\working_format;
 use App\Models\company;
 use App\Models\experience;
 use App\Models\job_detail;
+use App\Models\notification;
 use App\Models\profile;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\TryCatch;
 
 class RecruiterController extends Controller
 {
+    protected $_notificationCollection;
+
+    public function __construct(notification $notificationCollection)
+    {
+        $this->_notificationCollection = $notificationCollection;
+    }
+
     public function list_jobpost()
     {
         $id = Session::get('admin_id');
@@ -44,16 +53,30 @@ class RecruiterController extends Controller
                     $info_user = customer::where('user_id', $item->id_user)->first();
                     $list_user[] = $info_user;
                 }
+            Session::put('id_job', $id_job);
             return view('recruiter.list_candidate')->with('list_candidate', $list_user);
         } catch (\Throwable $th) {
             return view('recruiter.list_candidate');
         }
     }
-    public function view_profile($id_user)
+    public function view_profile($id_user, Request $request)
     {
+        $data_post = $request->all();
+
         $user_infor = customer::where('user_id', $id_user)->first();
         $user_profile = profile::where('id_user', $id_user)->first();
         $list_experience = experience::where('id_user', $id_user)->get();
+        // create notify to customer
+        $notify = $this->_notificationCollection->checkNotification($id_user,$data_post['job']);
+        if(empty($notify)){
+        $notifi = new notification();
+        $notifi->id_user = $id_user;
+        $notifi->notification_title = __('Nhà tuyển dụng đã xem hồ sơ của bạn');
+        $notifi->notification_status = 0;
+        $notifi->id_job = $data_post['job'];
+        $notifi->save();
+        }
+
         return view('admin.user.profile')->with('user_info', $user_infor)->with('user_profile', $user_profile)->with('list_experience', $list_experience);
     }
     public function page_addjob()

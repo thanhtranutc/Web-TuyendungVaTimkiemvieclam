@@ -32,4 +32,8 @@ class admin extends Model
     {
         return null !== $this->detail_roles()->where('roles_id', $roles)->first();
     }
+    public function notification()
+    {
+        return $this->hasMany('App\Models\notification', 'id_admin');
+    }
 }

@@ -1,0 +1,92 @@
+/* job */
+.custom-title-text {
+    font-weight: 700;
+    color: black;
+}
+
+/* candidate page */
+.nav-tabs.flex-column .nav-link {
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+    margin-right: 0px;
+}
+
+.nav-tabs.flex-column {
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.image-user {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #dee2e6;
+    border-radius: 50%;
+    margin: 20px auto;
+}
+
+.text-password {
+    position: absolute;
+    left: 30%;
+    background: white;
+    border: none;
+}
+
+.infor-user {
+    margin: 10px auto;
+}
+
+.block-infor-user {
+    height: auto !important;
+}
+
+.icon-form-user {
+    margin-right: 10px;
+}
+
+.breadcrumb-row.custom {
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+
+.form-tilte {
+    font-weight: 700;
+}
+
+.edit {
+    position: absolute;
+    bottom: 60%;
+    left: 80%;
+}
+
+/* profile page */
+.form-img {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.add-experience {
+    background-color: #007BFF;
+    color: white !important;
+}
+
+.profile-custom {
+    margin-top: 0;
+    padding-top: 0 !important;
+}
+
+/* un active a */
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
+.not-style{
+    padding: unset;
+    background-color: unset;
+    border-left: unset;
+    border-radius: unset;
+    box-shadow: unset;
+    display: unset;
+    position: unset;
+}
