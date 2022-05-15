@@ -18,4 +18,8 @@ class distribution extends Model
     public function job(){
         return $this->hasMany('App\Models\job','id_distribution');
     }
+
+    public function getListDistribution(){
+        return distribution::orderby('id_distribution')->get();
+    }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\admin;
 use App\Models\roles;
 use App\Models\category;
+use App\Models\job;
 use App\Models\detail_roles;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -64,5 +65,11 @@ class CategoryController extends Controller
             $category->save();
         }
         return Redirect::to('/list_category');
+    }
+    public function getJobByCategory($id)
+    {
+        $listjob = job::where('id_category',$id)->where('job_status',3)->paginate(10);
+        $category = category::where('id_category',$id)->first();
+        return view('customer.jobbycategory')->with('listjob',$listjob)->with('category',$category); 
     }
 }

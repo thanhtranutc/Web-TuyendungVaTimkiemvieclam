@@ -17,4 +17,7 @@ class working_format extends Model
     public function job(){
         return $this->hasMany('App\Models\job','id_working_format');
     }
+    public function getListWorkingFormat(){
+        return working_format::orderby('id_working_format','asc')->get();
+    }
 }

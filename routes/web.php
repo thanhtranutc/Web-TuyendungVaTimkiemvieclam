@@ -107,8 +107,15 @@ Route::post('/save_profile{id}','CustomerController@save_profile');
 
 // page Chi tiết công viêc
 Route::get('/addtofavourite','CustomerController@addJobToFavourite');
+Route::get('/searchjob','JobController@searchJob');
 
 
 // công việc yêu thích
 Route::get('/favourite','HomeController@showFavouritePage');
+
+
+//category page
+Route::get('/categorywork{id}','CategoryController@getJobByCategory');
+Route::get('/citywork{id}','DistributionController@getJobByCity');
+
 

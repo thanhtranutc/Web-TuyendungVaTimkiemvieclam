@@ -1,6 +1,8 @@
-<?php use Illuminate\Support\Facades\Session;?>
+<?php
+
+use Illuminate\Support\Facades\Session; ?>
 <?php use Illuminate\Support\Facades\App; ?>
-<?php $user_id = Session::get('user_id');?>
+<?php $user_id = Session::get('user_id'); ?>
 <?php $job_info = App::make("App\Models\job_detail"); ?>
 @extends('welcome')
 @section('content')
@@ -23,16 +25,16 @@
 <!-- contact area -->
 <div class="content-block">
     <!-- Job Detail -->
-    
-        <?php
-        $notifi = Session::get('notifi');
-        if ($notifi) {
-            echo ' <div style="background-color: #a3eb7a;max-width: 500px;height: 30px;margin: 10px;max-width: 350px;"><span style="color: white;width: 100%;margin-left: 15px;" class="text-alert">' . $notifi . '</span>  </div>';
-            Session::put('notifi', null);
-            echo '<br></br>';
-            echo ' ';
-        }
-        ?>
+
+    <?php
+    $notifi = Session::get('notifi');
+    if ($notifi) {
+        echo ' <div style="background-color: #a3eb7a;max-width: 500px;height: 30px;margin: 10px;max-width: 350px;"><span style="color: white;width: 100%;margin-left: 15px;" class="text-alert">' . $notifi . '</span>  </div>';
+        Session::put('notifi', null);
+        echo '<br></br>';
+        echo ' ';
+    }
+    ?>
     <div class="section-full content-inner-1">
         <div class="container">
             <div class="row">
@@ -104,27 +106,30 @@
     <!-- Our Jobs -->
     <div class="section-full content-inner">
         <div class="container">
+            <div class="block-relate">
+                <span>Các công việc liên quan</span>
+            </div>
             <div class="row">
                 @foreach($relate_job as $value)
                 <?php $job = $job_info->getDetailJobByIdJob($value->job_id); ?>
-                <div class="col-xl-3 col-lg-6 col-md-6">
+                <div class="col-xl-3 col-lg-6 col-md-6 block-relate-content">
                     <div class="m-b30 blog-grid">
                         <div class="dez-post-media dez-img-effect "> <a href="#"><img src="images/blog/grid/pic1.jpg" alt=""></a> </div>
                         <div class="dez-info p-a20 border-1">
                             <div class="dez-post-title ">
-                                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="post-title"><a  href="#">{{$value->job_desc}}</a></h5>
+                                <h5 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="post-title"><a href="#">{{$value->job_desc}}</a></h5>
                             </div>
                             <div class="dez-post-meta ">
                                 <ul>
                                     <li class="post-date"> <i class="ti-location-pin"></i> {{$value->distribution['distribution_name']}} </li>
-                                    <li class="post-author"><i class="ti-user"></i>By <a href="#">Jone</a> </li>
+                                    <li class="post-author" style="height: auto;">{{$value->category['category_name']}}</li>
                                 </ul>
                             </div>
-                            <div class="dez-post-text">
-                                <?= $job['detail_job_desc']?>
+                            <div style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;" class="dez-post-text">
+                                <p style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><?= $job['detail_job_desc'] ?></p>
                             </div>
                             <div class="dez-post-readmore">
-                                <a href="#" class="site-button outline"><?= __('Xem') ?><i class="ti-arrow-right"></i></a>
+                                <a href="{{URL::to('/detail_job'.$value->job_id)}}" class="site-button outline"><?= __('Xem') ?><i class="ti-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>

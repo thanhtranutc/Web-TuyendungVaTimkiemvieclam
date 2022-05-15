@@ -33,4 +33,8 @@ class favourite_job extends Model
     {
         return favourite_job::where('id_user',$user)->paginate(3);
     }
+    public function getCountFavouriteJob($id_user)
+    {
+        return count(favourite_job::where('id_user',$id_user)->get());
+    }
 }

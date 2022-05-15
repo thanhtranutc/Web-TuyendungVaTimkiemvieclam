@@ -90,3 +90,33 @@
     display: unset;
     position: unset;
 }
+
+/* detail job page */
+.block-relate{
+    margin: 10px 0;
+    font-size: 25px;
+
+}
+.block-relate-content{
+    background-color: white;
+}
+.custom-select{
+    height: 35px !important;
+}
+
+/* homepage */
+.block-city{
+    background-color: #eef1ff !important;
+}
+.button-login{
+    margin: 15px;
+}
+.button-register{
+    margin: 15px;
+}
+h6{
+    color: black;
+}
+.block-job-custom{
+    float: right;
+}

@@ -63,9 +63,15 @@
 	<link rel="stylesheet" href="public/backend/plugins/summernote/summernote-bs4.min.css">
 	<link rel="stylesheet" href="public/backend/plugins/toastr/toastr.min.css">
 	<link rel="stylesheet" href="public/frontend/css/custom.css">
-	<link rel="stylesheet" href="public/frontend/css/custom.less">
+	<link rel="stylesheet" href="public/frontend/css/customless.css">
 	<!-- <link rel="stylesheet" href="public/frontend/css/sweetalert.css"> -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<link rel="stylesheet" href="public/backend/plugins/select2/css/select2.min.css">
+	<link rel="stylesheet" href="public/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 
 <body id="bg">
@@ -120,26 +126,30 @@
 							</ul>
 							<?php
 
+							use Illuminate\Support\Facades\App; ?>
+							<?php $hepper = App::make('App\Models\favourite_job'); ?>
+							<?php
 							use Illuminate\Support\Facades\Session;
-
 							$user_id = Session::get('user_id');
 							$user_name = Session::get('user_name');
 							if ($user_id) {
 							?>
-								<a href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
-								<a href="{{URL::to('/logout_customer')}}"><i class="fa fa-lock"></i> Đăng xuất</a>
+								<a class="button-login" href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
+								<a class="button-register" href="{{URL::to('/logout_customer')}}"><i class="fa fa-lock"></i> Đăng xuất</a>
 							<?php
 							} else {
 							?>
-								<a href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
-								<a href="{{URL::to('/login_customer')}}"><i class="fa fa-lock"></i> Đăng nhập</a>
+								<a class="button-login" href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
+								<a class="button-register" href="{{URL::to('/login_customer')}}"><i class="fa fa-lock"></i> Đăng nhập</a>
 							<?php } ?>
 							<ul class="navbar-nav ml-auto">
 								<li class="nav-item dropdown">
 									<a class="nav-link" href="{{URL::to('/favourite')}}">
-										<i class="far fa-bell"></i>
-										<span class="badge badge-warning navbar-badge">1</span>
+										<i class="far fa-heart"></i>
+										<span class="badge badge-warning navbar-badge"><?= isset($user_id) ? $hepper->getCountFavouriteJob($user_id) : "" ?></span>
 									</a>
+								</li>
+								<li class="nav-item dropdown">
 									<a class="nav-link" data-toggle="dropdown" href="#">
 										<i class="far fa-bell"></i>
 										<span class="badge badge-warning navbar-badge">15</span>
@@ -208,26 +218,26 @@
 		CKEDITOR.config.entities = false;
 	</script>
 	<script type="text/javascript">
-        $(document).ready(function() {
-            $('.add-to-favourite').click(function() {
-                var job_id = $(this).data('job_id');
-             
-                $.ajax({
-                    url: "{{url('/addtofavourite')}}",
-                    method: 'GET',
-                    data: {
-                        id_job: job_id,
-                    },
-                    success: function(data) {
-                        swal("Đã thêm công việc vào yêu thích của bạn!", "", "success");
-                    },
-                    error: function(data) {
-                        swal("Công việc này đã có trong yêu thích của bạn!", "", "error");
-                    }
-                });
-            });
-        });
-    </script>
+		$(document).ready(function() {
+			$('.add-to-favourite').click(function() {
+				var job_id = $(this).data('job_id');
+
+				$.ajax({
+					url: "{{url('/addtofavourite')}}",
+					method: 'GET',
+					data: {
+						id_job: job_id,
+					},
+					success: function(data) {
+						swal("Đã thêm công việc vào yêu thích của bạn!", "", "success");
+					},
+					error: function(data) {
+						swal("Công việc này đã có trong yêu thích của bạn!", "", "error");
+					}
+				});
+			});
+		});
+	</script>
 	<script src="public/frontend/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 	<script src="public/frontend/plugins/wow/wow.js"></script><!-- WOW JS -->
 	<script src="public/frontend/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->
@@ -288,6 +298,8 @@
 	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 	<script src="public/backend/dist/js/pages/dashboard.js"></script>
 	<script src="public/ckeditor/ckeditor.js"></script>
+
+	<script src="public/backend/plugins/select2/js/select2.full.min.js"></script>
 
 
 </body>

@@ -19,4 +19,8 @@ class category extends Model
     {
         return $this->hasMany('App\Models\job', 'id_category');
     }
+    public function getListCategory()
+    {
+       return category::orderby('id_category','asc')->get();
+    }
 }

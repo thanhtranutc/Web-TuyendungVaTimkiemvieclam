@@ -1,12 +1,13 @@
-<?php
-
-use Illuminate\Support\Facades\Session; ?>
+<?php use Illuminate\Support\Facades\App; ?>
+<?php use App\Models\distribution; ?>
+<?php $distribution = App::make("App\Models\distribution")->getListDistribution() ?>
+<?php $work_type = App::make("App\Models\working_format")->getListWorkingFormat() ?>
+<?php $category = App::make("App\Models\category")->getListCategory() ?>
 <!--  -->
 @extends('welcome')
 @section('content')
 @php
 use App\Models\job_detail;
-use Illuminate\Support\Facades\App;
 use App\Http\Controllers\HomeController;
 $count_job = App::make("App\Http\Controllers\HomeController");
 @endphp
@@ -34,44 +35,43 @@ $count_job = App::make("App\Http\Controllers\HomeController");
 		<div class="section-full bg-white browse-job content-inner-2">
 			<div class="container">
 				<div class="row">
-
-					<div class="col-xl-9 col-lg-8">
-						<h5 class="widget-title font-weight-700 text-uppercase ">Công việc được thêm gần đây</h5>
-						<ul class="post-job-bx">
-							@foreach($job_list as $value)
-							@php
-							$image1 = job_detail::where('id_job', $value->job_id)->with('company')->first();
-							@endphp
-							<li>
-								<a href="{{URL::to('/detail_job'.$value->job_id)}}">
-									<div class="d-flex m-b30">
-										<div class="job-post-company">
-											<span><img src="{{URL('public/images/company/'.$image1->company['company_image'])}}" /></span>
+						<div class="col-xl-9 col-lg-8">
+							<h5 class="widget-title font-weight-700 text-uppercase ">Kết quả tìm kiếm</h5>
+							<ul class="post-job-bx">
+								@foreach($result_search as $value)
+								@php
+								$image1 = job_detail::where('id_job', $value->job_id)->with('company')->first();
+								@endphp
+								<li>
+									<a href="{{URL::to('/detail_job'.$value->job_id)}}">
+										<div class="d-flex m-b30">
+											<div class="job-post-company">
+												<span><img src="{{URL('public/images/company/'.$image1->company['company_image'])}}" /></span>
+											</div>
+											<div class="job-post-info">
+												<h4 class="custom-title-text">{{$value->job_desc}}</h4>
+												<ul>
+													<li><i class="fa fa-map-marker"></i>{{$value->distribution['distribution_name']}}</li>
+													<li><i class="fa fa-bookmark-o"></i> {{$value->working_format['working_format_name']}}</li>
+													<li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
+												</ul>
+											</div>
 										</div>
-										<div class="job-post-info">
-											<h4 class="custom-title-text">{{$value->job_desc}}</h4>
-											<ul>
-												<li><i class="fa fa-map-marker"></i>{{$value->distribution['distribution_name']}}</li>
-												<li><i class="fa fa-bookmark-o"></i> {{$value->working_format['working_format_name']}}</li>
-												<li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
-											</ul>
+										<div class="d-flex">
+											<div class="job-time mr-auto">
+												<span>{{$value->working_format['working_format_name']}}</span>
+											</div>
+											<div class="salary-bx">
+												<span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
+											</div>
 										</div>
-									</div>
-									<div class="d-flex">
-										<div class="job-time mr-auto">
-											<span>{{$value->working_format['working_format_name']}}</span>
-										</div>
-										<div class="salary-bx">
-											<span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
-										</div>
-									</div>
-									<span class="post-like fa fa-heart-o"></span>
-								</a>
-							</li>
-							@endforeach
-						</ul>
-						{{ $job_list->links() }}
-					</div>
+										<span class="post-like fa fa-heart-o"></span>
+									</a>
+								</li>
+								@endforeach
+							</ul>
+							{{ $result_search->links() }}
+						</div>
 					<div class="col-xl-3 col-lg-4">
 						<div class="sticky-top">
 							<form method="get" action="{{URL::to('/searchjob')}}">

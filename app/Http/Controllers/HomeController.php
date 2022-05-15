@@ -41,7 +41,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $city = distribution::orderby('id_distribution', 'asc')->take(3)->get();
+        $city = distribution::orderby('id_distribution', 'asc')->take(4)->get();
         $list_job = $this->getJob();
         return view('customer.homepage')->with('city', $city)->with('list_job', $list_job);
     }

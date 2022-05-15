@@ -38,9 +38,11 @@ class JobController extends Controller
         $job_list = $homeController->getJob();
         $working_format = working_format::orderby('id_working_format', 'desc')->get();
         $category = category::where('category_status', '1')->orderby('id_category', 'desc')->get();
+        $distribution = distribution::where('distribution_status', '1')->orderby('id_distribution', 'desc')->get();
         return view('customer.job_browser')
             ->with('job_list', $job_list)
             ->with('work_type', $working_format)
+            ->with('distribution', $distribution)
             ->with('category', $category);
     }
     public function job_detail()
@@ -112,5 +114,30 @@ class JobController extends Controller
     public function getDetailJobById($id)
     {
         return job_detail::where('id_job', $id)->with('company')->first();
+    }
+
+    public function searchJob(Request $request){
+        $data_post = $request->all();
+        $category = category::where('category_name',$data_post['category'])->first();
+        $distribution = distribution::where('distribution_name',$data_post['distribution'])->first();
+        $working_format = working_format::where('working_format_name',$data_post['workingformat'])->first();
+
+        $list_job = job::orderby('job_id','asc');
+
+        if(!empty($category)){
+            $list_job = $list_job->where('id_category', $category['id_category']);
+        }
+        if(!empty($distribution)){
+            $list_job = $list_job->where('id_distribution', $distribution['id_distribution']);
+        }
+        if(!empty($working_format)){
+            $list_job = $list_job->where('id_working_format', $working_format['id_working_format']);
+        }
+        $list_job = $list_job->paginate(1);
+        $list_job->appends(['category' => $data_post['category']])
+        ->appends(['distribution' => $data_post['distribution']])
+        ->appends(['workingformat' => $data_post['workingformat']]);
+        return view('customer.resultsearch')->with('result_search',$list_job);
+
     }
 }

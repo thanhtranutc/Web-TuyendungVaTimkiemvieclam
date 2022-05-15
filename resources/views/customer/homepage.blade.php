@@ -1,11 +1,9 @@
 <?php
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController as customer;
 use App\Models\company;
 use App\Models\job_detail;
 use Illuminate\Support\Facades\App;
-
 // $count_job = new HomeController();
 $count_job = App::make("App\Http\Controllers\HomeController");
 $category = $count_job->getCategory();
@@ -52,12 +50,6 @@ $category = $count_job->getCategory();
                                         <option>Employer</option>
                                         <option>Financial Career</option>
                                         <option>Information Technology</option>
-                                        <option>Marketing</option>
-                                        <option>Quality check</option>
-                                        <option>Real Estate</option>
-                                        <option>Sales</option>
-                                        <option>Supporting</option>
-                                        <option>Teaching</option>
                                     </select>
                                 </div>
                             </div>
@@ -82,10 +74,6 @@ $category = $count_job->getCategory();
                     <h2 class="m-b5 counter custom-title-text"><?php echo $count_job->job_total() ?></h2>
                     <h6 class="fw3">Công việc</h6>
                 </div>
-                <!-- <div class="head-counter-bx">
-                    <h2 class="m-b5 counter">4500</h2>
-                    <h6 class="fw3">Tasks Posted</h6>
-                </div> -->
                 <div class="head-counter-bx">
                     <h2 class="m-b5 counter custom-title-text"><?= $count_job->count_cv_candidate() ?></h2>
                     <h6 class="fw3">Ứng viên</h6>
@@ -96,23 +84,23 @@ $category = $count_job->getCategory();
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="icon-bx-wraper">
                         <div class="icon-content">
-                            <div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div>
-                            <a href="#" class="dez-tilte">{{$item->category_name}}</a>
+                            <div class="icon-md text-primary m-b20"><i class="ti-bar-chart"></i></div>
+                            <a href="{{URL::to('/categorywork'.$item->id_category)}}" class="dez-tilte">{{$item->category_name}}</a>
                             <p class="m-a0"><?= $count_job->getCountJobByCategory($item->id_category) ?> công việc</p>
                             <div class="rotate-icon"><i class="ti-location-pin"></i></div>
                         </div>
                     </div>
                 </div>
                 @endforeach
-                <div class="col-lg-12 text-center m-t30">
+                <!-- <div class="col-lg-12 text-center m-t30">
                     <button class="site-button radius-xl">All Categories</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
     <!-- About Us END -->
     <!-- Call To Action -->
-    <div class="section-full content-inner bg-gray">
+    <div class="section-full content-inner bg-gray block-city">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 section-head text-center">
@@ -123,9 +111,9 @@ $category = $count_job->getCategory();
             <div class="row">
                 @foreach($city as $key=>$value)
                 <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex" style="background-image:url(images/city/pic1.jpg)">
+                    <div class="city-bx align-items-end  d-flex" style="background-image:URL(<?=URL('public/images/city/'.$value->image)?>)">
                         <div class="city-info">
-                            <h5>{{$value->distribution_name}}</h5>
+                           <a href="{{URL::to('/citywork'.$value->id_distribution)}}"><h5>{{$value->distribution_name}}</h5></a>
                             <span><?php echo $count_job->count_job_distribution($value->id_distribution); ?> Công việc</span>
                         </div>
                     </div>
@@ -144,7 +132,7 @@ $category = $count_job->getCategory();
                     <h6 class="fw4 m-b0">+20 việc làm mới được thêm gần đây</h5>
                 </div>
                 <div class="align-self-end">
-                    <a href="#" class="site-button button-sm">Tất cả<i class="fa fa-long-arrow-right"></i></a>
+                    <a href="{{URL::to('/job_browser')}}" class="site-button button-sm">Tất cả<i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
             <div class="row">
