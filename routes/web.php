@@ -119,3 +119,8 @@ Route::get('/categorywork{id}','CategoryController@getJobByCategory');
 Route::get('/citywork{id}','DistributionController@getJobByCity');
 
 
+
+// 
+Route::get('/test','DistributionController@test');
+
+

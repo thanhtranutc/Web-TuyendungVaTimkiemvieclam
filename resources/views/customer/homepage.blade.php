@@ -4,7 +4,6 @@ use App\Http\Controllers\CustomerController as customer;
 use App\Models\company;
 use App\Models\job_detail;
 use Illuminate\Support\Facades\App;
-// $count_job = new HomeController();
 $count_job = App::make("App\Http\Controllers\HomeController");
 $category = $count_job->getCategory();
 ?>
@@ -15,13 +14,13 @@ $category = $count_job->getCategory();
         <div class="container">
             <div class="dez-bnr-inr-entry align-m ">
                 <div class="find-job-bx">
-                    <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
-                    <h2>Search Between More Them <br /> <span class="text-primary">50,000</span> Open Jobs.</h2>
+                    <p class="site-button button-sm"><?= __('Tìm việc làm, Cơ hội việc làm & Nghề nghiệp')?></p>
+                    <h2>Tiếp cận <br /> <span class="text-primary"><?= __('30,000+')?></span>tin tuyển dụng việc làm mới mỗi ngày.</h2>
                     <form class="dezPlaceAni">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
-                                    <label>Job Title, Keywords, or Phrase</label>
+                                    <label><?= __('Tiêu đề, tên công việc, hoặc công ty')?></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="">
                                         <div class="input-group-append">
@@ -32,7 +31,7 @@ $category = $count_job->getCategory();
                             </div>
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
-                                    <label>City, State or ZIP</label>
+                                    <label><?= __('Thành phố')?></label>
                                     <div class="input-group">
                                         <input type="text" class="form-control" placeholder="">
                                         <div class="input-group-append">
@@ -44,7 +43,7 @@ $category = $count_job->getCategory();
                             <div class="col-lg-3 col-md-6">
                                 <div class="form-group">
                                     <select>
-                                        <option>Select Sector</option>
+                                        <option>Ngành nghề</option>
                                         <option>Construction</option>
                                         <option>Corodinator</option>
                                         <option>Employer</option>
@@ -54,7 +53,7 @@ $category = $count_job->getCategory();
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-6">
-                                <button type="submit" class="site-button btn-block">Find Job</button>
+                                <button type="submit" class="site-button btn-block"><?= __('Tìm kiếm')?></button>
                             </div>
                         </div>
                     </form>
@@ -157,7 +156,7 @@ $category = $count_job->getCategory();
                                             <ul>
                                                 <li><i class="fa fa-map-marker"></i> {{$job_list->distribution['distribution_name']}}</li>
                                                 <li><i class="fa fa-bookmark-o"></i> {{$job_list->working_format['working_format_name']}}</li>
-                                                <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
+                                                <li><i class="fa fa-clock-o"></i>{{ Carbon\Carbon::parse($job_list->job_date)->diffForHumans()}} </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -191,9 +190,9 @@ $category = $count_job->getCategory();
                         </div>
                         <div class="quote-bx">
                             <div class="quote-info">
-                                <h4>Make a Difference with Your Online Resume!</h4>
-                                <p>Your resume in minutes with JobBoard resume assistant is ready!</p>
-                                <a href="#" class="site-button">Create an Account</a>
+                                <h4><?= __('Tạo sự khác biệt với Sơ yếu lý lịch trực tuyến của bạn!')?></h4>
+                                <p><?= __('Sơ yếu lý lịch của bạn trong vài phút với trợ lý sơ yếu lý lịch JobBoard đã sẵn sàng!')?></p>
+                                <a href="#" class="site-button"><?= __('Tạo tài khoản')?></a>
                             </div>
                         </div>
                     </div>

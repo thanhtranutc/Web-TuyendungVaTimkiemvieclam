@@ -47,7 +47,7 @@
                                                 <ul>
                                                     <li><i class="fa fa-map-marker"></i><?= $job_info->distribution['distribution_name'] ?></li>
                                                     <li><i class="fa fa-bookmark-o"></i><?= $job_info->working_format['working_format_name'] ?></li>
-                                                    <li><i class="fa fa-clock-o"></i></li>
+                                                    <li><i class="fa fa-clock-o"></i>{{ Carbon\Carbon::parse($job_info->job_date)->diffForHumans()}}</li>
                                                 </ul>
                                             </div>
                                         </div>

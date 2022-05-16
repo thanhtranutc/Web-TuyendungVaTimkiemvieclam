@@ -1,5 +1,6 @@
 <?php use App\Http\Controllers\HomeController; ?>
-<?php $count_job = new HomeController();  ?>
+<?php use Illuminate\Support\Facades\App; ?>
+<?php $count_job = App::make("App\Http\Controllers\HomeController")  ?>
 @extends('layout_admin')
 @section('content')
 <!-- Content Header (Page header) -->
@@ -23,10 +24,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="callout callout-info">
+                <!-- <div class="callout callout-info">
                     <h5><i class="fas fa-info"></i> Note:</h5>
                     This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-                </div>
+                </div> -->
 
 
                 <!-- Main content -->

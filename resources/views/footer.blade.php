@@ -4,15 +4,15 @@
             <div class="row">
                 <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12">
                     <div class="widget">
-                        <img src="images/logo-white.png" width="180" class="m-b15" alt="" />
-                        <p class="text-capitalize m-b20">Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry's standard dummy text ever since the..</p>
+                        <img src="public/frontend/images/logo-white.png" width="180" class="m-b15" alt="" />
+                        <p class="text-capitalize m-b20"><?= __('website tuyển dụng test test test test test test test test test')?></a></p>
                         <div class="subscribe-form m-b20">
                             <form class="dzSubscribe" action="http://job-board.w3itexperts.com/xhtml/script/mailchamp.php" method="post">
                                 <div class="dzSubscribeMsg"></div>
                                 <div class="input-group">
                                     <input name="dzEmail" required="required" class="form-control" placeholder="Your Email Id" type="email">
                                     <span class="input-group-btn">
-                                        <button name="submit" value="Submit" type="submit" class="site-button radius-xl">Subscribe</button>
+                                        <button name="submit" value="Submit" type="submit" class="site-button radius-xl">Gửi</button>
                                     </span>
                                 </div>
                             </form>
@@ -41,12 +41,11 @@
                     <div class="widget border-0">
                         <h5 class="m-b30 text-white">Tìm việc</h5>
                         <ul class="list-2 w10 list-line">
-                            <li><a href="#">US Jobs</a></li>
-                            <li><a href="#">Canada Jobs</a></li>
-                            <li><a href="#">UK Jobs</a></li>
-                            <li><a href="#">Emplois en Fnce</a></li>
-                            <li><a href="#">Jobs in Deuts</a></li>
-                            <li><a href="#">Vacatures China</a></li>
+                            <li><a href="#"><?= __('test')?></a></li>
+                            <li><a href="#"><?= __('test')?></a></li>
+                            <li><a href="#"><?= __('test')?></a></li>
+                            <li><a href="#"><?= __('test')?></a></li>
+                            <li><a href="#"><?= __('test')?></a></li>
                         </ul>
                     </div>
                 </div>

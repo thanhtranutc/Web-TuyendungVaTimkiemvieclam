@@ -1,6 +1,4 @@
-<?php
-
-use Illuminate\Support\Facades\Session; ?>
+<?php use Illuminate\Support\Facades\Session; ?>
 <?php use Illuminate\Support\Facades\App; ?>
 <?php $user_id = Session::get('user_id'); ?>
 <?php $job_info = App::make("App\Models\job_detail"); ?>
@@ -69,7 +67,7 @@ use Illuminate\Support\Facades\Session; ?>
                             use Carbon\Carbon;
                             @endphp
                             <li><strong>Công việc:</strong> {{$distribution->category['category_name']}}</li>
-                            <li><strong>Thời hạn:</strong> {{Carbon::parse($data->detail_job_duration)->format('m/d/Y');}}</li>
+                            <li><strong>Thời hạn:</strong> {{Carbon::parse($data->detail_job_duration)->format('m/d/Y');}}</li><?= checkDuration($data->detail_job_duration) ?>
                             <li><i class="ti-location-pin text-black m-r5"></i> {{$distribution->distribution['distribution_name']}} </li>
                         </ul>
                         <p class="p-t20"><?php echo $data->company['company_desc'] ?></p>

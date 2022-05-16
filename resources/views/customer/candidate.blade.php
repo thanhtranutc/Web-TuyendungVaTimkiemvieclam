@@ -183,7 +183,7 @@
                                                                         <ul>
                                                                             <li><i class="fa fa-map-marker"></i>{{$item->distribution['distribution_name']}}</li>
                                                                             <li><i class="fa fa-bookmark-o"></i> {{$item->working_format['working_format_name']}}</li>
-                                                                            <li><i class="fa fa-clock-o"></i> Published 11 months ago</li>
+                                                                            <li><i class="fa fa-clock-o"></i>{{ Carbon\Carbon::parse($item->job_date)->diffForHumans()}}</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

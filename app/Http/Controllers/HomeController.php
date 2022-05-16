@@ -37,6 +37,8 @@ class HomeController extends Controller
     ) {
         $this->_customer = $customer;
         $this->_favouritejobCollection = $favouritejobCollection;
+        $this->_favouritejobCollection = $favouritejobCollection;
+
     }
 
     public function index()
