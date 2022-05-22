@@ -26,7 +26,7 @@
         <!-- small box -->
         <div class="small-box bg-info">
           <div class="inner">
-            <h3>150</h3>
+            <h3>{{$countJob}}</h3>
 
             <p><?= __('Việc làm')?></p>
           </div>
@@ -43,7 +43,7 @@
           <div class="inner">
             <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-            <p>Bounce Rate</p>
+            <p><?= __('Nhà tuyển dụng')?></p>
           </div>
           <div class="icon">
             <i class="ion ion-stats-bars"></i>
@@ -56,7 +56,7 @@
         <!-- small box -->
         <div class="small-box bg-warning">
           <div class="inner">
-            <h3>44</h3>
+            <h3>{{$countUser}}</h3>
 
             <p><?= __('Người dùng')?></p>
           </div>

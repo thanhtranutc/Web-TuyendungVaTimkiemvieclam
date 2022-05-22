@@ -8,6 +8,8 @@ use App\Models\admin;
 use App\Models\roles;
 use App\Models\category;
 use App\Models\detail_roles;
+use App\Repositories\UserRepository;
+use App\Repositories\JobRepository;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\FuncCall;
@@ -15,6 +17,17 @@ use Symfony\Component\Console\Input\Input;
 
 class AdminController extends Controller
 {
+    protected $_userRepository;
+    protected $_jobRepository;
+
+    public function __construct(
+        UserRepository $userRepository,
+        JobRepository $jobRepository
+    ) {
+        $this->_userRepository = $userRepository;
+        $this->_jobRepository = $jobRepository;
+    }
+
     public function Security()
     {
         $admin_id = Session::get('admin_id');
@@ -31,7 +44,9 @@ class AdminController extends Controller
     public function dashboard()
     {
         $this->Security();
-        return view('admin.dashboard');
+        $countJob = $this->_jobRepository->getCountTotalJob();
+        $countUser = $this->_userRepository->getCountTotalUser();
+        return view('admin.dashboard')->with('countJob',$countJob)->with('countUser',$countUser);
     }
     public function login(Request $request)
     {
@@ -99,10 +114,8 @@ class AdminController extends Controller
         }
         return Redirect::to('/listuser');
     }
-    public function profile(){
+    public function profile()
+    {
         return view('admin.user.profile');
     }
-
-
-
 }

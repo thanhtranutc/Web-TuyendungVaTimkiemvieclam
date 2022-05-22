@@ -1,9 +1,11 @@
 <?php
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController as customer;
 use App\Models\company;
 use App\Models\job_detail;
 use Illuminate\Support\Facades\App;
+
 $count_job = App::make("App\Http\Controllers\HomeController");
 $category = $count_job->getCategory();
 ?>
@@ -14,46 +16,54 @@ $category = $count_job->getCategory();
         <div class="container">
             <div class="dez-bnr-inr-entry align-m ">
                 <div class="find-job-bx">
-                    <p class="site-button button-sm"><?= __('Tìm việc làm, Cơ hội việc làm & Nghề nghiệp')?></p>
-                    <h2>Tiếp cận <br /> <span class="text-primary"><?= __('30,000+')?></span>tin tuyển dụng việc làm mới mỗi ngày.</h2>
-                    <form class="dezPlaceAni">
+                    <p class="site-button button-sm"><?= __('Tìm việc làm, Cơ hội việc làm & Nghề nghiệp') ?></p>
+                    <h2>Tiếp cận <br /> <span class="text-primary"><?= __('30,000+') ?></span>tin tuyển dụng việc làm mới mỗi ngày.</h2>
+                    <form class="dezPlaceAni" method="get" action="{{URL::to('/searchjob')}}">
                         <div class="row">
                             <div class="col-lg-4 col-md-6">
                                 <div class="form-group">
-                                    <label><?= __('Tiêu đề, tên công việc, hoặc công ty')?></label>
+                                    <label></label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" name="keyword" placeholder="<?= __('Tiêu đề, tên công việc') ?>">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-search"></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6">
+                            <div class="col-lg-2 col-md-6">
                                 <div class="form-group">
-                                    <label><?= __('Thành phố')?></label>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="">
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6">
-                                <div class="form-group">
-                                    <select>
-                                        <option>Ngành nghề</option>
-                                        <option>Construction</option>
-                                        <option>Corodinator</option>
-                                        <option>Employer</option>
-                                        <option>Financial Career</option>
-                                        <option>Information Technology</option>
+                                    <select class="form-control" name="category" id="distribution-select">
+                                        <option selected="selected custom-select"><?= __('Tất cả ngành nghề')?></option>
+                                        @foreach($category as $item)
+                                        <option value="{{$item->category_name}}">{{$item->category_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-md-6">
-                                <button type="submit" class="site-button btn-block"><?= __('Tìm kiếm')?></button>
+                                <div class="form-group">
+                                    <select class="form-control" name="distribution" id="category-select">
+                                        <option selected="selected custom-select"><?= __('Tất cả thành phố')?></option>
+                                        @foreach($list_distribution as $item)
+                                        <option value="{{$item->distribution_name}}">{{$item->distribution_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-6">
+                                <div class="form-group">
+                                    <select class="form-control" name="workingformat" id="working-select">
+                                        <option selected="selected custom-select"><?= __('tất cả hình thức')?></option>
+                                        @foreach($list_workingformat as $item)
+                                        <option value="{{$item->working_format_name}}">{{$item->working_format_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6">
+                                <button type="submit" class="site-button btn-block"><?= __('Tìm kiếm') ?></button>
                             </div>
                         </div>
                     </form>
@@ -110,9 +120,11 @@ $category = $count_job->getCategory();
             <div class="row">
                 @foreach($city as $key=>$value)
                 <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
-                    <div class="city-bx align-items-end  d-flex" style="background-image:URL(<?=URL('public/images/city/'.$value->image)?>)">
+                    <div class="city-bx align-items-end  d-flex" style="background-image:URL(<?= URL('public/images/city/' . $value->image) ?>)">
                         <div class="city-info">
-                           <a href="{{URL::to('/citywork'.$value->id_distribution)}}"><h5>{{$value->distribution_name}}</h5></a>
+                            <a href="{{URL::to('/citywork'.$value->id_distribution)}}">
+                                <h5>{{$value->distribution_name}}</h5>
+                            </a>
                             <span><?php echo $count_job->count_job_distribution($value->id_distribution); ?> Công việc</span>
                         </div>
                     </div>
@@ -140,34 +152,34 @@ $category = $count_job->getCategory();
                         @foreach($list_job as $key=>$job_list)
                         <li>
                             <a href="{{URL::to('/detail_job'.$job_list->job_id)}}">
-                                    <div class="d-flex m-b30">
-                                        <div class="job-post-company">
+                                <div class="d-flex m-b30">
+                                    <div class="job-post-company">
 
-                                            <?php
-                                            $image1 = job_detail::where('id_job', $job_list->job_id)->with('company')->first();
-                                            // print_r(json_encode($image1));die;
-                                            // $image_company = company::where('company_id', $image1['id_company'])->first();
-                                            ?>
-                                            <span><img style="height:60px; width:60px;" src="{{URL('public/images/company/'.$image1->company['company_image'])}}" /></span>
-                                        </div>
-                                        <div class="job-post-info">
-                                            <!-- <h4>Digital Marketing Executive</h4> -->
-                                            <h4 class="custom-title-text">{{$job_list->job_desc}}</h4>
-                                            <ul>
-                                                <li><i class="fa fa-map-marker"></i> {{$job_list->distribution['distribution_name']}}</li>
-                                                <li><i class="fa fa-bookmark-o"></i> {{$job_list->working_format['working_format_name']}}</li>
-                                                <li><i class="fa fa-clock-o"></i>{{ Carbon\Carbon::parse($job_list->job_date)->diffForHumans()}} </li>
-                                            </ul>
-                                        </div>
+                                        <?php
+                                        $image1 = job_detail::where('id_job', $job_list->job_id)->with('company')->first();
+                                        // print_r(json_encode($image1));die;
+                                        // $image_company = company::where('company_id', $image1['id_company'])->first();
+                                        ?>
+                                        <span><img style="height:60px; width:60px;" src="{{URL('public/images/company/'.$image1->company['company_image'])}}" /></span>
                                     </div>
-                                    <div class="d-flex">
-                                        <div class="job-time mr-auto">
-                                            <span>{{$job_list->working_format['working_format_name']}}</span>
-                                        </div>
-                                        <div class="salary-bx">
-                                            <span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
-                                        </div>
+                                    <div class="job-post-info">
+                                        <!-- <h4>Digital Marketing Executive</h4> -->
+                                        <h4 class="custom-title-text">{{$job_list->job_desc}}</h4>
+                                        <ul>
+                                            <li><i class="fa fa-map-marker"></i> {{$job_list->distribution['distribution_name']}}</li>
+                                            <li><i class="fa fa-bookmark-o"></i> {{$job_list->working_format['working_format_name']}}</li>
+                                            <li><i class="fa fa-clock-o"></i>{{ Carbon\Carbon::parse($job_list->job_date)->diffForHumans()}} </li>
+                                        </ul>
                                     </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="job-time mr-auto">
+                                        <span>{{$job_list->working_format['working_format_name']}}</span>
+                                    </div>
+                                    <div class="salary-bx">
+                                        <span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
+                                    </div>
+                                </div>
                                 <span onclick="myFunction55()" class="post-like fa fa-heart-o">
                                     <img src="pullic/frontend/images/icon/hearts.png" alt="">
                                 </span>
@@ -190,9 +202,9 @@ $category = $count_job->getCategory();
                         </div>
                         <div class="quote-bx">
                             <div class="quote-info">
-                                <h4><?= __('Tạo sự khác biệt với Sơ yếu lý lịch trực tuyến của bạn!')?></h4>
-                                <p><?= __('Sơ yếu lý lịch của bạn trong vài phút với trợ lý sơ yếu lý lịch JobBoard đã sẵn sàng!')?></p>
-                                <a href="#" class="site-button"><?= __('Tạo tài khoản')?></a>
+                                <h4><?= __('Tạo sự khác biệt với Sơ yếu lý lịch trực tuyến của bạn!') ?></h4>
+                                <p><?= __('Sơ yếu lý lịch của bạn trong vài phút với trợ lý sơ yếu lý lịch JobBoard đã sẵn sàng!') ?></p>
+                                <a href="#" class="site-button"><?= __('Tạo tài khoản') ?></a>
                             </div>
                         </div>
                     </div>
@@ -202,9 +214,15 @@ $category = $count_job->getCategory();
     </div>
 </div>
 <script>
-    function myFunction55() {
-        alert("Hello! I am an alert box!");
-    }
+    $(document).ready(function() {
+        $('#distribution-select').select2();
+    });
+    $(document).ready(function() {
+        $('#working-select').select2();
+    });
+    $(document).ready(function() {
+        $('#category-select').select2();
+    });
 </script>
 
 @endsection

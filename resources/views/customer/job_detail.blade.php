@@ -67,7 +67,7 @@
                             use Carbon\Carbon;
                             @endphp
                             <li><strong>Công việc:</strong> {{$distribution->category['category_name']}}</li>
-                            <li><strong>Thời hạn:</strong> {{Carbon::parse($data->detail_job_duration)->format('m/d/Y');}}</li><?= checkDuration($data->detail_job_duration) ?>
+                            <li><strong>Thời hạn:</strong><?= checkDuration($data->detail_job_duration) ?></li>
                             <li><i class="ti-location-pin text-black m-r5"></i> {{$distribution->distribution['distribution_name']}} </li>
                         </ul>
                         <p class="p-t20"><?php echo $data->company['company_desc'] ?></p>

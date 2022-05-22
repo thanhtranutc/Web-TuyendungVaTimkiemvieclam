@@ -2,16 +2,13 @@
 
 function checkDuration($start_time)
 {
-    $time = Carbon\Carbon::parse($start_time)->format('Y-m-d');
-    $current_time = Carbon\Carbon::now()->format('Y-m-d');
-    $start = Carbon\Carbon::parse($time);
-    $end = Carbon\Carbon::parse($current_time);
-
-    $day = $start->diffInDays($end);
-    // $day= date('d', mktime($time) - mktime($current_time));
+    $time_end = Carbon\Carbon::create($start_time)->timestamp;
+    $current_time = Carbon\Carbon::now()->timestamp;
+   
+    $day = $time_end - $current_time;
     $text = "Hết hạn ứng tuyển";
     if ($day > 0) {
-        return $start_time;
+        return Carbon\Carbon::create($start_time)->format('d-m-Y');
     } else {
         return $text;
     }

@@ -17,6 +17,9 @@ use App\Models\notification;
 use App\Models\favourite_job;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Repositories\DistributionRepository;
+use App\Repositories\WorkingformatRepository;
+use App\Repositories\CategoryRepository;
 use App\Http\Controllers\CustomerController;
 
 
@@ -29,23 +32,39 @@ class HomeController extends Controller
     protected $_job;
     protected $_jobCollection;
     protected $_favouritejobCollection;
+    protected $_distributionRepository;
+    protected $_workingformatRepository;
+    protected $_categoryRepository;
 
     public function __construct(
         CustomerController $customer,
         job $jobCollection,
+        DistributionRepository $distributionRepository,
+        WorkingformatRepository $workingformatRepository,
+        CategoryRepository $categoryRepository,
         favourite_job $favouritejobCollection
     ) {
         $this->_customer = $customer;
         $this->_favouritejobCollection = $favouritejobCollection;
         $this->_favouritejobCollection = $favouritejobCollection;
-
+        $this->_distributionRepository = $distributionRepository;
+        $this->_workingformatRepository = $workingformatRepository;
+        $this->_categoryRepository = $categoryRepository;
     }
 
     public function index()
     {
+        $distribution = $this->_distributionRepository->getAllDistribution();
+        $working_format = $this->_workingformatRepository->getAllWorkingformat();
+        $category = $this->_categoryRepository->getAllCategory();
         $city = distribution::orderby('id_distribution', 'asc')->take(4)->get();
         $list_job = $this->getJob();
-        return view('customer.homepage')->with('city', $city)->with('list_job', $list_job);
+        return view('customer.homepage')
+        ->with('city', $city)
+        ->with('list_job', $list_job)
+        ->with('list_distribution',$distribution)
+        ->with('list_workingformat',$working_format)
+        ->with('category',$category);
     }
     public function count_job_distribution($id_distribution)
     {

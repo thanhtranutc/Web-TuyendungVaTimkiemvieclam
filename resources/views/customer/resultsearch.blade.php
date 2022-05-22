@@ -70,7 +70,7 @@ $count_job = App::make("App\Http\Controllers\HomeController");
 								</li>
 								@endforeach
 							</ul>
-							{{ $result_search->links() }}
+							{{ $result_search->appends(request()->query())->links() }}
 						</div>
 					<div class="col-xl-3 col-lg-4">
 						<div class="sticky-top">

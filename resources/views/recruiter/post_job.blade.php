@@ -1,4 +1,6 @@
-<?php use Illuminate\Support\Facades\Session; ?>
+<?php
+
+use Illuminate\Support\Facades\Session; ?>
 @extends('layout_admin')
 @section('content')
 <style>
@@ -86,7 +88,7 @@
                 <div class="form-custom">
                     <div class="form-group col-md-6">
                         <label for="exampleSelectRounded0">Ngành nghề</label>
-                        <select class="custom-select rounded-0" name="category" id="exampleSelectRounded0">
+                        <select class="custom-select rounded-0" name="category" id="selectcategory">
                             @foreach($category as $item)
                             <option>{{$item->category_name}}</option>
                             @endforeach
@@ -94,7 +96,7 @@
                     </div>
                     <div class="form-group col-md-6 time-job">
                         <label for="exampleSelectRounded0">Thời gian làm việc</label>
-                        <select class="custom-select rounded-0" name="working_format" id="exampleSelectRounded0">
+                        <select class="custom-select rounded-0" name="working_format" id="selectworking">
                             @foreach($working_format as $item)
                             <option>{{$item->working_format_name}}</option>
                             @endforeach
@@ -113,7 +115,7 @@
                 <div class="form-custom">
                     <div class="form-group col-md-6 time-job">
                         <label for="exampleSelectRounded0">Khu vực</label>
-                        <select class="custom-select rounded-0" name="distribution" id="exampleSelectRounded0">
+                        <select class="custom-select rounded-0" name="distribution" id="selectdistribution">
                             @foreach($distribution as $item)
                             <option>{{$item->distribution_name}}</option>
                             @endforeach
@@ -155,9 +157,9 @@
                 <div class="form-custom">
                     <div class="form-group col-md-6 form-select-company">
                         <label for="exampleSelectRounded0">Công ty</label>
-                        <select class="custom-select rounded-0" name="company_id" role="menu" data-toggle="dropdown" id="exampleSelectRounded0">
+                        <select class="custom-select rounded-0" name="company_id" id="selectcompany">
                             @foreach($list_company as $item)
-                            <option role="menu">{{$item->company_name}}</option>
+                            <option>{{$item->company_name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -222,5 +224,30 @@
             box.style.display = 'none';
         });
     }
+</script>
+<script>
+    $(document).ready(function() {
+        $('#selectcompany').select2();
+    });
+    $(document).ready(function() {
+        $('#selectdistribution').select2();
+    });
+    $(document).ready(function() {
+        $('#selectworking').select2();
+    });
+    $(document).ready(function() {
+        $('#selectcategory').select2();
+    });
+    // $('select:not(.normal)').each(function() {
+    //     $(this).select2({
+    //         dropdownParent: $(this).parent()
+    //     });
+    // });
+    // $('select').select2({
+    //     dropdownCssClass: 'custom-dropdown'
+    // });
+    // $('select').on('select2:open', function(e) {
+    //     $('.custom-dropdown').parent().css('z-index', 99999);
+    // });
 </script>
 @endsection

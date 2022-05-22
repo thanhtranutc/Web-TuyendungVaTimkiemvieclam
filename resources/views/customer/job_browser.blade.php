@@ -70,16 +70,15 @@ $count_job = App::make("App\Http\Controllers\HomeController");
 							</li>
 							@endforeach
 						</ul>
-						{{ $job_list->links() }}
+						{{ $job_list->appends(request()->query())->links() }}
 					</div>
 					<div class="col-xl-3 col-lg-4">
 						<div class="sticky-top">
 							<form method="get" action="{{URL::to('/searchjob')}}">
-								@csrf
 								<div class="clearfix m-b30">
 									<h5 class="widget-title font-weight-700 text-uppercase">Từ khóa </h5>
 									<div class="">
-										<input type="text" class="form-control" placeholder="Tìm kiếm">
+										<input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm">
 									</div>
 								</div>
 								<div class="clearfix m-b30">
