@@ -31,9 +31,9 @@
 
 
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-	<link rel="stylesheet" href="public/backend/plugins/select2/css/select2.min.css">
-	<link rel="stylesheet" href="public/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <link rel="stylesheet" href="public/backend/plugins/select2/css/select2.min.css">
+  <link rel="stylesheet" href="public/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -439,17 +439,17 @@
 
 
   <script src="public/backend/plugins/select2/js/select2.full.min.js"></script>
-  <script>
-    InlineEditor
-    .create(document.querySelector('textarea1'))
-    .catch(error =>{
-      console.error(error)
-    });
-  </script>
   <!-- <script>
+    InlineEditor
+      .create(document.querySelector('textarea1'))
+      .catch(error => {
+        console.error(error)
+      });
+  </script> -->
+  <script>
     CKEDITOR.replace('textarea1');
     CKEDITOR.config.entities = false;
-  </script> -->
+  </script>
   <script>
     CKEDITOR.replace('textarea2');
     CKEDITOR.config.entities = false;
@@ -480,16 +480,16 @@
     });
   </script>
   <script>
-     $('select:not(.normal)').each(function() {
-        $(this).select2({
-            dropdownParent: $(this).parent()
-        });
+    $('select:not(.normal)').each(function() {
+      $(this).select2({
+        dropdownParent: $(this).parent()
+      });
     });
     $('select').select2({
-        dropdownCssClass: 'custom-dropdown'
+      dropdownCssClass: 'custom-dropdown'
     });
     $('select').on('select2:open', function(e) {
-        $('.custom-dropdown').parent().css('z-index', 99999);
+      $('.custom-dropdown').parent().css('z-index', 99999);
     });
   </script>
 </body>

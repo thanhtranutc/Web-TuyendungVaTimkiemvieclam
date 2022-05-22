@@ -1,288 +1,154 @@
 @extends('welcome')
 @section('content')
-<div class="page-content bg-white">
+<style>
+    .container-company-page {
+        width: 90%;
+        margin: auto;
+        height: auto;
+    }
+
+    .block-title-pagecompany {
+        width: 100%;
+        text-align: center;
+        margin: 15px;
+    }
+
+    .text-title {
+        font-size: 25px;
+        font-weight: 700;
+    }
+
+    .container-block-company {
+        width: 100%;
+    }
+
+    .block-company-content {
+        width: 30%;
+        height: 400px;
+        margin: 10px 1.6%;
+        float: left;
+        border: 0.5px solid;
+        border-color: antiquewhite;
+        background-color: white;
+        box-shadow: 0 0 10px 0 rgb(0 24 128 / 10%) !important;
+    }
+
+    .content-image-company {
+        height: 40%;
+        width: 100%;
+    }
+
+    .content-logo-company {
+        height: 60px;
+        width: 70px;
+        position: relative;
+        bottom: 45px;
+        left: 10px;
+        border-radius: 6px;
+        background-color: white;
+        border: 0px;
+    }
+
+    .image-company {
+        width: 100%;
+        height: 100%;
+    }
+
+    .content-desc-company {
+        margin-top: 30px !important;
+        width: 95%;
+        margin: auto;
+    }
+
+    p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .page-content.bg-white.container-company-custom {
+        height: 1200px !important;
+    }
+
+    .text-company-custom {
+        color: white;
+        text-align: left;
+    }
+
+    .form-search-company {
+        width: 50%;
+    }
+</style>
+<div class="page-content bg-white container-company-custom">
     <!-- inner page banner -->
     <div class="dez-bnr-inr overlay-black-middle" style="background-image:url(public/frontend/images/banner/bnr1.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Companies</h1>
+                <!-- <h1 class="text-white"><?= __('Công ty') ?></h1> -->
                 <!-- Breadcrumb row -->
-                <div class="breadcrumb-row">
+                <!-- <div class="breadcrumb-row">
                     <ul class="list-inline">
-                        <li><a href="#">Home</a></li>
-                        <li>Companies</li>
+                        <li><a href="{{URL::to('/')}}"><?= __('Trang chủ') ?></a></li>
+                        <li><?= __('Công ty') ?></li>
                     </ul>
+                </div> -->
+                <h2 class="text-company-custom"><?= __('Khám phá') ?><br /> <span class="text-primary"><?= __('15000+') ?></span><?= __('Công ty tuyển dụng') ?></h2>
+                <h3 class="text-company-custom"><?= __('Tra cứu thông tin công ty và nơi làm việc dành cho bạn.') ?></h3>
+                <div class="find-job-bx">
+                    <form class="dezPlaceAni form-search-company" method="get" action="#">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-6">
+                                <div class="form-group">
+                                    <label></label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="keyword" placeholder="<?= __('Tiêu đề, tên công việc') ?>">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <button type="submit" class="site-button btn-block"><?= __('Tìm kiếm') ?></button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <!-- Breadcrumb row END -->
             </div>
+
+        </div>
+    </div>
+    <div class="content-block">
+        <div class="container-company-page">
+            <div class="block-title-pagecompany">
+                <p class="text-title"><?= __('DANH SÁCH CÁC CÔNG TY NỔI BẬT') ?></p>
+            </div>
+            <div class="container-block-company">
+                @foreach($listcompany as $item)
+                <div class="block-company-content">
+                    <a href="{{URL::to('/detail-company')}}">
+                        <div class="content-image-company">
+                            <img class="image-company" src="{{URL::to('public/images/company/anhdemo.jpg')}}" />
+                            <div class="content-logo-company">
+                                <span><img style="height:60px; width:70px; border-radius:6px;" src="{{URL('public/images/company/'.$item->company_image)}}" /></span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="content-desc-company">
+                        <h3>{{$item->company_name}}</h3>
+                        <div class="company-desc">
+                            <p><?= $item->company_desc ?></p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
         </div>
     </div>
     <!-- inner page banner END -->
     <!-- contact area -->
-    <div class="content-block">
-        <!-- Find Job -->
-        <div class="section-full bg-white content-inner">
-            <div class="container">
-                <div class="site-filters clearfix center  m-b40">
-                    <ul class="filters" data-toggle="buttons">
-                        <li data-filter="" class="btn active">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>A</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>B</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>C</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>D</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>E</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>F</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>G</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>H</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>I</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>J</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>K</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>L</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>M</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>N</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>O</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>P</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>Q</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>R</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>S</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>T</span></a>
-                        </li>
-                        <li data-filter="advertising" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>U</span></a>
-                        </li>
-                        <li data-filter="branding" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>V</span></a>
-                        </li>
-                        <li data-filter="design" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>W</span></a>
-                        </li>
-                        <li data-filter="photography" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>X</span></a>
-                        </li>
-                        <li data-filter="" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>Y</span></a>
-                        </li>
-                        <li data-filter="web" class="btn">
-                            <input type="radio">
-                            <a href="#" class="site-button-secondry radius-sm"><span>Z</span></a>
-                        </li>
-                    </ul>
-                </div>
-                <ul id="masonry" class="dez-gallery-listing gallery-grid-4 gallery mfp-gallery">
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic1.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="advertising card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic2.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="branding card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic3.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="design card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic4.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo4.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="photography card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic5.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic6.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="advertising card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic7.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic8.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="branding card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic9.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo2.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="design card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic1.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="web card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic2.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo4.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="photography card-container col-lg-3 col-md-4 col-sm-4">
-                        <div class="dez-gallery-box">
-                            <div class="dez-media overlay-black-light">
-                                <a href="javascript:void(0);"> <img src="public/frontend/images/gallery/pic3.jpg" alt=""> </a>
-                                <div class="overlay-icon overlay-logo">
-                                    <img src="public/frontend/images/logo/logo/logo1.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Find Job END -->
-    </div>
-</div>
-<script type="text/javascript">
 
-			$("#exp-slider-range").slider({
-				range: true,
-				min: 0,
-				max: 10,
-				//values: [0, 10],
-				slide: function(event, ui) {
-					var min = ui.values[0],
-						max = ui.values[1];
-					  $('#' + this.id).prev().val( min + " year - " + max + " year");
-				}
-			});
-			
-			$("#salary-slider-range").slider({
-				range: true,
-				min: 10,
-				max: 100,
-				//values: [10, 1000],
-				slide: function(event, ui) {
-					var min = ui.values[0],
-						max = ui.values[1];
-					  $('#' + this.id).prev().val(min + "K - " + max + "K");
-				}
-			});
-		
-</script>
+</div>
 @endsection

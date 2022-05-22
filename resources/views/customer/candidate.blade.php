@@ -1,4 +1,6 @@
-<?php use Illuminate\Support\Facades\App; ?>
+<?php
+
+use Illuminate\Support\Facades\App; ?>
 <?php $job = App::make("App\Http\Controllers\HomeController"); ?>
 <?php $job_detail = App::make("App\Http\Controllers\JobController"); ?>
 <?php $job_detail_info = App::make("App\Models\job_detail"); ?>
@@ -115,21 +117,22 @@
                                                                     <tbody>
                                                                         @foreach($notify as $value)
                                                                         <?php $info_job = $job_detail_info->getDetailJobByIdJob($value->id_job);  ?>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <div class="icheck-primary">
-                                                                                    <input type="checkbox" value="" id="check1">
-                                                                                    <label for="check1"></label>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                                                                            <td class="mailbox-name"><a href="read-mail.html">{{$info_job->company['company_name']}}</a></td>
-                                                                            <td class="mailbox-subject"><b><?= __('Thông báo') ?></b> - <a style="color: black;" href="{{URL::to('/detail_job'.$info_job->id_job)}}">{{$value->notification_title}}</a>
-                                                                            </td>
-                                                                            <td class="mailbox-attachment"></td>
-                                                                            <td class="mailbox-date">{{$value->notification_date}}</td>
-                                                                        </tr>
-
+                                                                        <?php if ($info_job) { ?>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div class="icheck-primary">
+                                                                                        <input type="checkbox" value="" id="check1">
+                                                                                        <label for="check1"></label>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                                                                                <td class="mailbox-name"><a href="read-mail.html">{{$info_job->company['company_name']}}</a></td>
+                                                                                <td class="mailbox-subject"><b><?= __('Thông báo') ?></b> - <a style="color: black;" href="{{URL::to('/detail_job'.$info_job->id_job)}}">{{$value->notification_title}}</a>
+                                                                                </td>
+                                                                                <td class="mailbox-attachment"></td>
+                                                                                <td class="mailbox-date">{{$value->notification_date}}</td>
+                                                                            </tr>
+                                                                        <?php } ?>
                                                                         @endforeach
                                                                         <!-- <tr>
                                                                             <td>

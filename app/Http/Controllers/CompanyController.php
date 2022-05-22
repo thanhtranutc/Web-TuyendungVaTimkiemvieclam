@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\company;
+use App\Repositories\CompanyRepository;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
     //
+    
+    protected $_companyRepository;
+
+    public function __construct(CompanyRepository $companyRepository)
+    {
+        $this->_companyRepository = $companyRepository;
+    }
     public function Security()
     {
         $admin_id = Session::get('admin_id');
@@ -58,9 +66,9 @@ class CompanyController extends Controller
     }
     public function frontend_company()
     {
-        return view('customer.company');
+        $listcompany = $this->_companyRepository->getCompanyByOutstanding(1);
+        return view('customer.company')->with('listcompany',$listcompany);
     }
-
     public function edit_page($id)
     {
         $company = company::where('company_id', $id)->first();

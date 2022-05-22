@@ -5,14 +5,14 @@
                 <div class="col-xl-5 col-lg-4 col-md-12 col-sm-12">
                     <div class="widget">
                         <img src="public/frontend/images/logo-white.png" width="180" class="m-b15" alt="" />
-                        <p class="text-capitalize m-b20"><?= __('website tuyển dụng test test test test test test test test test')?></a></p>
+                        <p class="text-capitalize m-b20"><?= __('Đồ án website tuyển dụng by Trần Tất Thành')?></a></p>
                         <div class="subscribe-form m-b20">
                             <form class="dzSubscribe" action="http://job-board.w3itexperts.com/xhtml/script/mailchamp.php" method="post">
                                 <div class="dzSubscribeMsg"></div>
                                 <div class="input-group">
                                     <input name="dzEmail" required="required" class="form-control" placeholder="Your Email Id" type="email">
                                     <span class="input-group-btn">
-                                        <button name="submit" value="Submit" type="submit" class="site-button radius-xl">Gửi</button>
+                                        <button name="submit" value="Submit" type="submit" class="site-button radius-xl"><?= __('Gửi')?></button>
                                     </span>
                                 </div>
                             </form>
@@ -28,12 +28,12 @@
                 </div>
                 <div class="col-xl-5 col-lg-5 col-md-8 col-sm-8 col-12">
                     <div class="widget border-0">
-                        <h5 class="m-b30 text-white">Câu hỏi thường gặp ?</h5>
+                        <h5 class="m-b30 text-white"><?= __('Câu hỏi thường gặp ?')?></h5>
                         <ul class="list-2 w10 list-line">
-                            <li><a href="#">Chính sách và bảo mật</a></li>
-                            <li><a href="#">Hỗ trợ</a></li>
-                            <li><a href="#">Liên hệ</a></li>   
-                            <li><a href="#">Support</a></li>
+                            <li><a href="#"><?= __('Chính sách và bảo mật')?></a></li>
+                            <li><a href="#"><?= __('Hỗ trợ')?></a></li>
+                            <li><a href="#"><?= __('Liên hệ')?></a></li>   
+                            <li><a href="#"><?= __('Support')?></a></li>
                         </ul>
                     </div>
                 </div>
@@ -41,11 +41,8 @@
                     <div class="widget border-0">
                         <h5 class="m-b30 text-white">Tìm việc</h5>
                         <ul class="list-2 w10 list-line">
-                            <li><a href="#"><?= __('test')?></a></li>
-                            <li><a href="#"><?= __('test')?></a></li>
-                            <li><a href="#"><?= __('test')?></a></li>
-                            <li><a href="#"><?= __('test')?></a></li>
-                            <li><a href="#"><?= __('test')?></a></li>
+                            <li><a href="#"><?= __('Việc làm Hà Nội')?></a></li>
+                            <li><a href="#"><?= __('Việc làm TP. Hồ Chí Minh')?></a></li>
                         </ul>
                     </div>
                 </div>

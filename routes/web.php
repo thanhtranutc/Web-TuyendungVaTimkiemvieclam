@@ -105,7 +105,7 @@ Route::get('/apply_job{id}{id_job}','CustomerController@apply_job');
 Route::post('/save_profile{id}','CustomerController@save_profile');
 
 
-// page Chi tiết công viêc
+//page Chi tiết công viêc
 Route::get('/addtofavourite','CustomerController@addJobToFavourite');
 Route::get('/searchjob','JobController@searchJob');
 
@@ -122,5 +122,9 @@ Route::get('/citywork{id}','DistributionController@getJobByCity');
 
 // 
 Route::get('/test','DistributionController@test');
+
+
+//company page
+Route::get('/detail-company','CompanyController@');
 
 

@@ -204,7 +204,7 @@ $category = $count_job->getCategory();
                             <div class="quote-info">
                                 <h4><?= __('Tạo sự khác biệt với Sơ yếu lý lịch trực tuyến của bạn!') ?></h4>
                                 <p><?= __('Sơ yếu lý lịch của bạn trong vài phút với trợ lý sơ yếu lý lịch JobBoard đã sẵn sàng!') ?></p>
-                                <a href="#" class="site-button"><?= __('Tạo tài khoản') ?></a>
+                                <a href="{{URL::to('/register_customer')}}" class="site-button"><?= __('Tạo tài khoản') ?></a>
                             </div>
                         </div>
                     </div>

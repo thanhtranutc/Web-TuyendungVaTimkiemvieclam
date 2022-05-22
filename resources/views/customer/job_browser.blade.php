@@ -1,7 +1,4 @@
-<?php
-
-use Illuminate\Support\Facades\Session; ?>
-<!--  -->
+<?php use Illuminate\Support\Facades\Session; ?>
 @extends('welcome')
 @section('content')
 @php

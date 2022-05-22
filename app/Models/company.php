@@ -10,7 +10,7 @@ class company extends Model
     use HasFactory;
     public $timestamps = false; //set time to false
     protected $fillable = [
-        'company_id', 'company_name', 'company_image', 'company_desc', 'company_adress', 'company_status'
+        'company_id', 'company_name', 'company_image', 'company_desc', 'company_adress', 'company_status','company_introduce','outstanding'
     ];
     protected $primaryKey = 'company_id';
     protected $table = 'company';

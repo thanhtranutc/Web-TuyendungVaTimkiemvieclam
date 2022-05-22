@@ -7,10 +7,10 @@
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 	<meta name="robots" content="" />
-	<meta name="description" content="JobBoard - HTML Template" />
-	<meta property="og:title" content="JobBoard - HTML Template" />
-	<meta property="og:description" content="JobBoard - HTML Template" />
-	<meta property="og:image" content="JobBoard - HTML Template" />
+	<meta name="description" content="JobBoard - Tuyển Dụng" />
+	<meta property="og:title" content="JobBoard - Tuyển Dụng" />
+	<meta property="og:description" content="JobBoard - Tuyển Dụng" />
+	<meta property="og:image" content="JobBoard - Tuyển Dụng" />
 	<meta name="format-detection" content="telephone=no">
 
 	<!-- FAVICONS ICON -->
@@ -18,7 +18,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 
 	<!-- PAGE TITLE HERE -->
-	<title>JobBoard - HTML Template</title>
+	<title>JobBoard - Tuyển Dụng</title>
 
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,19 +101,16 @@
 										<li><a href="{{URL::to('/company')}}" class="dez-page">Công ty</a></li>
 									</ul>
 								</li>
-								<li>
-									<a href="{{URL::to('/candidates')}}">Ứng viên</a>
-								</li>
-								<!-- @php
+								@php
 								$user_id = Session::get('user_id');
 								if($user_id){
 								@endphp
 								<li>
-									<a href="{{URL::to('/profile')}}">Hồ sơ</a>
+									<a href="{{URL::to('/candidates')}}"><?= __('Hồ sơ của bạn') ?></a>
 								</li>
 								@php
 								}
-								@endphp -->
+								@endphp
 
 								<li>
 									<a href="#">Trang khác <i class="fa fa-chevron-down"></i></a>
@@ -129,7 +126,9 @@
 							use Illuminate\Support\Facades\App; ?>
 							<?php $hepper = App::make('App\Models\favourite_job'); ?>
 							<?php
+
 							use Illuminate\Support\Facades\Session;
+
 							$user_id = Session::get('user_id');
 							$user_name = Session::get('user_name');
 							if ($user_id) {
