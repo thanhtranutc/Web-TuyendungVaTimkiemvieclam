@@ -68,7 +68,7 @@ class HomeController extends Controller
     }
     public function count_job_distribution($id_distribution)
     {
-        $count = count(job::where('id_distribution', $id_distribution)->get());
+        $count = count(job::where('id_distribution', $id_distribution)->where('job_status',3)->get());
         return $count;
     }
     public function login_customer()
@@ -81,7 +81,7 @@ class HomeController extends Controller
     }
     public function job_total()
     {
-        $count = job::orderby('job_id', 'desc')->get();
+        $count = job::where('job_status',3)->orderby('job_id', 'desc')->get();
         return count($count);
     }
     public function logout()

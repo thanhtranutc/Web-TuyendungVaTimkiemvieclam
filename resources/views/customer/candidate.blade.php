@@ -1,6 +1,4 @@
-<?php
-
-use Illuminate\Support\Facades\App; ?>
+<?php use Illuminate\Support\Facades\App; ?>
 <?php $job = App::make("App\Http\Controllers\HomeController"); ?>
 <?php $job_detail = App::make("App\Http\Controllers\JobController"); ?>
 <?php $job_detail_info = App::make("App\Models\job_detail"); ?>
@@ -48,9 +46,9 @@ use Illuminate\Support\Facades\App; ?>
                                                 <li class="nav-item">
                                                     <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">Thông báo</a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">Tin nhắn</a>
-                                                </li>
+                                                </li> -->
                                                 <li class="nav-item">
                                                     <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">Cài đặt</a>
                                                 </li>

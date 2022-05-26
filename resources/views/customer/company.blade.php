@@ -127,9 +127,9 @@
             <div class="container-block-company">
                 @foreach($listcompany as $item)
                 <div class="block-company-content">
-                    <a href="{{URL::to('/detail-company')}}">
+                    <a href="{{URL::to('/detail-company'.$item->company_id)}}">
                         <div class="content-image-company">
-                            <img class="image-company" src="{{URL::to('public/images/company/anhdemo.jpg')}}" />
+                            <img class="image-company" src="{{URL::to('public/images/company/'.$item->company_logo)}}" />
                             <div class="content-logo-company">
                                 <span><img style="height:60px; width:70px; border-radius:6px;" src="{{URL('public/images/company/'.$item->company_image)}}" /></span>
                             </div>

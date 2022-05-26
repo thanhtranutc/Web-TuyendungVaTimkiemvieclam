@@ -18,6 +18,7 @@ class DistributionController extends Controller
     }
     public function test()
     {
+        return view('customer.test');
     }
 
 }

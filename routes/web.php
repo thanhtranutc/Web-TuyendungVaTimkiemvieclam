@@ -125,6 +125,6 @@ Route::get('/test','DistributionController@test');
 
 
 //company page
-Route::get('/detail-company','CompanyController@');
+Route::get('/detail-company{id}','CompanyController@showDetailCompany');
 
 
