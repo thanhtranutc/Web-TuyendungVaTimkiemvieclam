@@ -5,12 +5,12 @@
     <div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url(public/frontend/images/banner/bnr2.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Register</h1>
+                <h1 class="text-white"><?= __('Đăng ký')?></h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
-                        <li><a href="{{URL::to('/')}}">Home</a></li>
-                        <li>Register</li>
+                        <li><a href="{{URL::to('/')}}"><?= __('Trang chủ')?></a></li>
+                        <li><?= __('Đăng ký')?></li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->

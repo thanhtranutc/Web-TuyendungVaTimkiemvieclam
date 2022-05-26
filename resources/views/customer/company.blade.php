@@ -95,13 +95,13 @@
                 <h2 class="text-company-custom"><?= __('Khám phá') ?><br /> <span class="text-primary"><?= __('15000+') ?></span><?= __('Công ty tuyển dụng') ?></h2>
                 <h3 class="text-company-custom"><?= __('Tra cứu thông tin công ty và nơi làm việc dành cho bạn.') ?></h3>
                 <div class="find-job-bx">
-                    <form class="dezPlaceAni form-search-company" method="get" action="#">
+                    <form class="dezPlaceAni form-search-company" method="get" action="{{URL::to('/searchcompany')}}">
                         <div class="row">
                             <div class="col-lg-8 col-md-6">
                                 <div class="form-group">
                                     <label></label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" name="keyword" placeholder="<?= __('Tiêu đề, tên công việc') ?>">
+                                        <input type="text" class="form-control" name="keyword" placeholder="<?= __('Tiêu đề, tên công ty') ?>">
                                         <div class="input-group-append">
                                             <span class="input-group-text"><i class="fa fa-search"></i></span>
                                         </div>

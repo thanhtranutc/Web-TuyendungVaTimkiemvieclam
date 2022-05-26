@@ -30,4 +30,11 @@ class CompanyService {
         }
         return $jobRelate;
     }
+
+    public function searchCompany($keyword){
+        if(!empty($keyword)){
+            $company = $this->_companyRepository->getCompanyByName($keyword);
+            return $company;
+        }
+    }
 }

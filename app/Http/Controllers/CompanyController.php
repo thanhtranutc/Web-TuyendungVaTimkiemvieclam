@@ -141,4 +141,11 @@ class CompanyController extends Controller
         $company = $this->_companyRepository->getCompanyById($id_company);
         return view('customer.DetailCompany')->with('company', $company)->with('listRelate',$listRelate);
     }
+
+    public function searchCompany(Request $request)
+    {
+       $data_post  = $request->All();
+       $resultSearch = $this->_companyService->searchCompany($data_post['keyword']);
+       return view('customer.ResultSearchCompany')->with('resultSearch',$resultSearch);
+    }
 }

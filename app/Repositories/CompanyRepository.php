@@ -21,4 +21,8 @@ class CompanyRepository {
     public function getCompanyByOutstanding($condition){
         return $this->_company->where('outstanding',$condition)->take(4)->get();
     }
+
+    public function getCompanyByName($name){
+        return $this->_company->where('company_name', 'LIKE', '%' . $name. '%')->get();
+    }
 }
