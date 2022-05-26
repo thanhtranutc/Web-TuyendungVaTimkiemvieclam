@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\company;
 use App\Repositories\CompanyRepository;
+use App\Services\CompanyService;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
     //
-    
-    protected $_companyRepository;
 
-    public function __construct(CompanyRepository $companyRepository)
-    {
+    protected $_companyRepository;
+    protected $_companyService;
+
+    public function __construct(
+        CompanyRepository $companyRepository,
+        CompanyService $companyService
+    ) {
         $this->_companyRepository = $companyRepository;
+        $this->_companyService = $companyService;
     }
     public function Security()
     {
@@ -67,7 +72,7 @@ class CompanyController extends Controller
     public function frontend_company()
     {
         $listcompany = $this->_companyRepository->getCompanyByOutstanding(1);
-        return view('customer.company')->with('listcompany',$listcompany);
+        return view('customer.company')->with('listcompany', $listcompany);
     }
     public function edit_page($id)
     {
@@ -89,7 +94,7 @@ class CompanyController extends Controller
         $company->company_desc = $data['company_desc'];
 
         $img_old = $data['img_old'];
-        if (!empty($img_old)){
+        if (!empty($img_old)) {
             if ($request->hasFile('company_image')) {
                 $get_image = $request->file('company_image');
                 if ($get_image) {
@@ -100,10 +105,10 @@ class CompanyController extends Controller
                     $data['company_image'] = $new_image;
                     $company->company_image = $data['company_image'];
                 }
-            }else{
+            } else {
                 $company->company_image = $data['img_old'];
             }
-        }else{
+        } else {
             $get_image = $request->file('company_image');
             if ($get_image) {
                 $new_image_name = $get_image->getClientOriginalName();
@@ -119,15 +124,21 @@ class CompanyController extends Controller
 
         return Redirect::to('/listcompany');
     }
-    public function delete_company($id){
-        $company = company::where('company_id',$id)->first();
-        if($company){
+    public function delete_company($id)
+    {
+        $company = company::where('company_id', $id)->first();
+        if ($company) {
             $company->delete();
             Session::put('message', "Xóa thành công !");
-        }
-        else{
+        } else {
             Session::put('message', "Không tìm thấy sản phẩm!");
         }
         return Redirect()->back();
+    }
+    public function showDetailCompany($id_company)
+    {
+        $listRelate = $this->_companyService->getJobRelateByCompany($id_company);
+        $company = $this->_companyRepository->getCompanyById($id_company);
+        return view('customer.DetailCompany')->with('company', $company)->with('listRelate',$listRelate);
     }
 }
