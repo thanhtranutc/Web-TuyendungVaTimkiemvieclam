@@ -16,6 +16,7 @@ use App\Models\job_detail;
 use App\Models\notification;
 use App\Models\profile;
 use App\Services\StaticticService;
+use App\Services\RecruiterService;
 use App\Repositories\JobRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -28,15 +29,18 @@ class RecruiterController extends Controller
     protected $_notificationCollection;
     protected $_staticticService;
     protected $_jobRepository;
+    protected $_recruiterService;
 
     public function __construct(
         JobRepository $jobRepository,
         notification $notificationCollection,
+        RecruiterService $recruiterService,
         StaticticService $staticticService)
     {
         $this->_notificationCollection = $notificationCollection;
         $this->_staticticService = $staticticService;
         $this->_jobRepository = $jobRepository;
+        $this->_recruiterService = $recruiterService;
     }
 
     public function list_jobpost()
@@ -192,7 +196,9 @@ class RecruiterController extends Controller
     }
     public function saveRecuiter(Request $request)
     {
-        $dataPost = $request->All();
-        print_r($dataPost);
+        $dataPost = $request;
+        $this->_recruiterService->saveRecruiter($dataPost);
+        Session::put('notifi', 'Đăng ký thành công vui lòng chờ admin xác nhận !');
+        return Redirect::to('/register_recuiter');
     }
 }

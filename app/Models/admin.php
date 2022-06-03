@@ -10,7 +10,7 @@ class admin extends Model
     use HasFactory;
     public $timestamps = false; //set time to false
     protected $fillable = [
-        'id_admin', 'admin_name', 'admin_email', 'admin_password', 'admin_phone', 'admin_adress', 'admin_image'
+        'id_admin', 'admin_name', 'admin_email', 'admin_password', 'admin_phone', 'admin_adress', 'admin_image','admin_status'
     ];
     protected $primaryKey = 'id_admin';
     protected $table = 'admin';

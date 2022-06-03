@@ -93,7 +93,7 @@ Route::post('/insert_job','RecruiterController@add_job');   // thêm bài tuyể
 Route::get('/statistic','RecruiterController@showPageStatistic');   // báo cáo thống kê
 Route::get('/filterstatic','RecruiterController@getStaticticByYear');   // Lọc theo năm
 Route::get('/register_recuiter','RecruiterController@showRegisterPage');   // Trang đăng ký
-Route::post('//save_recuiter','RecruiterController@saveRecuiter');   // Thêm tài khoản nhà tuyển dụng
+Route::post('/save_recuiter','RecruiterController@saveRecuiter');   // Thêm tài khoản nhà tuyển dụng
 
 
 
