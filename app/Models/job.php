@@ -10,7 +10,7 @@ class job extends Model
     use HasFactory;
     public $timestamps = false; //set time to false
     protected $fillable = [
-    	'job_id', 'job_desc','id_user','id_category','job_date','job_status','id_distribution','id_working_format'
+    	'job_id', 'job_desc','id_user','id_category','job_date','job_status','id_distribution','id_working_format','job_view'
     ];
     protected $primaryKey = 'job_id';
  	protected $table = 'job';

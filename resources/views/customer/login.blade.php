@@ -77,8 +77,13 @@
                                 </ul>
                                 @enderror
                                 <div class="text-left">
-                                    <button type="submit" class="site-button m-r5 button-lg">Đăng nhập</button>
+                                    <button type="submit" style="background-color: #007BFF !important;" class="site-button m-r5 button-lg">Đăng nhập</button>
                                     <a data-toggle="tab" href="#forgot-password" class="m-l5"><i class="fa fa-unlock-alt"></i> Quên mật khẩu</a>
+                                </div>
+                                <div class="social-auth-links text-center mt-2 mb-3">
+                                    <a href="#" class="btn btn-block btn-primary">
+                                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                                    </a>
                                 </div>
                             </form>
                             <form id="forgot-password" class="tab-pane fade  col-12 p-a0">

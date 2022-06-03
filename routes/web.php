@@ -90,6 +90,10 @@ Route::get('/list_candidate{id}','RecruiterController@list_candidate');   // Xem
 Route::post('/viewprofile{id}','RecruiterController@view_profile');   // Xem profile ứng viên
 Route::get('/add_job','RecruiterController@page_addjob');   // Trang thêm bài tuyển dụng
 Route::post('/insert_job','RecruiterController@add_job');   // thêm bài tuyển dụng 
+Route::get('/statistic','RecruiterController@showPageStatistic');   // báo cáo thống kê
+Route::get('/filterstatic','RecruiterController@getStaticticByYear');   // Lọc theo năm
+Route::get('/register_recuiter','RecruiterController@showRegisterPage');   // Trang đăng ký
+Route::post('//save_recuiter','RecruiterController@saveRecuiter');   // Thêm tài khoản nhà tuyển dụng
 
 
 
@@ -127,5 +131,8 @@ Route::get('/test','DistributionController@test');
 //company page
 Route::get('/detail-company{id}','CompanyController@showDetailCompany');
 Route::get('/searchcompany','CompanyController@searchCompany');
+
+// Đổi mật khẩu
+Route::post('/savepassword','CustomerController@savePassword');
 
 

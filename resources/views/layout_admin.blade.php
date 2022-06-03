@@ -26,7 +26,11 @@
   <link rel="stylesheet" href="public/backend/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="public/backend/plugins/summernote/summernote-bs4.min.css">
-  <link rel="stylesheet" href="public/backend/plugins/toastr/toastr.min.css">
+
+
+  <link rel="stylesheet" href="public/backend/custom.css">
+  <script src="public/backend/js/chart.min.js"></script>
+  <script src="public/backend/js/custom.js"></script>
 
 
 
@@ -34,6 +38,7 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <link rel="stylesheet" href="public/backend/plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="public/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -356,6 +361,14 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="{{URL::to('/statistic')}}" class="nav-link">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Báo cáo, thống kê
+                </p>
+              </a>
+            </li>
             <?php
             $roles = session::get('roles_admin');
             if ($roles) {
@@ -407,7 +420,7 @@
   <!-- Bootstrap 4 -->
   <script src="public/backend/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- ChartJS -->
-  <script src="public/backend/plugins/chart.js/Chart.min.js"></script>
+  <!-- <script src="public/backend/plugins/chart.js/Chart.min.js"></script> -->
   <!-- Sparkline -->
   <script src="public/backend/plugins/sparklines/sparkline.js"></script>
   <!-- JQVMap -->
@@ -446,18 +459,8 @@
         console.error(error)
       });
   </script> -->
-  <script>
-    CKEDITOR.replace('textarea1');
-    CKEDITOR.config.entities = false;
-  </script>
-  <script>
-    CKEDITOR.replace('textarea2');
-    CKEDITOR.config.entities = false;
-  </script>
-  <script>
-    CKEDITOR.replace('textarea3');
-    CKEDITOR.config.entities = false;
-  </script>
+  <script src="public/backend/js/custom.js"></script>
+
   <script>
     $(function() {
       var Toast = Swal.mixin({
@@ -479,17 +482,27 @@
       });
     });
   </script>
-  <script>
-    $('select:not(.normal)').each(function() {
-      $(this).select2({
-        dropdownParent: $(this).parent()
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#filter-year').click(function() {
+        var year = $('.year').val();
+
+        $.ajax({
+          url: "{{url('/filterstatic')}}",
+          method: 'GET',
+          dataType: "JSON",
+          data: {
+            year: year,
+          },
+          success: function(response) {
+            if (response) {
+              myChart.data.datasets[0].data = response.staticYear;
+              myChart.data.datasets[1].data = response.staticApplyYear;
+              myChart.update();
+            }
+          }
+        });
       });
-    });
-    $('select').select2({
-      dropdownCssClass: 'custom-dropdown'
-    });
-    $('select').on('select2:open', function(e) {
-      $('.custom-dropdown').parent().css('z-index', 99999);
     });
   </script>
 </body>

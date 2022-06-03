@@ -17,4 +17,10 @@ class DistributionRepository {
     public function getAllDistribution(){
         return $this->_distribution->all();
     }
+    public function getDistributionById($id)
+    {
+        return $this->_distribution->find($id);
+    }
+
+    
 }

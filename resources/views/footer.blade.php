@@ -18,11 +18,9 @@
                             </form>
                         </div>
                         <ul class="list-inline m-a0">
-                            <li><a href="#" class="site-button white facebook circle "><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="site-button white google-plus circle "><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#" class="site-button white linkedin circle "><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#" class="site-button white instagram circle "><i class="fa fa-instagram"></i></a></li>
-                            <li><a href="#" class="site-button white twitter circle "><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/imsoybad/" class="site-button white facebook circle "><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="" class="site-button white google-plus circle "><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://www.instagram.com/imsoybad_/" class="site-button white instagram circle "><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>
                 </div>

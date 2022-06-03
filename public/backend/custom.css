@@ -1,0 +1,12 @@
+.button-submit--custom{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 30px;
+    border-radius: 4px;
+}
+.text-info-job{
+    margin: 20px;
+    color: brown;
+}

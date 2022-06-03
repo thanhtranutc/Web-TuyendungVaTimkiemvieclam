@@ -37,4 +37,26 @@ class JobRepository {
     public function getJobDetailByIdJob($id){
         return $this->_jobdetail->where('id_job',$id)->first();
     }
+
+    public function getGroupJobByDistribution()
+    {
+        return $this->_job->groupBy('id_distribution')
+        ->selectRaw('count(*) as total, id_distribution')
+        ->orderby('total','desc')->take(2)->get();
+    }
+    public function getGroupJobByCategory()
+    {
+        return $this->_job->groupBy('id_category')
+        ->selectRaw('count(*) as total, id_category')
+        ->orderby('total','desc')->take(2)->get();
+    }
+    public function getJobByIdRecruiter($id)
+    {
+        return $this->_job->where('id_user',$id)->get();
+    }
+    
+    public function getJobTopViews($id_recruiter){
+        return $this->_job->where('id_user',$id_recruiter)->orderby('job_view','desc')->take(3)->get();
+    }
+
 }

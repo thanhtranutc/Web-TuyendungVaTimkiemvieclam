@@ -15,18 +15,28 @@ use App\Models\experience;
 use App\Models\job_detail;
 use App\Models\notification;
 use App\Models\profile;
+use App\Services\StaticticService;
+use App\Repositories\JobRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Stmt\TryCatch;
+use PHPUnit\Util\Json;
 
 class RecruiterController extends Controller
 {
     protected $_notificationCollection;
+    protected $_staticticService;
+    protected $_jobRepository;
 
-    public function __construct(notification $notificationCollection)
+    public function __construct(
+        JobRepository $jobRepository,
+        notification $notificationCollection,
+        StaticticService $staticticService)
     {
         $this->_notificationCollection = $notificationCollection;
+        $this->_staticticService = $staticticService;
+        $this->_jobRepository = $jobRepository;
     }
 
     public function list_jobpost()
@@ -149,5 +159,40 @@ class RecruiterController extends Controller
         //     echo "thanhf coong";
         // }
         // print_r(json_encode($data));
+    }
+
+    public function showPageStatistic()
+    {
+        $idRecruiter = Session::get('admin_id');
+        $countPost = $this->_staticticService->getCountPostByRecruiter($idRecruiter);
+        $countUserApply = $this->_staticticService->getCountApply($idRecruiter);
+        $jobTopViews = $this->_jobRepository->getJobTopViews($idRecruiter);
+        $getCountUserApply = $this->_staticticService->getCountUserApply($idRecruiter);
+        $staticJobs = $this->_staticticService->getTotalJobByMonth($idRecruiter,2022);
+        $staticApply = $this->_staticticService->getTotalCadidateByMonth($idRecruiter,2022);
+        return view('recruiter.StaticticPage',['staticJobs'=> $staticJobs,'staticApply'=> $staticApply])
+        ->with('countUserApply',$countUserApply)
+        ->with('jobTopViews',$jobTopViews)
+        ->with('countPost',$countPost)
+        ->with('getCountUserApply',$getCountUserApply);
+    }
+
+    public function getStaticticByYear(Request $request)
+    {
+        $dataPost = $request->all();
+        $idRecruiter = Session::get('admin_id');
+        $year = $dataPost['year'];
+        $staticYear = $this->_staticticService->getTotalJobByMonth($idRecruiter,$year);
+        $staticApplyYear = $this->_staticticService->getTotalCadidateByMonth($idRecruiter,$year);
+        return response()->json(['staticYear'=>$staticYear,'staticApplyYear'=>$staticApplyYear]);
+    }
+    public function showRegisterPage()
+    {
+        return view('recruiter.Register');
+    }
+    public function saveRecuiter(Request $request)
+    {
+        $dataPost = $request->All();
+        print_r($dataPost);
     }
 }

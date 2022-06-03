@@ -17,4 +17,9 @@ class CategoryRepository {
     public function getAllCategory(){
         return $this->_category->all();
     }
+
+    public function getCategoryById($id)
+    {
+        return $this->_category->find($id);
+    }
 }

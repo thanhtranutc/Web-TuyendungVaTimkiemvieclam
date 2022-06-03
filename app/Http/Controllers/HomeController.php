@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Session;
 use App\Repositories\DistributionRepository;
 use App\Repositories\WorkingformatRepository;
 use App\Repositories\CategoryRepository;
+use App\Services\DistributionService;
+use App\Services\CategoryService;
+
 use App\Http\Controllers\CustomerController;
 
 
@@ -35,6 +38,8 @@ class HomeController extends Controller
     protected $_distributionRepository;
     protected $_workingformatRepository;
     protected $_categoryRepository;
+    protected $_distributionService;
+    protected $_categoryService;
 
     public function __construct(
         CustomerController $customer,
@@ -42,6 +47,8 @@ class HomeController extends Controller
         DistributionRepository $distributionRepository,
         WorkingformatRepository $workingformatRepository,
         CategoryRepository $categoryRepository,
+        DistributionService $distributionService,
+        CategoryService $categoryService,
         favourite_job $favouritejobCollection
     ) {
         $this->_customer = $customer;
@@ -50,21 +57,25 @@ class HomeController extends Controller
         $this->_distributionRepository = $distributionRepository;
         $this->_workingformatRepository = $workingformatRepository;
         $this->_categoryRepository = $categoryRepository;
+        $this->_distributionService = $distributionService;
+        $this->_categoryService = $categoryService;
     }
 
     public function index()
     {
         $distribution = $this->_distributionRepository->getAllDistribution();
+        $topDistribution = $this->_distributionService->getTopDistribution();
+        $topCategory = $this->_categoryService->getTopCategory();
         $working_format = $this->_workingformatRepository->getAllWorkingformat();
         $category = $this->_categoryRepository->getAllCategory();
         $city = distribution::orderby('id_distribution', 'asc')->take(4)->get();
         $list_job = $this->getJob();
         return view('customer.homepage')
-        ->with('city', $city)
         ->with('list_job', $list_job)
         ->with('list_distribution',$distribution)
-        ->with('list_workingformat',$working_format)
-        ->with('category',$category);
+        ->with('topDistribution',$topDistribution)
+        ->with('topCategory',$topCategory)
+        ->with('list_workingformat',$working_format);
     }
     public function count_job_distribution($id_distribution)
     {

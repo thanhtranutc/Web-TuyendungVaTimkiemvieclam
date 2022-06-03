@@ -14,15 +14,16 @@ use Illuminate\Support\Facades\Session;
 class CustomerController extends Controller
 {
     // Đăng nhập khách hàng
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $validate = $request->validate([
-        'user_email' => ['required'],
-        'user_password' => ['required'],
+            'user_email' => ['required'],
+            'user_password' => ['required'],
         ]);
         $email = $validate['user_email'];
         $password = md5($validate['user_password']);
-        $user = customer::where('user_email',$email)->where('user_password',$password)->first();
-        if($user){
+        $user = customer::where('user_email', $email)->where('user_password', $password)->first();
+        if ($user) {
             $login_count = $user->count();
             if ($login_count > 0) {
                 Session::put('user_email', $user->user_email);
@@ -34,10 +35,10 @@ class CustomerController extends Controller
             Session::put('message', 'Mật khẩu hoặc tài khoản bị sai.Làm ơn nhập lại !');
             return Redirect::to('/login_customer');
         }
-
     }
     // Thêm tài khoản đăng ký tới database
-    public function add_user(Request $request){
+    public function add_user(Request $request)
+    {
         // $data = $request->all();
         $validatedData = $request->validate([
             'user_email' => 'required|email',
@@ -51,7 +52,7 @@ class CustomerController extends Controller
         //     'min' => ':attribute Không được nhỏ hơn :min ký tự',
         //     'max' => ':attribute Không được lớn hơn :max ký tự',
         //  ];
-        
+
         $data = $request->all();
         $customer = new customer();
 
@@ -66,36 +67,38 @@ class CustomerController extends Controller
         return Redirect()->back();
     }
     // Xây dựng hồ sơ
-    public function profile(){
+    public function profile()
+    {
         $id_user = Session::get('user_id');
-        $data = customer::where('user_id',$id_user)->first();
-        return view('customer.profile')->with('user',$data);
+        $data = customer::where('user_id', $id_user)->first();
+        return view('customer.profile')->with('user', $data);
     }
-    public function login_after_apply(){
+    public function login_after_apply()
+    {
         Session::put('notifi', 'Bạn cần đăng nhập để có thể ứng tuyển công việc!');
         return Redirect::to('/login_customer');
     }
-    public function apply_job($id_user,$id_job){
-        $profile_user = profile::where('id_user',$id_user)->first();
-        if($profile_user){
-            $is_applyjob = apply_job::where('id_job',$id_job)->where('id_user',$profile_user['id_user'])->first();
-            if($is_applyjob){
+    public function apply_job($id_user, $id_job)
+    {
+        $profile_user = profile::where('id_user', $id_user)->first();
+        if ($profile_user) {
+            $is_applyjob = apply_job::where('id_job', $id_job)->where('id_user', $profile_user['id_user'])->first();
+            if ($is_applyjob) {
                 Session::put('notifi', 'Bạn đã ứng tuyển công việc này trước đó');
-            }else{
-            $apply_job = new apply_job();
-            $apply_job->id_user = $id_user;
-            $apply_job->id_job = $id_job;
-            $apply_job->save();
-            Session::put('notifi', 'Bạn đã ứng tuyển công việc');
+            } else {
+                $apply_job = new apply_job();
+                $apply_job->id_user = $id_user;
+                $apply_job->id_job = $id_job;
+                $apply_job->save();
+                Session::put('notifi', 'Bạn đã ứng tuyển công việc');
             }
-        }
-        else{
+        } else {
             Session::put('notifi', 'Bạn cần tạo hồ sơ để có thể ứng tuyển!');
         }
         return Redirect()->back();
-
     }
-    public function save_profile($id_user,Request $request){
+    public function save_profile($id_user, Request $request)
+    {
         $data = $request->all();
         // get image user
         $get_image = $request->file('user_image');
@@ -106,13 +109,13 @@ class CustomerController extends Controller
             $get_image->move('public/images/user', $new_image);
             $data['user_image'] = $new_image;
         }
-        $userCurrent = customer::where('user_id',$id_user)->first();
-        if($userCurrent){
+        $userCurrent = customer::where('user_id', $id_user)->first();
+        if ($userCurrent) {
             $userCurrent->user_name = $data['user_name'];
             $userCurrent->user_phone = $data['user_sdt'];
             $userCurrent->user_adress = $data['user_adress'];
-            if(isset($data['user_image'])){
-            $userCurrent->user_image = $data['user_image'];
+            if (isset($data['user_image'])) {
+                $userCurrent->user_image = $data['user_image'];
             }
             $userCurrent->update();
         }
@@ -120,37 +123,39 @@ class CustomerController extends Controller
         // insert profile table
         $id_user = Session::get('user_id');
         $isProfile  = $this->getProfileByIdUser($id_user);
-        if($isProfile){
+        if ($isProfile) {
             $isProfile->profile_skill = $data['user_skill'];
             $isProfile->profile_education = $data['univerity'];
             $isProfile->profile_link = $data['user_link'];
             $isProfile->profile_career_goals = $data['career_goals'];
             $isProfile->update();
-        }else{
-             $new_profile = new profile();
-             $new_profile->profile_skill = $data['user_skill'];
-             $new_profile->id_user = $id_user;
-             $new_profile->profile_title = 'test';
-             $new_profile->profile_education = $data['univerity'];
-             $new_profile->profile_link = $data['user_link'];
-             $new_profile->profile_interest = 'test';
-             $new_profile->profile_career_goals = $data['career_goals'];
-             $new_profile->save();
+        } else {
+            $new_profile = new profile();
+            $new_profile->profile_skill = $data['user_skill'];
+            $new_profile->id_user = $id_user;
+            $new_profile->profile_title = 'test';
+            $new_profile->profile_education = $data['univerity'];
+            $new_profile->profile_link = $data['user_link'];
+            $new_profile->profile_interest = 'test';
+            $new_profile->profile_career_goals = $data['career_goals'];
+            $new_profile->save();
         }
-        
+
         Session::put('notifi', 'Cập nhật thành công !');
         return Redirect()->back();
-
     }
-    public function getProfileByIdUser($id){
-        $profile = profile::where('id_user',$id)->first();
+    public function getProfileByIdUser($id)
+    {
+        $profile = profile::where('id_user', $id)->first();
         return $profile;
     }
-    public function getUserById($id){
+    public function getUserById($id)
+    {
         return customer::find($id);
     }
 
-    public function addJobToFavourite(Request $request){
+    public function addJobToFavourite(Request $request)
+    {
         $data_post = $request->all();
         $user = Session::get('user_id');
         $favourite_job = new favourite_job();
@@ -158,4 +163,22 @@ class CustomerController extends Controller
         $favourite_job->id_job = $data_post['id_job'];
         $favourite_job->save();
     }
+
+    // public function savePassword(Request $request)
+    // {
+    //     $data_post = $request->All();
+    //     $userCurrent  = Session::get('user_id');
+    //     $user = customer::find($userCurrent);
+    //     if ($user->user_password == md5($request->password_old)) {
+    //         return response()->json([
+    //             'status' => true,
+    //             'msg' => 'dung',
+    //         ]);
+    //     } else {
+    //         return response()->json([
+    //             'status' => false,
+    //             'msg' => 'sai',
+    //         ]);
+    //     }
+    // }
 }

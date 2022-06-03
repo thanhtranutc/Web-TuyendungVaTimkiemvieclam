@@ -34,7 +34,7 @@ $category = $count_job->getCategory();
                             <div class="col-lg-2 col-md-6">
                                 <div class="form-group">
                                     <select class="form-control" name="category" id="distribution-select">
-                                        <option selected="selected custom-select"><?= __('Tất cả ngành nghề')?></option>
+                                        <option selected="selected custom-select"><?= __('Tất cả ngành nghề') ?></option>
                                         @foreach($category as $item)
                                         <option value="{{$item->category_name}}">{{$item->category_name}}</option>
                                         @endforeach
@@ -44,7 +44,7 @@ $category = $count_job->getCategory();
                             <div class="col-lg-2 col-md-6">
                                 <div class="form-group">
                                     <select class="form-control" name="distribution" id="category-select">
-                                        <option selected="selected custom-select"><?= __('Tất cả thành phố')?></option>
+                                        <option selected="selected custom-select"><?= __('Tất cả thành phố') ?></option>
                                         @foreach($list_distribution as $item)
                                         <option value="{{$item->distribution_name}}">{{$item->distribution_name}}</option>
                                         @endforeach
@@ -54,7 +54,7 @@ $category = $count_job->getCategory();
                             <div class="col-lg-2 col-md-6">
                                 <div class="form-group">
                                     <select class="form-control" name="workingformat" id="working-select">
-                                        <option selected="selected custom-select"><?= __('tất cả hình thức')?></option>
+                                        <option selected="selected custom-select"><?= __('tất cả hình thức') ?></option>
                                         @foreach($list_workingformat as $item)
                                         <option value="{{$item->working_format_name}}">{{$item->working_format_name}}</option>
                                         @endforeach
@@ -89,7 +89,7 @@ $category = $count_job->getCategory();
                 </div>
             </div>
             <div class="row sp20">
-                @foreach($category as $item)
+                @foreach($topCategory as $item)
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="icon-bx-wraper">
                         <div class="icon-content">
@@ -118,7 +118,7 @@ $category = $count_job->getCategory();
                 </div>
             </div>
             <div class="row">
-                @foreach($city as $key=>$value)
+                @foreach($topDistribution as $key=>$value)
                 <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
                     <div class="city-bx align-items-end  d-flex" style="background-image:URL(<?= URL('public/images/city/' . $value->image) ?>)">
                         <div class="city-info">

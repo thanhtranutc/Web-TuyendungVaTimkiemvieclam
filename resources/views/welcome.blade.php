@@ -116,31 +116,35 @@
 									<a href="#">Trang khác <i class="fa fa-chevron-down"></i></a>
 									<ul class="sub-menu">
 										<li><a href="about-us.html" class="dez-page">Thông tin</a></li>
-										<li><a href="error-404.html" class="dez-page">Error 404</a></li>
 										<li><a href="{{URL::to('/contact')}}" class="dez-page">Liên hệ</a></li>
 									</ul>
 								</li>
+								<?php
+
+								use Illuminate\Support\Facades\App; ?>
+								<?php $hepper = App::make('App\Models\favourite_job'); ?>
+								<?php
+
+								use Illuminate\Support\Facades\Session;
+
+								$user_id = Session::get('user_id');
+								$user_name = Session::get('user_name');
+								if ($user_id) {
+								?>
+									<li><a href="{{URL::to('/logout_customer')}}"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+								<?php
+								} else {
+								?>
+									<li><a href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a></li>
+									<li>
+										<a href="#"><i class="fa fa-lock"></i> Đăng nhập<i class="fa fa-chevron-down"></i></a>
+										<ul class="sub-menu">
+											<li><a href="{{URL::to('/login_customer')}}" class="dez-page">Khách</a></li>
+											<li><a href="{{URL::to('/admin')}}" class="dez-page">Nhà tuyển dụng</a></li>
+										</ul>
+									</li>
+								<?php } ?>
 							</ul>
-							<?php
-
-							use Illuminate\Support\Facades\App; ?>
-							<?php $hepper = App::make('App\Models\favourite_job'); ?>
-							<?php
-
-							use Illuminate\Support\Facades\Session;
-
-							$user_id = Session::get('user_id');
-							$user_name = Session::get('user_name');
-							if ($user_id) {
-							?>
-								<a class="button-login" href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
-								<a class="button-register" href="{{URL::to('/logout_customer')}}"><i class="fa fa-lock"></i> Đăng xuất</a>
-							<?php
-							} else {
-							?>
-								<a class="button-login" href="{{URL::to('/register_customer')}}"><i class="fa fa-user"></i>Đăng ký</a>
-								<a class="button-register" href="{{URL::to('/login_customer')}}"><i class="fa fa-lock"></i> Đăng nhập</a>
-							<?php } ?>
 							<a class="nav-link" href="{{URL::to('/favourite')}}">
 								<i class="far fa-heart"></i>
 								<span class="badge badge-warning navbar-badge"><?= isset($user_id) ? $hepper->getCountFavouriteJob($user_id) : "" ?></span>
@@ -157,7 +161,6 @@
 							?>
 								&ensp;Id:<span data-user_id="{{$user_id}}" name="user">{{$user_name}}</span>
 							<?php } ?>
-							<a>asdasd</a>
 						</div>
 					</div>
 				</div>
@@ -166,14 +169,9 @@
 		</header>
 		<!-- header END -->
 		<!-- Content -->
-		<!-- Section Banner -->
 		@yield('content');
-		<!-- Our Job END -->
-		<!-- Call To Action -->
+		<!-- Content END -->
 
-		<!-- Call To Action END -->
-		<!-- Our Latest Blog -->
-		<!-- Our Latest Blog -->
 		<!-- Footer -->
 		@extends('footer');
 		<!-- Footer END -->

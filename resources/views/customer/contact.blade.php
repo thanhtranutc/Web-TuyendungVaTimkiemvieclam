@@ -5,12 +5,12 @@
     <div class="dez-bnr-inr overlay-black-middle" style="background-image:url(public/frontend/images/banner/bnr1.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Contact Us</h1>
+                <h1 class="text-white"><?= __('Liên hệ')?></h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
-                        <li><a href="#">Home</a></li>
-                        <li>Contact Us</li>
+                        <li><a href="{{URL::to('/')}}"><?= __('Trang chủ')?></a></li>
+                        <li><?= __('Liên hệ')?></li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->
@@ -25,38 +25,35 @@
                 <!-- right part start -->
                 <div class="col-lg-4 col-md-6 d-lg-flex d-md-flex">
                     <div class="p-a30 border m-b30 contact-area border-1 align-self-stretch radius-sm">
-                        <h4 class="m-b10">Quick Contact</h4>
-                        <p>If you have any questions simply use the following contact details.</p>
+                        <h4 class="m-b10"><?= __('Liên hệ nhanh')?></h4>
+                        <p><?= __('Nếu bạn có bất kỳ câu hỏi nào, chỉ cần sử dụng các chi tiết liên hệ sau.')?></p>
                         <ul class="no-margin">
                             <li class="icon-bx-wraper left m-b30">
                                 <div class="icon-bx-xs border-1"> <a href="#" class="icon-cell"><i class="ti-location-pin"></i></a> </div>
                                 <div class="icon-content">
-                                    <h6 class="text-uppercase m-tb0 dez-tilte">Address:</h6>
-                                    <p>123 West Street, Melbourne Victoria 3000 Australia</p>
+                                    <h6 class="text-uppercase m-tb0 dez-tilte"><?= __('Address:')?></h6>
+                                    <p><?= __('Công viên hòa bình, Xuân Đỉnh, Bắc Từ Liêm, Hà Nội.')?></p>
                                 </div>
                             </li>
                             <li class="icon-bx-wraper left  m-b30">
                                 <div class="icon-bx-xs border-1"> <a href="#" class="icon-cell"><i class="ti-email"></i></a> </div>
                                 <div class="icon-content">
-                                    <h6 class="text-uppercase m-tb0 dez-tilte">Email:</h6>
-                                    <p>info@example.com</p>
+                                    <h6 class="text-uppercase m-tb0 dez-tilte"><?= __('Email:')?></h6>
+                                    <p><?= __('tranthanh2820@gmail.com')?></p>
                                 </div>
                             </li>
                             <li class="icon-bx-wraper left">
                                 <div class="icon-bx-xs border-1"> <a href="#" class="icon-cell"><i class="ti-mobile"></i></a> </div>
                                 <div class="icon-content">
-                                    <h6 class="text-uppercase m-tb0 dez-tilte">PHONE</h6>
-                                    <p>+61 3 8376 6284</p>
+                                    <h6 class="text-uppercase m-tb0 dez-tilte"><?= __('Điện thoại')?></h6>
+                                    <p><?= __('+84 69984922')?></p>
                                 </div>
                             </li>
                         </ul>
                         <div class="m-t20">
                             <ul class="dez-social-icon dez-social-icon-lg">
-                                <li><a href="javascript:void(0);" class="fa fa-facebook bg-primary"></a></li>
-                                <li><a href="javascript:void(0);" class="fa fa-twitter bg-primary"></a></li>
-                                <li><a href="javascript:void(0);" class="fa fa-linkedin bg-primary"></a></li>
-                                <li><a href="javascript:void(0);" class="fa fa-pinterest-p bg-primary"></a></li>
-                                <li><a href="javascript:void(0);" class="fa fa-google-plus bg-primary"></a></li>
+                                <li><a href="https://www.facebook.com/imsoybad/" class="fa fa-facebook bg-primary"></a></li>
+                                <li><a href="https://www.instagram.com/imsoybad_/" class="fa fa-linkedin bg-primary"></a></li>
                             </ul>
                         </div>
                     </div>
@@ -65,7 +62,7 @@
                 <!-- Left part start -->
                 <div class="col-lg-4 col-md-6">
                     <div class="p-a30 m-b30 radius-sm bg-gray clearfix">
-                        <h4>Send Message Us</h4>
+                        <h4><?= __('Gửi tin nhắn cho chúng tôi.')?></h4>
                         <div class="dzFormMsg"></div>
                         <form method="post" class="dzForm" action="http://job-board.w3itexperts.com/xhtml/script/contact.php">
                             <input type="hidden" value="Contact" name="dzToDo">
@@ -73,21 +70,21 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input name="dzName" type="text" required class="form-control" placeholder="Your Name">
+                                            <input name="dzName" type="text" required class="form-control" placeholder="Họ và tên">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input name="dzEmail" type="email" class="form-control" required placeholder="Your Email Id">
+                                            <input name="dzEmail" type="email" class="form-control" required placeholder="Địa chỉ email">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <textarea name="dzMessage" rows="4" class="form-control" required placeholder="Your Message..."></textarea>
+                                            <textarea name="dzMessage" rows="4" class="form-control" required placeholder="Tin nhắn..."></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <button name="submit" type="submit" value="Submit" class="site-button "> <span>Submit</span> </button>
+                                    <button name="submit" type="submit" value="Submit" class="site-button "> <span>Gửi</span> </button>
                                 </div>
                             </div>
                         </form>

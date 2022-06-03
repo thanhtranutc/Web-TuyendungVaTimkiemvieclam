@@ -50,7 +50,7 @@
                                     <ul>
                                         <li><i class="ti-location-pin"></i><strong class="font-weight-700 text-black">Địa chỉ</strong><span class="text-black-light"> {{$data->company['company_adress']}} </span></li>
                                         <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Lương</strong>{{number_format($data->detail_job_salary,0,',','.')}} VND</li>
-                                        <li><i class="ti-shield"></i><strong class="font-weight-700 text-black">Kinh nghiệm</strong>6 Year Experience</li>
+                                        <li><i class="ti-shield"></i><strong class="font-weight-700 text-black">Kinh nghiệm</strong><?= $data['experience'].__(' năm')?></li>
                                     </ul>
                                 </div>
                             </div>

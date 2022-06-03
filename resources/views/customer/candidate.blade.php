@@ -1,9 +1,30 @@
-<?php use Illuminate\Support\Facades\App; ?>
+<?php
+
+use Illuminate\Support\Facades\App; ?>
 <?php $job = App::make("App\Http\Controllers\HomeController"); ?>
 <?php $job_detail = App::make("App\Http\Controllers\JobController"); ?>
 <?php $job_detail_info = App::make("App\Models\job_detail"); ?>
 @extends('welcome')
 @section('content')
+<style>
+    .form-editpassword {
+        width: 50%;
+        display: none;
+    }
+
+    .editpassword-title {
+        width: 32%;
+        margin: 10px;
+        margin-left: 0;
+    }
+
+    .button-save-password {
+        border-radius: 0.2rem;
+        background-color: #2E55FA;
+        border: none;
+        color: white;
+    }
+</style>
 <div class="page-content bg-white">
     </section>
     <!-- Main content -->
@@ -163,10 +184,19 @@
                                                     <h4 class="form-tilte"><?= __('Bảo Mật') ?></h4><br><br>
                                                     <span>Mật khẩu: <input class="text-password" type="password" disabled value="{{$userInfor->user_password}}"><br><br></p></span>
                                                     <div class="edit">
-                                                        <a>
-                                                            <img />
+                                                        <a id="hide" style="color: none;">
+                                                            <img style="width:25px; height:25px;" src="{{asset('public/frontend/images/icon/icons8-edit-64.png')}}" />
                                                             <span>chỉnh sửa</span>
                                                         </a>
+                                                    </div>
+                                                    <div class="form-editpassword">
+                                                        <form>
+                                                            @csrf
+                                                            <label class="editpassword-title"><?= __('Mật khẩu cũ:') ?></label><input name="password-old" class="text-password-old" /><br>
+                                                            <label class="editpassword-title"><?= __('Mật khẩu mới:') ?></label><input name="password-new" class="text-password-new" /><br>
+                                                            <label class="editpassword-title"><?= __('Xác nhận mật khẩu:') ?></label><input name="re-password" class="text-repassword" /><br>
+                                                            <button class="button-save-password">Lưu</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="custom-tabs-four-messages2" role="tabpanel" aria-labelledby="custom-tabs-four-messages-1">
@@ -223,6 +253,53 @@
 
 </div>
 <script>
+    $(document).ready(function() {
+        $("#hide").click(function() {
+            $(".form-editpassword").show();
+
+            var id_user = $(this).data('job_id');
+
+            $.ajax({
+                url: "{{url('/editpassword')}}",
+                method: 'POST',
+                data: {
+                    id_user: id_user,
+                },
+            });
+        });
+    });
 </script>
+<!-- <script type="text/javascript">
+    $(document).ready(function() {
+        $('.button-save-password').click(function() {
+            var password_old = $('.text-password-old').val();
+            var password_new = $('.text-password-new').val();
+            var re_password = $('.text-repassword').val();
+
+            $.ajax({
+                url: "{{url('/savepassword')}}",
+                method: 'POST',
+                data: {
+                    password_old: password_old,
+                    password_new: password_new,
+                    re_password: re_password,
+                },
+                success: function(response) {
+                    if (response.status == true) {
+                        console.log('asdasd');
+                        swal("Công việc này đã có ", "", "error");
+                    }
+                    if (response.status == false) {
+                        console.log('sai roi');
+                        swal(" trong yêu thích của bạn!", "", "error");
+                    }
+                },
+                error: function(data) {
+                	swal("Công việc này đã có trong yêu thích của bạn!", "", "error");
+                }
+            });
+        });
+    });
+</script> -->
 
 @endsection

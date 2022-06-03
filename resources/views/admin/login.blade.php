@@ -21,7 +21,7 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a>
+                <a href="../../index2.html" class="h1"><b>Admin</b></a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
@@ -31,7 +31,7 @@
 
                 $message = Session::get('message');
                 if ($message) {
-                    echo '<span style="color:#79EE56;" class="text-alert">' . $message . '</span>';
+                    echo '<span style="color:red;" class="text-alert">' . $message . '</span>';
                     Session::put('message', null);
                     echo '<br></br>';
                     echo '  ';
@@ -72,22 +72,13 @@
                         <!-- /.col -->
                     </div>
                 </form>
-
-                <div class="social-auth-links text-center mt-2 mb-3">
-                    <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                    </a>
-                    <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                    </a>
-                </div>
                 <!-- /.social-auth-links -->
 
                 <p class="mb-1">
                     <a href="forgot-password.html">Quên mật khẩu</a>
                 </p>
                 <p class="mb-0">
-                    <a href="register.html" class="text-center">Đăng ký</a>
+                    <a href="{{URL::to('/register_recuiter')}}" class="text-center">Đăng ký</a>
                 </p>
             </div>
             <!-- /.card-body -->
