@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-md-6">
                                 <div class="m-b30">
-                                    <img src="images/blog/grid/pic1.jpg" alt="">
+                                    <img src="{{URL('public/images/company/'.$data->company['company_image'])}}" alt="">
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-6">
@@ -49,7 +49,7 @@
                                     <h4 class="text-black font-weight-700 p-t10 m-b15">Chi tiết công việc</h4>
                                     <ul>
                                         <li><i class="ti-location-pin"></i><strong class="font-weight-700 text-black">Địa chỉ</strong><span class="text-black-light"> {{$data->company['company_adress']}} </span></li>
-                                        <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Lương</strong>{{number_format($data->detail_job_salary,0,',','.')}} VND</li>
+                                        <li><i class="ti-money"></i><strong class="font-weight-700 text-black">Lương</strong>{{number_format($data->salary_down,0,',','.').' - '.number_format($data->salary_up,0,',','.')}} VND</li>
                                         <li><i class="ti-shield"></i><strong class="font-weight-700 text-black">Kinh nghiệm</strong><?= $data['experience'].__(' năm')?></li>
                                     </ul>
                                 </div>
@@ -84,7 +84,7 @@
                         </ul>
                         <div>
                             <?php if ($user_id) { ?>
-                                <a href="{{URL::to('/apply_job'.$user_id.$data->id_job)}}" class="site-button">Ứng tuyển</a>
+                                <a href="{{URL::to('/apply_job'.$data->id_job)}}" class="site-button">Ứng tuyển</a>
                             <?php } else { ?>
                                 <a href="{{URL::to('/login_user')}}" class="site-button">Ứng tuyển</a>
                             <?php } ?>

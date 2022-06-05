@@ -1,4 +1,6 @@
-<?php use Illuminate\Support\Facades\App; ?>
+<?php
+
+use Illuminate\Support\Facades\App; ?>
 <?php $hepper = App::make("App\Http\Controllers\HomeController"); ?>
 <?php $job = App::make("App\Models\job"); ?>
 <?php $job_detail = App::make("App\Models\job_detail"); ?>
@@ -10,14 +12,14 @@
         <div class="container">
             <div class="dez-bnr-inr-entry">
                 <h1 class="text-white">Việc làm</h1>
-                <!-- Breadcrumb row -->
+
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
-                        <li><a href="{{URL::to('/')}}">Home</a></li>
-                        <li>Browse Jobs</li>
+                        <li><a href="{{URL::to('/')}}">Trang chủ</a></li>
+                        <li>Việc làm yêu thích</li>
                     </ul>
                 </div>
-                <!-- Breadcrumb row END -->
+               
             </div>
         </div>
     </div>
@@ -33,17 +35,17 @@
                         <?php if (isset($list_favouritejob)) { ?>
                             <ul class="post-job-bx">
                                 @foreach($list_favouritejob as $value)
-              
+
                                 <?php $job_detail_info = $job_detail->getDetailJobByIdJob($value->id_job) ?>
                                 <?php $job_info = $job->getJobById($value->id_job) ?>
-                                <li>
+                                <li style="margin-bottom: 0;">
                                     <a href="">
                                         <div class="d-flex m-b30">
                                             <div class="job-post-company">
                                                 <span><img style="height:60px; width:60px;" src="{{URL('public/images/company/'.$job_detail_info->company['company_image'])}}" /></span>
                                             </div>
                                             <div class="job-post-info">
-                                                <h4 class="custom-title-text"><?= $job_info->job_desc?></h4>
+                                                <h4 class="custom-title-text"><?= $job_info->job_desc ?></h4>
                                                 <ul>
                                                     <li><i class="fa fa-map-marker"></i><?= $job_info->distribution['distribution_name'] ?></li>
                                                     <li><i class="fa fa-bookmark-o"></i><?= $job_info->working_format['working_format_name'] ?></li>
@@ -62,6 +64,14 @@
                                         <span class="post-like fa fa-heart-o"></span>
                                     </a>
                                 </li>
+                                <div style="margin-bottom: 25px;" class="btn-group">
+                                    <form action="{{URL::to('/deletejobfavorite'.$job_info->job_id)}}" method="get">
+                                    @csrf
+                                    <button type="submit" data-id_favorite="<?= $job_info->job_id ?>" class="btn btn-default btn-sm delete-job-favorite">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                    </form>
+                                </div>
                                 @endforeach
                             </ul>
                         <?php } else { ?>
@@ -77,3 +87,11 @@
     </div>
 </div>
 @endsection
+<!-- <script>
+    $(document).ready(function() {
+        $('.delete-job-favorite').click(function() {
+            var job_id = $(this).data('idJob');
+            alert(job_id);
+        });
+    });
+</script> -->

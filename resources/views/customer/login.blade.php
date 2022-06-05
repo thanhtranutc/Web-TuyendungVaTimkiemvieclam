@@ -81,7 +81,7 @@
                                     <a data-toggle="tab" href="#forgot-password" class="m-l5"><i class="fa fa-unlock-alt"></i> Quên mật khẩu</a>
                                 </div>
                                 <div class="social-auth-links text-center mt-2 mb-3">
-                                    <a href="#" class="btn btn-block btn-primary">
+                                    <a href="{{URL::to('/login_facebook')}}" class="btn btn-block btn-primary">
                                         <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
                                     </a>
                                 </div>

@@ -1,4 +1,6 @@
 <?php use Illuminate\Support\Facades\Session; ?>
+<?php use Illuminate\Support\Facades\App;?>
+<?php  $jobRepository = App::make("App\Repositories\JobRepository");?>
 <?php $message = Session::get('message'); ?>
 @extends('layout_admin')
 @section('content')
@@ -49,7 +51,7 @@
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>STT</th>
                             <th>Tiêu đề</th>
                             <th>Người Đăng</th>
                             <th>Ngành nghề</th>
@@ -60,11 +62,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i=0 ?> 
                         @foreach($list_job as $value)
+                        <?php $i++ ?>
                         <tr>
-                            <td>{{$value->job_id}}</td>
+                            <td>{{$i}}</td>
                             <td>{{$value->job_desc}}</td>
-                            <td>{{$value->customer['user_name']}}</td>
+                            <td>{{$value->admin['admin_name']}}</td>
                             <td>{{$value->category['category_name']}}</td>
                             <td>{{$value->job_date}}</td>
                             <td>{{$value->distribution['distribution_name']}}</td>
@@ -73,7 +77,7 @@
                                 <a class="btn btn-app bg-success" href="{{URL::to('/confirm_job'.$value->job_id)}}">
                                     <i class="fas fa-edit "></i> Xác nhận
                                 </a>
-                                <a class="btn btn-app bg-warning" href="{{URL::to('/deletecompany')}}">
+                                <a class="btn btn-app bg-warning" href="{{URL::to('/canceljob'.$value->job_id)}}">
                                     <i class="fas fa-save"></i> Hủy
                                 </a>
                             <td>

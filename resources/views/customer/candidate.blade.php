@@ -83,7 +83,7 @@ use Illuminate\Support\Facades\App; ?>
                                                 <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                                                     <!-- <div class="card card-primary card-outline"> -->
                                                     <div class="card">
-                                                        <div class="card-header">
+                                                        <!-- <div class="card-header">
                                                             <div class="card-tools">
                                                                 <div class="input-group input-group-sm">
                                                                     <input type="text" class="form-control" placeholder="Search Mail">
@@ -94,42 +94,16 @@ use Illuminate\Support\Facades\App; ?>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <!-- /.card-tools -->
-                                                        </div>
+                                                    
+                                                        </div> -->
                                                         <!-- /.card-header -->
                                                         <div class="card-body p-0">
                                                             <div class="mailbox-controls">
-                                                                <!-- Check all button -->
-                                                                <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-                                                                </button>
                                                                 <div class="btn-group">
                                                                     <button type="button" class="btn btn-default btn-sm">
                                                                         <i class="far fa-trash-alt"></i>
                                                                     </button>
-                                                                    <button type="button" class="btn btn-default btn-sm">
-                                                                        <i class="fas fa-reply"></i>
-                                                                    </button>
-                                                                    <button type="button" class="btn btn-default btn-sm">
-                                                                        <i class="fas fa-share"></i>
-                                                                    </button>
                                                                 </div>
-                                                                <!-- /.btn-group -->
-                                                                <button type="button" class="btn btn-default btn-sm">
-                                                                    <i class="fas fa-sync-alt"></i>
-                                                                </button>
-                                                                <div class="float-right">
-                                                                    1-50/200
-                                                                    <div class="btn-group">
-                                                                        <button type="button" class="btn btn-default btn-sm">
-                                                                            <i class="fas fa-chevron-left"></i>
-                                                                        </button>
-                                                                        <button type="button" class="btn btn-default btn-sm">
-                                                                            <i class="fas fa-chevron-right"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                    <!-- /.btn-group -->
-                                                                </div>
-                                                                <!-- /.float-right -->
                                                             </div>
                                                             <div class="table-responsive mailbox-messages">
                                                                 <table class="table table-hover table-striped">

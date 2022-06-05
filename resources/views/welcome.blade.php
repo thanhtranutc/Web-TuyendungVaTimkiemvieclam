@@ -97,7 +97,7 @@
 								<li>
 									<a href="#">Việc làm<i class="fa fa-chevron-down"></i></a>
 									<ul class="sub-menu">
-										<li><a href="{{URL::to('/job_browser')}}" class="dez-page">Công việc</a></li>
+										<li><a href="{{URL::to('/job_browser')}}" class="dez-page">Việc làm</a></li>
 										<li><a href="{{URL::to('/company')}}" class="dez-page">Công ty</a></li>
 									</ul>
 								</li>
@@ -115,7 +115,7 @@
 								<li>
 									<a href="#">Trang khác <i class="fa fa-chevron-down"></i></a>
 									<ul class="sub-menu">
-										<li><a href="about-us.html" class="dez-page">Thông tin</a></li>
+										<li><a href="{{URL::to('/aboutus')}}" class="dez-page">Giới thiệu</a></li>
 										<li><a href="{{URL::to('/contact')}}" class="dez-page">Liên hệ</a></li>
 									</ul>
 								</li>
@@ -145,9 +145,10 @@
 									</li>
 								<?php } ?>
 							</ul>
+
 							<a class="nav-link" href="{{URL::to('/favourite')}}">
 								<i class="far fa-heart"></i>
-								<span class="badge badge-warning navbar-badge"><?= isset($user_id) ? $hepper->getCountFavouriteJob($user_id) : "" ?></span>
+								<span style="  position: absolute;top: 25px;right: 249px;" class="badge badge-warning navbar-badge"><?= isset($user_id) ? $hepper->getCountFavouriteJob($user_id) : "" ?></span>
 							</a>
 							<!-- <li class="nav-item dropdown">
 									<a class="nav-link" data-toggle="dropdown" href="#">
@@ -159,7 +160,7 @@
 							<?php
 							if ($user_name) {
 							?>
-								&ensp;Id:<span data-user_id="{{$user_id}}" name="user">{{$user_name}}</span>
+								&ensp;&ensp;Xin chào:<span data-user_id="{{$user_id}}" name="user">{{$user_name}}</span>
 							<?php } ?>
 						</div>
 					</div>
@@ -213,6 +214,28 @@
 			});
 		});
 	</script>
+	<!-- <script>
+		$(document).ready(function() {
+			$('.delete-job-favorite').click(function() {
+				var job_id = $(this).data('id_favorite');
+				alert(job_id);
+			});
+
+			$.ajax({
+				url: "{{url('/deletejobfavorite')}}",
+				method: 'GET',
+					data: {
+						id_job: job_id,
+					},
+					success: function(data) {
+						swal("Đã xóa việc làm khỏi yêu thích của bạn!", "", "success");
+					},
+					error: function(data) {
+						swal("Không tìm thấy việc làm!", "", "error");
+					}
+			});
+		});
+	</script> -->
 	<script src="public/frontend/js/jquery.min.js"></script><!-- JQUERY.MIN JS -->
 	<script src="public/frontend/plugins/wow/wow.js"></script><!-- WOW JS -->
 	<script src="public/frontend/plugins/bootstrap/js/popper.min.js"></script><!-- BOOTSTRAP.MIN JS -->

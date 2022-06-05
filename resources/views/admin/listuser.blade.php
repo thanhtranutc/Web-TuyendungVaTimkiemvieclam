@@ -11,7 +11,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th style="width: 10px">Mã</th>
+                            <th style="width: 10px">STT</th>
                             <th style="width: 200px">Tên</th>
                             <th>Email</th>
                             <th>Chức vụ</th>
@@ -20,12 +20,13 @@
                     </thead>
                     <tbody>
                         <!-- <form action="{{URL::to('/update_roles')}}" enctype="multipart/form-data" method="post"> -->
-
+<?php $i=0?>
                         @foreach($data as $key =>$value)
+                        <?php $i++?>
                         <form action="{{URL::to('/update_roles'.$value->id_admin)}}" enctype="multipart/form-data" method="post">
                             @csrf
                             <tr>
-                                <td>{{$value->id_admin}}</td>
+                                <td>{{$i}}</td>
                                 <td>{{$value->admin_name}}</td>
                                 <td>{{$value->admin_email}}</td>
                                 <td>
@@ -63,13 +64,14 @@
             </div>
             <!-- /.card-body -->
             <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
+            {{ $data->appends(request()->query())->links() }}
+                <!-- <ul class="pagination pagination-sm m-0 float-right">
                     <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>

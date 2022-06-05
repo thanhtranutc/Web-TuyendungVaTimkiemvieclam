@@ -33,7 +33,7 @@ $count_job = App::make("App\Http\Controllers\HomeController");
 				<div class="row">
 
 					<div class="col-xl-9 col-lg-8">
-						<h5 class="widget-title font-weight-700 text-uppercase ">Công việc được thêm gần đây</h5>
+						<h5 class="widget-title font-weight-700 text-uppercase ">Danh sách việc làm</h5>
 						<ul class="post-job-bx">
 							@foreach($job_list as $value)
 							@php
@@ -69,11 +69,11 @@ $count_job = App::make("App\Http\Controllers\HomeController");
 						</ul>
 						{{ $job_list->appends(request()->query())->links() }}
 					</div>
-					<div class="col-xl-3 col-lg-4">
+					<div class="col-xl-3 col-lg-4" style="background-color: aliceblue;">
 						<div class="sticky-top">
 							<form method="get" action="{{URL::to('/searchjob')}}">
 								<div class="clearfix m-b30">
-									<h5 class="widget-title font-weight-700 text-uppercase">Từ khóa </h5>
+									<h5 style="margin-top: 5px;" class="widget-title font-weight-700 text-uppercase">Từ khóa </h5>
 									<div class="">
 										<input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm">
 									</div>

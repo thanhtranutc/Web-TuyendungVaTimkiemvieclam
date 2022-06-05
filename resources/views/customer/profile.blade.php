@@ -1,9 +1,10 @@
 <?php
-
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CustomerController; ?>
+<?php App::make("App\Http\Controllers\HomeController"); ?>
 <?php $user_id = Session::get('user_id') ?>
-<?php $customer = new CustomerController() ?>
+<?php $customer = App::make("App\Http\Controllers\CustomerController"); ?>
 <?php $profile = $customer->getProfileByIdUser($user_id) ?>
 @extends('welcome')
 @section('content')
@@ -11,12 +12,12 @@ use App\Http\Controllers\CustomerController; ?>
     <div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url(public/frontend/images/banner/bnr2.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Profile</h1>
+                <h1 class="text-white">Hồ sơ</h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
                         <li><a href="{{URL::to('/')}}">Home</a></li>
-                        <li>Profile</li>
+                        <li>Hồ sơ</li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->
@@ -67,7 +68,7 @@ use App\Http\Controllers\CustomerController; ?>
                 <div class="col-md-8">
                     <!-- <form method="post" action="{{URL::to('/save_profile')}}"> -->
                     <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span></div><br>
+                        <!-- <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span></div><br> -->
                         <!-- <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br> -->
                         <!-- <div class="col-md-12">
                         <label class="labels">Experience</label>

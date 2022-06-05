@@ -2,7 +2,7 @@
 <?php $job_info = App::make("App\Repositories\JobRepository"); ?>
 @extends('welcome')
 @section('content')
-<div class="dez-bnr-inr overlay-black-middle" style="background-image:url(public/images/company/anhdemo.jpg);">
+<div class="dez-bnr-inr overlay-black-middle" style="background-image:url('public/images/company/<?= $company['company_logo']?>');">
     <div class="container">
         <div class="dez-bnr-inr-entry">
             <h1 class="text-white">Chi tiết công ty</h1>

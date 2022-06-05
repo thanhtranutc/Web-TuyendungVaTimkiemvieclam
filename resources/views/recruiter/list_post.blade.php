@@ -1,3 +1,5 @@
+<?php use Illuminate\Support\Facades\App;?>
+<?php  $jobRepository = App::make("App\Repositories\JobRepository");?>
 @extends('layout_admin')
 @section('content')
 <div class="content-header">
@@ -35,11 +37,11 @@
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 300px;">
+            <div class="card-body table-responsive p-0" style="height: 500px;">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>STT</th>
                             <th>Tiêu đề</th>
                             <th>Ngành nghề</th>
                             <th>Ngày đăng bài</th>
@@ -50,9 +52,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i =0;?>
                         @foreach($listjob as $value)
+                        <?php $i++?>
                         <tr>
-                            <td>{{$value->job_id}}</td>
+                            <td>{{$i}}</td>
                             <td>{{$value->job_desc}}</td>
                             <td>{{$value->category['category_name']}}</td>
                             <td>{{$value->job_date}}</td>
@@ -62,27 +66,33 @@
                                 <td>Đăng bài</td>
                             <?php }elseif($value->job_status == 2) { ?>
                                 <td>Ngừng hoạt động</td>
+                                <?php }elseif($value->job_status == 4) { ?>
+                                <td>Admin đã xóa</td>
                             <?php }else{ ?>
                                 <td>Chờ xác nhận</td>
                                 <?php } ?>
                             <td>
-                                <a class="btn btn-app bg-success" href="{{URL::to('/list_candidate'.$value->job_id)}}">
+                                <a class="btn btn-app bg-success" style=" <?= $jobRepository->checkJobDisable($value->job_id) ?>;"  href="{{URL::to('/list_candidate'.$value->job_id)}}">
                                     <i class="fas fa-edit "></i> Xem ứng viên
                                 </a>
                                 <a class="btn btn-app bg-success" href="{{URL::to('/view_detailjob'.$value->job_id)}}">
                                     <i class="fas fa-edit "></i> Xem Chi tiết
                                 </a>
-                                <a class="btn btn-app bg-success" href="{{URL::to('/editcompany')}}">
+                                <a class="btn btn-app bg-success" href="{{URL::to('/editcompany')}}"  style=" <?= $jobRepository->checkJobDisable($value->job_id) ?>;">
                                     <i class="fas fa-edit "></i> Sửa
                                 </a>
-                                <a class="btn btn-app bg-warning" href="{{URL::to('/deletecompany')}}">
+                                <a class="btn btn-app bg-warning" onclick="return confirm('Bạn có muốn xóa không')" href="{{URL::to('/deletepost'.$value->job_id)}}">
                                     <i class="fas fa-save"></i> Xóa
                                 </a>
                             <td>
                         </tr>
-                        @endforeach
+                        @endforeach  
                     </tbody>
                 </table>
+                <!-- {{ $listjob->appends(request()->query())->links() }} -->
+            </div>
+            <div class="card-footer clearfix">
+            {{ $listjob->appends(request()->query())->links() }}
             </div>
             <!-- /.card-body -->
         </div>

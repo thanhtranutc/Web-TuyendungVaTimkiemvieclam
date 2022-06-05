@@ -24,6 +24,7 @@ Route::get('/dashboard','AdminController@dashboard');
 Route::post('/loginadmin','AdminController@login');
 Route::get('/logoutadmin','AdminController@logout');
 Route::post('/update_roles{admin_id}','AdminController@update_roles');
+Route::get('/canceljob{id}','AdminController@cancelJob');  // Hủy xác nhận bài viết
 
 //phân quyền
 Route::get('/listuser','AdminController@list_user');
@@ -47,14 +48,11 @@ Route::post('/add_category','CategoryController@add_category');
 //Quản lý hình thức làm việc backend
 
 
-
-
 // job Backend
 Route::get('/list_job','JobController@job_list');               // Danh sách job
 Route::get('/job_new','JobController@job_new');                 // Danh sách job mới
 Route::get('/confirm_job{id}','JobController@confirm_job');    // Xác nhận job
 Route::get('//view_detailjob{id}','JobController@view_job'); // Xem chi tiết job
-// home page
 
 
 //login customer
@@ -64,10 +62,11 @@ Route::post('/user_login','CustomerController@login');
 Route::post('/add_user','CustomerController@add_user');
 Route::get('/logout_customer','HomeController@logout');
 Route::get('/profile','CustomerController@profile');
+Route::get('/login_facebook','CustomerController@loginFacebook');
+Route::get('/login_customer/callback','CustomerController@callbackFacebook');
 
 //register customer
 
-//
 Route::get('/candidates','HomeController@candidate_page');
 Route::get('/ui_list_candidate','AdminController@ui_list_candidate');
 
@@ -94,15 +93,16 @@ Route::get('/statistic','RecruiterController@showPageStatistic');   // báo cáo
 Route::get('/filterstatic','RecruiterController@getStaticticByYear');   // Lọc theo năm
 Route::get('/register_recuiter','RecruiterController@showRegisterPage');   // Trang đăng ký
 Route::post('/save_recuiter','RecruiterController@saveRecuiter');   // Thêm tài khoản nhà tuyển dụng
+Route::get('/deletepost{id}','RecruiterController@deletePost');   // xóa tin tuyển dụng
 
 
 
-Route::post('/save_profile','CustomerController@save_profile');   // list bài đã đăng 
 
+Route::post('/save_profile','CustomerController@save_profile');   // tạo hồ sơ cá nhân
 
 // Ứng tuyển
 Route::get('/login_user','CustomerController@login_after_apply');
-Route::get('/apply_job{id}{id_job}','CustomerController@apply_job');
+Route::get('/apply_job{id_job}','CustomerController@apply_job');
 
 
 
@@ -116,6 +116,7 @@ Route::get('/searchjob','JobController@searchJob');
 
 // công việc yêu thích
 Route::get('/favourite','HomeController@showFavouritePage');
+Route::get('/deletejobfavorite{id}','CustomerController@deleteJobFavorite'); // xóa công việc khỏi yêu thích
 
 
 //category page
@@ -132,7 +133,7 @@ Route::get('/test','DistributionController@test');
 Route::get('/detail-company{id}','CompanyController@showDetailCompany');
 Route::get('/searchcompany','CompanyController@searchCompany');
 
-// Đổi mật khẩu
-Route::post('/savepassword','CustomerController@savePassword');
+// Trang about us
+Route::get('/aboutus','HomeController@showAboutusPage');
 
 

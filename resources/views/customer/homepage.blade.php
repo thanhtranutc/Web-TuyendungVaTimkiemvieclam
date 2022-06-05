@@ -191,7 +191,7 @@ $category = $count_job->getCategory();
                 </div>
                 <div class="col-lg-3">
                     <div class="sticky-top">
-                        <div class="candidates-are-sys m-b30">
+                        <!-- <div class="candidates-are-sys m-b30">
                             <div class="candidates-bx">
                                 <div class="testimonial-pic radius"><img src="images/testimonials/pic3.jpg" alt="" width="100" height="100"></div>
                                 <div class="testimonial-text">
@@ -199,7 +199,7 @@ $category = $count_job->getCategory();
                                 </div>
                                 <div class="testimonial-detail"> <strong class="testimonial-name">Richard Anderson</strong> <span class="testimonial-position">Nevada, USA</span> </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="quote-bx">
                             <div class="quote-info">
                                 <h4><?= __('Tạo sự khác biệt với Sơ yếu lý lịch trực tuyến của bạn!') ?></h4>

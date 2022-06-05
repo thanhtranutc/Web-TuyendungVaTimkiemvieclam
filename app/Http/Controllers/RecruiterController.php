@@ -17,6 +17,7 @@ use App\Models\notification;
 use App\Models\profile;
 use App\Services\StaticticService;
 use App\Services\RecruiterService;
+use App\Services\JobService;
 use App\Repositories\JobRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
@@ -30,27 +31,27 @@ class RecruiterController extends Controller
     protected $_staticticService;
     protected $_jobRepository;
     protected $_recruiterService;
+    protected $_jobService;
 
     public function __construct(
         JobRepository $jobRepository,
         notification $notificationCollection,
         RecruiterService $recruiterService,
+        JobService $jobService,
         StaticticService $staticticService)
     {
         $this->_notificationCollection = $notificationCollection;
         $this->_staticticService = $staticticService;
         $this->_jobRepository = $jobRepository;
         $this->_recruiterService = $recruiterService;
+        $this->_jobService = $jobService;
     }
 
     public function list_jobpost()
     {
         $id = Session::get('admin_id');
-        $job_post = job::where('id_user', $id)->orderby('job_id', 'asc')
-            ->with('admin', 'category', 'distribution', 'working_format')
-            ->get();
-
-
+        $job_post = job::where('id_user', $id)->where('job_status','<','5')->orderby('job_id', 'asc')
+            ->paginate(4);
         if ($job_post) {
             return view('recruiter.list_post')->with('listjob', $job_post);
         } else {
@@ -157,12 +158,6 @@ class RecruiterController extends Controller
         Session::put('notifi', 'Bài đăng đã được thêm, vui lòng chờ admin xác nhận');
         return Redirect()->back();
 
-
-        // if($data['company_name'] != null)
-        // {
-        //     echo "thanhf coong";
-        // }
-        // print_r(json_encode($data));
     }
 
     public function showPageStatistic()
@@ -200,5 +195,10 @@ class RecruiterController extends Controller
         $this->_recruiterService->saveRecruiter($dataPost);
         Session::put('notifi', 'Đăng ký thành công vui lòng chờ admin xác nhận !');
         return Redirect::to('/register_recuiter');
+    }
+
+    public function deletePost($id){
+        $this->_jobService->deleteJob($id);
+        return redirect()->back();
     }
 }

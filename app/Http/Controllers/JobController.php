@@ -11,6 +11,7 @@ use App\Models\distribution;
 use App\Models\category;
 use App\Models\apply_job;
 use App\Models\favourite_job;
+use App\Services\JobService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 // use App\Classes\HomeController;
@@ -25,11 +26,16 @@ class JobController extends Controller
 
     protected $_homecontroller;
     protected $_favouritejob;
+    protected $_jobService;
 
-    public function __construct(HomeController $homeController, favourite_job $favouritejob)
-    {
+    public function __construct(
+        HomeController $homeController,
+        JobService $jobService,
+        favourite_job $favouritejob
+    ) {
         $this->_homecontroller = $homeController;
         $this->_favouritejob = $favouritejob;
+        $this->_jobService = $jobService;
     }
 
     public function job_browser()
@@ -52,6 +58,7 @@ class JobController extends Controller
     public function detail_job($id_job)
     {
         $data = job_detail::where('id_job', $id_job)->with('company', 'job')->first();
+        $this->_jobService->updateViewJob($id_job);
         $distribution = job::where('job_id', $id_job)->with('distribution')->first();
         $relate_job = job::where('id_category', $distribution->id_category)
             ->whereNotIn('job_id', [$id_job])->where('job_status', 3)->take(4)->get();
@@ -78,7 +85,6 @@ class JobController extends Controller
     public function job_new()
     {
         $list_job = job::where('job_status', '1')
-            ->with('category', 'distribution', 'working_format')
             ->orderby('job_id', 'asc')
             ->get();
         return view('admin.job.job_new')->with('list_job', $list_job);

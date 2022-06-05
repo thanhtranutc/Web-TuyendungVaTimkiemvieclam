@@ -41,9 +41,8 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên</th>
-                            <th>Ảnh</th>
                             <th>Trạng thái</th>
-                            <th>Mô tả</th>
+                            <!-- <th>Mô tả</th> -->
                             <th></th>
                         </tr>
                     </thead>
@@ -52,7 +51,6 @@
                         <tr>
                             <td>{{$value->id_category}}</td>
                             <td>{{$value->category_name}}</td>
-                            <td></td>
                             <?php
                             if ($value->category_status == 1) {
                             ?>
@@ -65,7 +63,7 @@
                             }
                             ?>
 
-                            <td><?php echo $value->category_desc; ?></td>
+                            <!-- <td><?php echo $value->category_desc; ?></td> -->
                             <td>
                                 <a class="btn btn-app bg-success" href="{{URL::to('/editcategory'.$value->id_category)}}">
                                     <i class="fas fa-edit "></i> Sửa

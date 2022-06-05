@@ -7,12 +7,22 @@ use App\Models\customer;
 use App\Models\profile;
 use App\Models\apply_job;
 use App\Models\favourite_job;
+use App\Models\social;
+use App\Repositories\JobfavoriteRepository;
+use Laravel\Socialite\Facades\Socialite;
+// use Illuminate\Support\Facades\Auth;
 use App\Models\customer as ModelsCustomer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
+    protected $_jobfavoriteRepository;
+
+    public function __construct(JobfavoriteRepository $jobfavoriteRepository)
+    {
+        $this->_jobfavoriteRepository = $jobfavoriteRepository;
+    }
     // Đăng nhập khách hàng
     public function login(Request $request)
     {
@@ -78,19 +88,21 @@ class CustomerController extends Controller
         Session::put('notifi', 'Bạn cần đăng nhập để có thể ứng tuyển công việc!');
         return Redirect::to('/login_customer');
     }
-    public function apply_job($id_user, $id_job)
+    public function apply_job($id_job)
     {
-        $profile_user = profile::where('id_user', $id_user)->first();
+        $userCurrent = Session::get('user_id');
+        $profile_user = profile::where('id_user', $userCurrent)->first();
         if ($profile_user) {
             $is_applyjob = apply_job::where('id_job', $id_job)->where('id_user', $profile_user['id_user'])->first();
+           
             if ($is_applyjob) {
-                Session::put('notifi', 'Bạn đã ứng tuyển công việc này trước đó');
+                Session::put('notifi', 'Bạn đã ứng tuyển công việc này trước đó !');
             } else {
                 $apply_job = new apply_job();
-                $apply_job->id_user = $id_user;
+                $apply_job->id_user = $userCurrent;
                 $apply_job->id_job = $id_job;
                 $apply_job->save();
-                Session::put('notifi', 'Bạn đã ứng tuyển công việc');
+                Session::put('notifi', 'Bạn đã ứng tuyển công việc thành công !');
             }
         } else {
             Session::put('notifi', 'Bạn cần tạo hồ sơ để có thể ứng tuyển!');
@@ -164,21 +176,51 @@ class CustomerController extends Controller
         $favourite_job->save();
     }
 
-    // public function savePassword(Request $request)
-    // {
-    //     $data_post = $request->All();
-    //     $userCurrent  = Session::get('user_id');
-    //     $user = customer::find($userCurrent);
-    //     if ($user->user_password == md5($request->password_old)) {
-    //         return response()->json([
-    //             'status' => true,
-    //             'msg' => 'dung',
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'status' => false,
-    //             'msg' => 'sai',
-    //         ]);
-    //     }
-    // }
+    public function deleteJobFavorite($id)
+    {
+        $userCurrent = Session::get('user_id');
+        $this->_jobfavoriteRepository->delete($id,$userCurrent);
+        return redirect()->back();
+    }
+
+
+
+    public function loginFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function callbackFacebook()
+    {
+        $provider = Socialite::driver('facebook')->user();
+        $account = social::where('provider', 'facebook')->where('provider_user_id', $provider->getId())->first();
+
+        if ($account) {
+            $account_name = customer::where('user_id', $account->user)->first();
+            Session::put('user_name', $account_name->user_name);
+            Session::put('user_id', $account_name->user_id);
+            return Redirect::to('/');
+        } else {
+            $newAcountSocial = new social([
+                'provider_user_id' => $provider->getId(),
+                'provider' => 'facebook',
+            ]);
+
+            $checkEmail = customer::where('user_email', $provider->getEmail())->first();
+
+            if (!$checkEmail) {
+                $checkEmail = customer::create([
+                    'user_name' => $provider->getName(),
+                    'user_email' => $provider->getEmail(),
+                    'user_password' => ''
+                ]);
+            }
+            $newAcountSocial->customer()->associate($checkEmail);
+            $newAcountSocial->save();
+
+            $socialLogin = customer::find($account->user);
+            Session::put('user_name', $socialLogin->user_name);
+            Session::put('user_id', $socialLogin->user_id);
+            return Redirect('/');
+        }
+    }
 }

@@ -104,7 +104,7 @@ class HomeController extends Controller
     //get job list
     public function getJob()
     {
-        $list_job = job::orderby('job_id', 'asc')->with('distribution', 'working_format')->where('job_status', $this->job_status)->paginate(3);
+        $list_job = job::orderby('job_date', 'desc')->where('job_status', $this->job_status)->paginate(3);
         return $list_job;
     }
 
@@ -181,5 +181,9 @@ class HomeController extends Controller
     protected function getListNotifyByUserId($id)
     {
         return notification::where('id_user', $id)->get();
+    }
+    public function showAboutusPage()
+    {
+        return view('customer.AboutUs');
     }
 }

@@ -10,6 +10,9 @@ use App\Models\category;
 use App\Models\detail_roles;
 use App\Repositories\UserRepository;
 use App\Repositories\JobRepository;
+use App\Services\JobService;
+use App\Repositories\RecruiterRepository;
+use App\Repositories\ApplyjobRepository;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use PhpParser\Node\Expr\FuncCall;
@@ -19,13 +22,22 @@ class AdminController extends Controller
 {
     protected $_userRepository;
     protected $_jobRepository;
+    protected $_jobService;
+    protected $_recruiterRepository;
+    protected $_aplyjobRepository;
 
     public function __construct(
         UserRepository $userRepository,
-        JobRepository $jobRepository
+        JobRepository $jobRepository,
+        RecruiterRepository $recruiterRepository,
+        ApplyjobRepository $aplyjobRepository,
+        JobService $jobService
     ) {
         $this->_userRepository = $userRepository;
         $this->_jobRepository = $jobRepository;
+        $this->_jobService = $jobService;
+        $this->_recruiterRepository = $recruiterRepository;
+        $this->_aplyjobRepository = $aplyjobRepository;
     }
 
     public function Security()
@@ -46,7 +58,10 @@ class AdminController extends Controller
         $this->Security();
         $countJob = $this->_jobRepository->getCountTotalJob();
         $countUser = $this->_userRepository->getCountTotalUser();
-        return view('admin.dashboard')->with('countJob',$countJob)->with('countUser',$countUser);
+        $countRecruiter = $this->_recruiterRepository->getTotalRecruiter();
+        $countApply = $this->_aplyjobRepository->getCount();
+        return view('admin.dashboard',['countRecruiter'=>$countRecruiter,'countApply'=>$countApply])
+        ->with('countJob',$countJob)->with('countUser',$countUser);
     }
     public function login(Request $request)
     {
@@ -76,6 +91,7 @@ class AdminController extends Controller
                         Session::put('roles_admin', 'Quyền admin');
                     }
                 }
+                
                 Session::put('admin_email', $data->email);
                 Session::put('admin_id', $data->id_admin);
                 Session::put('admin_name', $data->admin_name);
@@ -89,7 +105,7 @@ class AdminController extends Controller
     public function list_user()
     {
         $this->Security();
-        $data = admin::with('detail_roles')->orderby('id_admin', 'desc')->get();
+        $data = admin::with('detail_roles')->orderby('id_admin', 'desc')->paginate(6);
         return view('admin.listuser')->with('data', $data);
     }
     public function logout()
@@ -117,5 +133,11 @@ class AdminController extends Controller
     public function profile()
     {
         return view('admin.user.profile');
+    }
+
+    public function cancelJob($id)
+    {
+        $this->_jobService->cancelJob($id);
+        return redirect()->back();
     }
 }

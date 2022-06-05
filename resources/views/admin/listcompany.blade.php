@@ -35,26 +35,28 @@
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body table-responsive p-0" style="height: 300px;">
+            <div class="card-body table-responsive p-0" style="height: 500px;">
                 <table class="table table-head-fixed text-nowrap">
                     <thead>
                         <tr>
                             <th>Mã</th>
                             <th>Tên</th>
-                            <th>Ảnh</th>
+                            <th>Địa chỉ</th>
                             <th>Trạng thái</th>
                             <th>Mô tả</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i=0?>
                         @foreach($data as $key =>$value)
+                        <?php $i++?>
                         <tr>
-                            <td>{{$value->company_id}}</td>
+                            <td>{{$i}}</td>
                             <td>{{$value->company_name}}</td>
-                            <td>{{$value->company_adress}}</td>
+                            <td style="white-space: normal;">{{$value->company_adress}}</td>
                             <?php
-                            if ($value->status == 1) {
+                            if ($value->company_status == 1) {
                             ?>
                                 <td>Đang hoạt động</td>
                             <?php
@@ -64,8 +66,7 @@
                             <?php
                             }
                             ?>
-
-                            <td><?php echo $value->company_desc; ?></td>
+                            <td style="white-space: normal;"><?php echo $value->company_desc; ?></td>
                             <td>
                                 <a class="btn btn-app bg-success" href="{{URL::to('/editcompany'.$value->company_id)}}">
                                     <i class="fas fa-edit "></i> Sửa
@@ -78,6 +79,9 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class="card-footer clearfix">
+            {{ $data->appends(request()->query())->links() }}
             </div>
             <!-- /.card-body -->
         </div>

@@ -85,8 +85,6 @@ class StaticticService
                 $idJobArray[] = $item->job_id;
             }
         }
-
-
         $countCandidate = apply_job::selectRaw('count(*) as total')->whereIn('id_job', $idJobArray)
             ->whereYear('create_at', date($year))
             ->groupBy(DB::Raw('Month(create_at)'))

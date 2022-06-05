@@ -35,7 +35,7 @@ class CompanyController extends Controller
     public function list_company()
     {
         $this->Security();
-        $data =  company::orderby('company_id')->get();
+        $data =  company::orderby('company_id')->paginate(6);
         return view('admin.listcompany')->with('data', $data);
     }
     public function add_company()
