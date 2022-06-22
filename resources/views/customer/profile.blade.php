@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CustomerController; ?>
@@ -16,8 +17,8 @@ use App\Http\Controllers\CustomerController; ?>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
-                        <li><a href="{{URL::to('/')}}">Home</a></li>
-                        <li>Hồ sơ</li>
+                        <li><a href="{{URL::to('/')}}"><?= __('Trang chủ')?></a></li>
+                        <li><?= __('Hồ sơ')?></li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->
@@ -26,12 +27,12 @@ use App\Http\Controllers\CustomerController; ?>
     </div>
     <div>
         <?php
-        $message = Session::get('notifi');
-        if ($message) {
-            echo '<span style="color:red;" class="text-alert">' . $message . '</span>';
+        $notifi = Session::get('notifi');
+        if ($notifi) {
+            echo ' <div style="background-color: #a3eb7a;max-width: 500px;height: 30px;margin: 10px;max-width: 350px;"><span style="color: white;width: 100%;margin-left: 15px;" class="text-alert">' . $notifi . '</span>  </div>';
             Session::put('notifi', null);
             echo '<br></br>';
-            echo '  ';
+            echo ' ';
         }
         ?>
     </div>
@@ -39,7 +40,7 @@ use App\Http\Controllers\CustomerController; ?>
         <form method="post" action="{{URL::to('/save_profile'.$user_id)}}" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="row">
-                <div class="col-md-4 border-right">
+                <div class="col-md-4 border-right" style="background-color: antiquewhite;">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <?php if (empty($user->user_image)) { ?>
                             <img class="rounded-circle mt-5" width="150px" id="img-preview" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
@@ -56,11 +57,15 @@ use App\Http\Controllers\CustomerController; ?>
                         <div class="row mt-3">
                             <div class="col-md-6"><label class="labels">Họ và tên</label><input type="text" class="form-control" name="user_name" placeholder="first name" value="{{$user->user_name}}"></div>
                             <div class="col-md-6"><label class="labels">Số điện thoại</label><input type="text" class="form-control" name="user_sdt" value="{{$user->user_phone}}" placeholder="Nhập số điện thoại"></div>
-                            <div class="col-md-12"><label class="labels">Liên kết</label><input type="text" class="form-control" name="user_link" placeholder="Nhập liên kết" value=""></div>
+                            <div class="col-md-12"><label class="labels">Liên kết</label><input type="text" class="form-control" name="user_link" placeholder="Nhập liên kết" value="<?php if (isset($profile)) {
+                                                                                                                                                                                            echo $profile->profile_link;
+                                                                                                                                                                                        } ?>"></div>
 
                             <div class="col-md-12"><label class="labels">Địa chỉ</label><input type="text" class="form-control" placeholder="enter address" name="user_adress" value="{{$user->user_adress}}"></div>
                             <div class="col-md-12"><label class="labels">Email</label><input type="text" disabled class="form-control" placeholder="enter email" name="user_email" value="{{$user->user_email}}"></div>
-                            <div class="col-md-12"><label class="labels">Kĩ năng</label> <textarea id="textarea3" name="user_skill" cols="50" rows="5"><?php if(isset($profile)){ echo $profile->profile_skill;} ?></textarea></div>
+                            <div class="col-md-12"><label class="labels">Kĩ năng</label> <textarea id="textarea3" name="user_skill" cols="50" rows="5"><?php if (isset($profile)) {
+                                                                                                                                                            echo $profile->profile_skill;
+                                                                                                                                                        } ?></textarea></div>
                         </div>
 
                     </div>
@@ -74,21 +79,26 @@ use App\Http\Controllers\CustomerController; ?>
                         <label class="labels">Experience</label>
                         <textarea id="textarea1" class="form-control" cols="" rows="20" placeholder="Enter"></textarea>
                     </div><br> -->
-                        <div class="col-md-12"><label class="labels">Mục tiêu nghề nghiệp</label><br> <textarea name="career_goals" id="textarea2" cols="80" rows="5"><?php if(isset($profile)){echo $profile->profile_career_goals;} ?></textarea>
+                        <div class="col-md-12"><label class="labels">Mục tiêu nghề nghiệp</label><br> <textarea name="career_goals" id="textarea2" cols="80" rows="5"><?php if (isset($profile)) {
+                                                                                                                                                                            echo $profile->profile_career_goals;
+                                                                                                                                                                        } ?></textarea>
                         </div>
-                        <div class="col-md-12"><label class="labels">Học vấn</label><br> <textarea name="univerity" id="" cols="80" rows="5"><?php if(isset($profile)){echo $profile->profile_education;} ?></textarea></div><br>
+                        <div class="col-md-12"><label class="labels">Học vấn</label><br> <textarea name="univerity" id="" cols="80" rows="5"><?php if (isset($profile)) {
+                                                                                                                                                    echo $profile->profile_education;
+                                                                                                                                                } ?></textarea></div><br>
+                        <input id="count_experien" name="count_experien" type="text" value="" hidden />
                         <div class="col-md-12" id="test">
                             <div class="d-flex justify-content-between align-items-center experience"> <label class="labels">Kinh nghiệm làm việc</label><a class="border px-3 p-1 add-experience" onclick="myFunction()"><i class="fa fa-plus"></i>&nbsp;Thêm</a></div><br>
+                            @foreach($list_experience as $item)
                             <div class="timeline timeline-inverse">
                                 <div class="time-label">
                                     <span class="bg-danger">
                                         <label>Từ</label>
-                                        <input class="myInput1" name="timestart" type="date" />
+                                        <input class="myInput1" name="timestart" type="date" value="{{$item->experience_start}}" />
                                         <label>Tới</label>
-                                        <input class="myInput2" name="timeend" type="date" />
+                                        <input class="myInput2" name="timeend" type="date" value="{{$item->experience_end}}" />
                                     </span>
                                 </div>
-                                <input id="count_experien" name="count_experien" type="text" value="" hidden />
                                 <div>
                                     <i class="fas fa-envelope bg-primary"></i>
 
@@ -98,17 +108,18 @@ use App\Http\Controllers\CustomerController; ?>
 
                                         <div class="timeline-body">
                                             <label>Tên công ty, dự án tham gia:</label><br>
-                                            <input class="myInput2" id="company" value="" name="experience_title" type="text" />
+                                            <input class="myInput2" id="company" value="{{$item->experience_title}}" name="experience_title"  type="text" />
                                         </div>
                                         <div class="timeline-body">
                                             <label>Công việc:</label>
                                             <div>
-                                                <textarea name="experience_desc" cols="70" rows="5"></textarea>
+                                                <textarea name="experience_desc" cols="70" rows="5">{{$item->experience_desc}}</textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                             <br>
                             <!-- <input type="submit" /> -->
                         </div><br>

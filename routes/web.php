@@ -25,6 +25,7 @@ Route::post('/loginadmin','AdminController@login');
 Route::get('/logoutadmin','AdminController@logout');
 Route::post('/update_roles{admin_id}','AdminController@update_roles');
 Route::get('/canceljob{id}','AdminController@cancelJob');  // Hủy xác nhận bài viết
+Route::get('/deleteuser{id}','AdminController@deleteUser');  // Xóa người dùng
 
 //phân quyền
 Route::get('/listuser','AdminController@list_user');
@@ -64,6 +65,7 @@ Route::get('/logout_customer','HomeController@logout');
 Route::get('/profile','CustomerController@profile');
 Route::get('/login_facebook','CustomerController@loginFacebook');
 Route::get('/login_customer/callback','CustomerController@callbackFacebook');
+Route::get('/forget_password','CustomerController@forgetPassword'); // Quên mật khẩu
 
 //register customer
 
@@ -123,11 +125,8 @@ Route::get('/deletejobfavorite{id}','CustomerController@deleteJobFavorite'); // 
 Route::get('/categorywork{id}','CategoryController@getJobByCategory');
 Route::get('/citywork{id}','DistributionController@getJobByCity');
 
-
-
 // 
 Route::get('/test','DistributionController@test');
-
 
 //company page
 Route::get('/detail-company{id}','CompanyController@showDetailCompany');

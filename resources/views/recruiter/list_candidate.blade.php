@@ -24,10 +24,10 @@ use Illuminate\Support\Facades\Session; ?>
                                 <div class="row">
                                     <div class="col-7">
                                         <h2 class="lead"><b>{{$item->user_name}}</b></h2>
-                                        <p class="text-muted text-sm"><b><?= __('About:')?> </b> test test test </p>
+                                        <!-- <p class="text-muted text-sm"><b><?= __('About:')?> </b> test test test </p> -->
                                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{$item->user_adress}}</li>
-                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: {{$item->user_phone}}</li>
+                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Địa chỉ: {{$item->user_adress}}</li>
+                                            <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Điện thoại #: {{$item->user_phone}}</li>
                                         </ul>
                                     </div>
                                     <div class="col-5 text-center">
@@ -37,9 +37,9 @@ use Illuminate\Support\Facades\Session; ?>
                             </div>
                             <div class="card-footer">
                                 <div class="text-right">
-                                    <a href="#" class="btn btn-sm bg-teal">
+                                    <!-- <a href="#" class="btn btn-sm bg-teal">
                                         <i class="fas fa-comments"></i>
-                                    </a>
+                                    </a> -->
                                     <form method="post" action="{{URL::to('/viewprofile'.$item->user_id)}}">
                                         @csrf
                                         <input hidden name="job" value="{{$job_id}}" />

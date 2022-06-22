@@ -1,11 +1,9 @@
 <?php
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController as customer;
 use App\Models\company;
 use App\Models\job_detail;
 use Illuminate\Support\Facades\App;
-
 $count_job = App::make("App\Http\Controllers\HomeController");
 $category = $count_job->getCategory();
 ?>
@@ -177,12 +175,12 @@ $category = $count_job->getCategory();
                                         <span>{{$job_list->working_format['working_format_name']}}</span>
                                     </div>
                                     <div class="salary-bx">
-                                        <span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
+                                        <span><?php echo $count_job->money_format($image1->salary_down) . "tr" . "-" . $count_job->money_format($image1->salary_up) . "tr" ?></span>
                                     </div>
                                 </div>
-                                <span onclick="myFunction55()" class="post-like fa fa-heart-o">
+                                <!-- <span class="post-like fa fa-heart-o">
                                     <img src="pullic/frontend/images/icon/hearts.png" alt="">
-                                </span>
+                                </span> -->
                             </a>
                         </li>
                         @endforeach

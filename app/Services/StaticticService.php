@@ -100,4 +100,10 @@ class StaticticService
 
         return $data;
     }
+
+    public function getCountJobWaitstatus($id)
+    {
+        $listPost = job::where('id_user',$id)->where('job_status',1)->get();
+        return count($listPost);
+    }
 }

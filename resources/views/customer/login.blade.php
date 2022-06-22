@@ -5,12 +5,12 @@
     <div class="dez-bnr-inr overlay-black-middle bg-pt" style="background-image:url(public/frontend/images/banner/bnr2.jpg);">
         <div class="container">
             <div class="dez-bnr-inr-entry">
-                <h1 class="text-white">Login</h1>
+                <h1 class="text-white"><?= __('Đăng nhập')?></h1>
                 <!-- Breadcrumb row -->
                 <div class="breadcrumb-row">
                     <ul class="list-inline">
-                        <li><a href="{{URL::to('/')}}">Home</a></li>
-                        <li>Login</li>
+                        <li><a href="{{URL::to('/')}}"><?= __('Trang chủ')?></a></li>
+                        <li><?= __('Đăng nhập')?></li>
                     </ul>
                 </div>
                 <!-- Breadcrumb row END -->
@@ -86,12 +86,12 @@
                                     </a>
                                 </div>
                             </form>
-                            <form id="forgot-password" class="tab-pane fade  col-12 p-a0">
+                            <form action="{{URL::to('/forget_password')}}" id="forgot-password" class="tab-pane fade  col-12 p-a0">
                                 <h4 class="font-weight-700">QUÊN MẬT KHẨU ?</h4>
                                 <p class="font-weight-600">Chúng tôi sẽ gửi email cho bạn để đặt lại mật khẩu. </p>
                                 <div class="form-group">
                                     <label class="font-weight-700">E-MAIL *</label>
-                                    <input name="dzName" required="" class="form-control" placeholder="Your Email Id" type="email">
+                                    <input name="emailreset" required="" class="form-control" placeholder="Your Email Id" type="email">
                                 </div>
                                 <div class="text-left">
                                     <a class="site-button outline gray button-lg" data-toggle="tab" href="#login">Quay lại</a>

@@ -48,7 +48,6 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
-
                 <!-- About Me Box -->
                 <div class="card card-primary">
                     <div class="card-header">
@@ -57,30 +56,21 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <strong><i class="fas fa-book mr-1"></i> Học vấn</strong>
-
                         <p class="text-muted">
                             {{$user_profile['profile_education']}}
                         </p>
-
                         <hr>
-
                         <strong><i class="fas fa-map-marker-alt mr-1"></i> Địa chỉ</strong>
-
                         <p class="text-muted">{{$user_info['user_adress']}}</p>
-
                         <hr>
-
                         <strong><i class="fas fa-pencil-alt mr-1"></i>Kĩ năng</strong>
-
                         <p class="text-muted">
                             <span class="tag tag-danger"><?= $user_profile['profile_skill'] ?></span>
                         </p>
-
                         <hr>
 
-                        <strong><i class="far fa-file-alt mr-1"></i> Thêm</strong>
-
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                        <!-- <strong><i class="far fa-file-alt mr-1"></i> Thêm</strong> -->
+                        <!-- <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p> -->
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -126,7 +116,7 @@
 
                                         <div class="timeline-item">
 
-                                            <h3 class="timeline-header"><a href="#">Support Team</a> {{$item->experience_title}}</h3>
+                                            <h3 class="timeline-header">{{$item->experience_title}}</h3>
 
                                             <div class="timeline-body">
                                                 {{$item->experience_desc}}
@@ -146,7 +136,7 @@
 
                             <div class="tab-pane" id="settings">
                                 <p>
-                                {{$user_profile->profile_interest}}
+                                <?= $user_profile->profile_interest?>
                                 </p>
                             </div>
                             <!-- /.tab-pane -->

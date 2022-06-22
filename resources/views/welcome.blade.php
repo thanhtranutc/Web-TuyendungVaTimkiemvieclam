@@ -145,11 +145,6 @@
 									</li>
 								<?php } ?>
 							</ul>
-
-							<a class="nav-link" href="{{URL::to('/favourite')}}">
-								<i class="far fa-heart"></i>
-								<span style="  position: absolute;top: 25px;right: 249px;" class="badge badge-warning navbar-badge"><?= isset($user_id) ? $hepper->getCountFavouriteJob($user_id) : "" ?></span>
-							</a>
 							<!-- <li class="nav-item dropdown">
 									<a class="nav-link" data-toggle="dropdown" href="#">
 										<i class="far fa-bell"></i>
@@ -160,6 +155,10 @@
 							<?php
 							if ($user_name) {
 							?>
+								<a class="nav-link" href="{{URL::to('/favourite')}}">
+									<i class="far fa-heart"></i>
+									<span style="  position: absolute;top: 25px;right: 249px;" class="badge badge-warning navbar-badge"><?= isset($user_id) ? $hepper->getCountFavouriteJob($user_id) : "" ?></span>
+								</a>
 								&ensp;&ensp;Xin chào:<span data-user_id="{{$user_id}}" name="user">{{$user_name}}</span>
 							<?php } ?>
 						</div>

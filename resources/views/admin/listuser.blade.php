@@ -50,7 +50,7 @@
                                     <button type="submit" class="btn btn-app  bg-success">
                                     <i class="fas fa-edit "></i> Cập nhật
                                     </button>
-                                    <a class="btn btn-app bg-warning">
+                                    <a  href="{{URL::to('/deleteuser'.$value->id_admin)}}" onclick="return confirm('Bạn có muốn xóa không')" class="btn btn-app bg-warning">
                                         <i class="fas fa-save"></i> Xóa
                                     </a>
                                 </td>

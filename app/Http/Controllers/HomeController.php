@@ -67,8 +67,6 @@ class HomeController extends Controller
         $topDistribution = $this->_distributionService->getTopDistribution();
         $topCategory = $this->_categoryService->getTopCategory();
         $working_format = $this->_workingformatRepository->getAllWorkingformat();
-        $category = $this->_categoryRepository->getAllCategory();
-        $city = distribution::orderby('id_distribution', 'asc')->take(4)->get();
         $list_job = $this->getJob();
         return view('customer.homepage')
         ->with('list_job', $list_job)
@@ -104,7 +102,10 @@ class HomeController extends Controller
     //get job list
     public function getJob()
     {
-        $list_job = job::orderby('job_date', 'desc')->where('job_status', $this->job_status)->paginate(3);
+        $list_job = job::orderby('job_date', 'desc')
+            ->where('job_status', $this->job_status)
+            ->take(10)
+            ->paginate(5);
         return $list_job;
     }
 

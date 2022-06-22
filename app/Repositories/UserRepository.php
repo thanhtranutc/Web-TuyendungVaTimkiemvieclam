@@ -21,4 +21,5 @@ class UserRepository {
     public function getCountTotalUser(){
         return count($this->getAllUser());
     }
+
 }

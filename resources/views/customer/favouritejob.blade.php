@@ -61,7 +61,6 @@ use Illuminate\Support\Facades\App; ?>
                                                 <span><?php echo $hepper->money_format($job_detail_info->salary_up) . "tr" . "-" . $hepper->money_format($job_detail_info->salary_down) . "tr" ?></span>
                                             </div>
                                         </div>
-                                        <span class="post-like fa fa-heart-o"></span>
                                     </a>
                                 </li>
                                 <div style="margin-bottom: 25px;" class="btn-group">

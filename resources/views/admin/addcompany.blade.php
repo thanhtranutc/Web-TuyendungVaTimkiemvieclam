@@ -55,10 +55,7 @@ $company_id = Session::get('id_company');
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Địa chỉ</label>
-
-
                     <input type="text" class="form-control" name="company_adress" id="exampleInputPassword1" placeholder="Nhập địa chỉ">
-
                 </div>
                 <div class="form-group">
                     <label for="exampleInputFile">Ảnh</label>
@@ -86,6 +83,10 @@ $company_id = Session::get('id_company');
 
                         </div>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Số lượng nhân viên</label>
+                    <input type="number" class="form-control" name="company_staff" min="1" id="exampleInputPassword1" placeholder="Nhập số lượng">
                 </div>
                 <div class="form-group">
                     <label for="exampleSelectRounded0">Tình trạng</label>

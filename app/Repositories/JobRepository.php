@@ -48,14 +48,15 @@ class JobRepository
     {
         return $this->_job->groupBy('id_distribution')
             ->selectRaw('count(*) as total, id_distribution')
-            ->orderby('total', 'desc')->take(2)->get();
+            ->orderby('total', 'desc')->take(4)->get();
     }
     public function getGroupJobByCategory()
     {
         return $this->_job->groupBy('id_category')
             ->selectRaw('count(*) as total, id_category')
-            ->orderby('total', 'desc')->take(2)->get();
+            ->orderby('total', 'desc')->take(4)->get();
     }
+    
     public function getJobByIdRecruiter($id)
     {
         return $this->_job->where('id_user', $id)->get();

@@ -62,10 +62,10 @@ $count_job = App::make("App\Http\Controllers\HomeController");
 												<span>{{$value->working_format['working_format_name']}}</span>
 											</div>
 											<div class="salary-bx">
-												<span><?php echo $count_job->money_format($image1->salary_up) . "tr" . "-" . $count_job->money_format($image1->salary_down) . "tr" ?></span>
+												<span><?php echo $count_job->money_format($image1->salary_down) . "tr" . "-" . $count_job->money_format($image1->salary_up) . "tr" ?></span>
 											</div>
 										</div>
-										<span class="post-like fa fa-heart-o"></span>
+										<!-- <span class="post-like fa fa-heart-o"></span> -->
 									</a>
 								</li>
 								@endforeach

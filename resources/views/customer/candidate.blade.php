@@ -200,7 +200,7 @@ use Illuminate\Support\Facades\App; ?>
                                                                         <span><?php echo $job->money_format($job_info->salary_up) . "tr" . "-" . $job->money_format($job_info->salary_down) . "tr" ?></span>
                                                                     </div>
                                                                 </div>
-                                                                <span class="post-like fa fa-heart-o"></span>
+                                                                <!-- <span class="post-like fa fa-heart-o"></span> -->
                                                             </a>
                                                         </li>
                                                         @endforeach

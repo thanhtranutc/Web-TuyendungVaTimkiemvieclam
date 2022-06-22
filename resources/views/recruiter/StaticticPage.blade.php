@@ -37,7 +37,7 @@
         <!-- small box -->
         <div class="small-box bg-success">
           <div class="inner">
-            <h3><sup style="font-size: 20px"></sup>1</h3>
+            <h3><sup style="font-size: 20px"></sup>{{$countPostWait}}</h3>
 
             <p><?= __('Tin chờ duyệt') ?></p>
           </div>

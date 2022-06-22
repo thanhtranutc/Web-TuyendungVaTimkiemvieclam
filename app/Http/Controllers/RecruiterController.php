@@ -169,7 +169,8 @@ class RecruiterController extends Controller
         $getCountUserApply = $this->_staticticService->getCountUserApply($idRecruiter);
         $staticJobs = $this->_staticticService->getTotalJobByMonth($idRecruiter,2022);
         $staticApply = $this->_staticticService->getTotalCadidateByMonth($idRecruiter,2022);
-        return view('recruiter.StaticticPage',['staticJobs'=> $staticJobs,'staticApply'=> $staticApply])
+        $countPostWait = $this->_staticticService->getCountJobWaitstatus($idRecruiter);
+        return view('recruiter.StaticticPage',['staticJobs'=> $staticJobs,'staticApply'=> $staticApply,'countPostWait'=>$countPostWait])
         ->with('countUserApply',$countUserApply)
         ->with('jobTopViews',$jobTopViews)
         ->with('countPost',$countPost)
@@ -201,4 +202,5 @@ class RecruiterController extends Controller
         $this->_jobService->deleteJob($id);
         return redirect()->back();
     }
+
 }

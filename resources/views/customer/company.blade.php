@@ -16,6 +16,7 @@
     .text-title {
         font-size: 25px;
         font-weight: 700;
+        padding-top: 5px;
     }
 
     .container-block-company {
@@ -79,7 +80,7 @@
         width: 50%;
     }
 </style>
-<div class="page-content bg-white container-company-custom">
+<div style="background-color: aliceblue !important;" class="page-content bg-white container-company-custom">
     <!-- inner page banner -->
     <div class="dez-bnr-inr overlay-black-middle" style="background-image:url(public/frontend/images/banner/bnr1.jpg);">
         <div class="container">
@@ -149,6 +150,5 @@
     </div>
     <!-- inner page banner END -->
     <!-- contact area -->
-
 </div>
 @endsection

@@ -12,6 +12,7 @@ use App\Repositories\UserRepository;
 use App\Repositories\JobRepository;
 use App\Services\JobService;
 use App\Repositories\RecruiterRepository;
+use App\Repositories\AdminRepository;
 use App\Repositories\ApplyjobRepository;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -25,12 +26,14 @@ class AdminController extends Controller
     protected $_jobService;
     protected $_recruiterRepository;
     protected $_aplyjobRepository;
+    protected $_adminRepository;
 
     public function __construct(
         UserRepository $userRepository,
         JobRepository $jobRepository,
         RecruiterRepository $recruiterRepository,
         ApplyjobRepository $aplyjobRepository,
+        AdminRepository $adminRepository,
         JobService $jobService
     ) {
         $this->_userRepository = $userRepository;
@@ -38,6 +41,7 @@ class AdminController extends Controller
         $this->_jobService = $jobService;
         $this->_recruiterRepository = $recruiterRepository;
         $this->_aplyjobRepository = $aplyjobRepository;
+        $this->_adminRepository = $adminRepository;
     }
 
     public function Security()
@@ -138,6 +142,11 @@ class AdminController extends Controller
     public function cancelJob($id)
     {
         $this->_jobService->cancelJob($id);
+        return redirect()->back();
+    }
+    public function deleteUser($id)
+    {
+        $this->_adminRepository->deleteUser($id);
         return redirect()->back();
     }
 }

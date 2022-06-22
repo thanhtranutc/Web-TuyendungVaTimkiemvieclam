@@ -9,19 +9,26 @@ use App\Models\apply_job;
 use App\Models\favourite_job;
 use App\Models\social;
 use App\Repositories\JobfavoriteRepository;
+use App\Services\CustomerService;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Mail;
 // use Illuminate\Support\Facades\Auth;
 use App\Models\customer as ModelsCustomer;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
     protected $_jobfavoriteRepository;
+    protected $_customerService;
 
-    public function __construct(JobfavoriteRepository $jobfavoriteRepository)
-    {
+    public function __construct(
+        JobfavoriteRepository $jobfavoriteRepository,
+        CustomerService $customerService
+    ) {
         $this->_jobfavoriteRepository = $jobfavoriteRepository;
+        $this->_customerService = $customerService;
     }
     // Đăng nhập khách hàng
     public function login(Request $request)
@@ -81,7 +88,8 @@ class CustomerController extends Controller
     {
         $id_user = Session::get('user_id');
         $data = customer::where('user_id', $id_user)->first();
-        return view('customer.profile')->with('user', $data);
+        $list_experience = $this->_customerService->getListExperienceByUserId($id_user);
+        return view('customer.profile', ['list_experience' => $list_experience])->with('user', $data);
     }
     public function login_after_apply()
     {
@@ -94,13 +102,14 @@ class CustomerController extends Controller
         $profile_user = profile::where('id_user', $userCurrent)->first();
         if ($profile_user) {
             $is_applyjob = apply_job::where('id_job', $id_job)->where('id_user', $profile_user['id_user'])->first();
-           
+
             if ($is_applyjob) {
                 Session::put('notifi', 'Bạn đã ứng tuyển công việc này trước đó !');
             } else {
                 $apply_job = new apply_job();
                 $apply_job->id_user = $userCurrent;
                 $apply_job->id_job = $id_job;
+                $apply_job->create_at = Carbon::now('y m d');
                 $apply_job->save();
                 Session::put('notifi', 'Bạn đã ứng tuyển công việc thành công !');
             }
@@ -112,6 +121,11 @@ class CustomerController extends Controller
     public function save_profile($id_user, Request $request)
     {
         $data = $request->all();
+
+        // print_r($data['count_experien']);die;
+        // insert experience table
+        $this->_customerService->insertExperience($request, $id_user);
+
         // get image user
         $get_image = $request->file('user_image');
         if ($get_image) {
@@ -153,6 +167,9 @@ class CustomerController extends Controller
             $new_profile->save();
         }
 
+
+
+
         Session::put('notifi', 'Cập nhật thành công !');
         return Redirect()->back();
     }
@@ -179,11 +196,9 @@ class CustomerController extends Controller
     public function deleteJobFavorite($id)
     {
         $userCurrent = Session::get('user_id');
-        $this->_jobfavoriteRepository->delete($id,$userCurrent);
+        $this->_jobfavoriteRepository->delete($id, $userCurrent);
         return redirect()->back();
     }
-
-
 
     public function loginFacebook()
     {
@@ -222,5 +237,14 @@ class CustomerController extends Controller
             Session::put('user_id', $socialLogin->user_id);
             return Redirect('/');
         }
+    }
+
+    public function forgetPassword(Request $request)
+    {
+        $data = $request->all();
+        $title = "Đặt lại mật khẩu của bạn";
+        Mail::send('email.form', compact('title'), function ($email) {
+            $email->to('xin1nucuoi2820@gmail.com', 'test thui');
+        });
     }
 }

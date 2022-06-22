@@ -28,10 +28,9 @@
                     <div class="widget border-0">
                         <h5 class="m-b30 text-white"><?= __('Câu hỏi thường gặp ?')?></h5>
                         <ul class="list-2 w10 list-line">
-                            <li><a href="#"><?= __('Chính sách và bảo mật')?></a></li>
-                            <li><a href="#"><?= __('Hỗ trợ')?></a></li>
-                            <li><a href="#"><?= __('Liên hệ')?></a></li>   
-                            <li><a href="#"><?= __('Support')?></a></li>
+                            <li><a href="{{URL::to('/contact')}}"><?= __('Chính sách và bảo mật')?></a></li>
+                            <li><a href="{{URL::to('/aboutus')}}"><?= __('Giới thiệu')?></a></li>
+                            <li><a href="{{URL::to('/contact')}}"><?= __('Liên hệ')?></a></li>  
                         </ul>
                     </div>
                 </div>

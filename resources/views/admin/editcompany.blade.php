@@ -81,6 +81,10 @@ $company_id = Session::get('id_company');
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="exampleInputPassword1">Số lượng nhân viên</label>
+                    <input type="number" class="form-control" name="company_staff" value="{{$company1->company_staff}}" min="1" id="exampleInputPassword1" placeholder="Nhập số lượng">
+                </div>
+                <div class="form-group">
                     <label for="exampleSelectRounded0">Tình trạng</label>
                     <select class="custom-select rounded-0" name="company_status" id="exampleSelectRounded0">
                         <option>Kích hoạt</option>

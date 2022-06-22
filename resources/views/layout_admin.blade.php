@@ -261,7 +261,7 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-edit"></i>
                 <p>
-                  UI Quản lý bài đăng
+                  Quản lý tin tuyển dụng
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -269,13 +269,13 @@
                 <li class="nav-item">
                   <a href="{{URL::to('/list_jobpost')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>UI Danh sách bài đăng</p>
+                    <p>Danh sách tin tuyển dụng</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{URL::to('/add_job')}}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>UI Thêm bài đăng</p>
+                    <p>Thêm tin tuyển dụng</p>
                   </a>
                 </li>
               </ul>

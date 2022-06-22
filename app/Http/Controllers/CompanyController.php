@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\company;
+use App\Models\job;
+use App\Models\job_detail;
 use App\Repositories\CompanyRepository;
 use App\Services\CompanyService;
 use Illuminate\Support\Facades\Redirect;
@@ -48,6 +50,7 @@ class CompanyController extends Controller
         $data = $request->all();
         $company = new company();
         $company->company_name = $data['company_name'];
+        $company->company_staff = $data['company_staff'];
         $company->company_adress = $data['company_adress'];
         if ($data['company_status'] == 'Kích hoạt') {
             $company->company_status = '1';
@@ -86,6 +89,7 @@ class CompanyController extends Controller
         $company = company::where('company_id', $id)->first();
         $company->company_name = $data['company_name'];
         $company->company_adress = $data['company_adress'];
+        $company->company_staff = $data['company_staff'];
         if ($data['company_status'] == 'Kích hoạt') {
             $company->company_status = '1';
         } else {
@@ -128,6 +132,11 @@ class CompanyController extends Controller
     {
         $company = company::where('company_id', $id)->first();
         if ($company) {
+            $listJob = job_detail::where('id_company',$company->company_id)->get();
+            foreach($listJob as $item){
+                $job = job::where('job_id',$item->id_job)->first();
+                $job->delete();
+            }
             $company->delete();
             Session::put('message', "Xóa thành công !");
         } else {
